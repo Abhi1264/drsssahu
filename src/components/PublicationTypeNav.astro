@@ -1,0 +1,23 @@
+---
+type Item = { href: string; label: string; id: "all" | "journals" | "conferences" | "books" };
+
+type Props = {
+  current: Item["id"];
+};
+
+const { current } = Astro.props;
+const items: Item[] = [
+  { href: "/publications", label: "All", id: "all" },
+  { href: "/publications/journals", label: "Journals", id: "journals" },
+  { href: "/publications/conferences", label: "Conferences", id: "conferences" },
+  { href: "/publications/books", label: "Book chapters", id: "books" },
+];
+---
+
+<nav class="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm" aria-label="Publication types">
+  {items.map((item) => (
+    <a href={item.href} aria-current={current === item.id ? "page" : undefined}>
+      {item.label}
+    </a>
+  ))}
+</nav>

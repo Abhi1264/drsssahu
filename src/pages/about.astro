@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import ProfileLinks from "../components/ProfileLinks.astro";
+import Timeline from "../components/Timeline.astro";
+import { site } from "../config/site";
+import { primaryEmail, visibleItems } from "../utils/content";
+import { pageSeo } from "../utils/seo";
+import { pageJsonLd } from "../utils/jsonld";
+
+const seo = pageSeo("about");
+const jsonLd = pageJsonLd("/about", [{ name: "About", path: "/about" }]);
+---
+
+<BaseLayout title={seo.title} description={seo.description} canonicalPath="/about" jsonLd={jsonLd}>
+  <Container class="py-12 md:py-16">
+    <Breadcrumbs items={[{ label: "About" }]} />
+    <PageHeader title="About" description={`${site.person.designation}, ${site.person.department}, ${site.person.institution}.`} />
+    <div class="mt-10 max-w-3xl space-y-6 text-lg leading-relaxed text-ink-soft">
+      <p>{site.person.bio}</p>
+      <p>
+        He has supervised {visibleItems(site.supervision).length} awarded Ph.D. scholars and has led funded projects with SERB-DST, NPIU-MHRD, and the Technology Innovation Hubs at ISI Kolkata.
+      </p>
+    </div>
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl text-ink">Appointments</h2>
+      <div class="mt-4">
+        <Timeline
+          items={visibleItems(site.academicExperience).map((item) => ({
+            title: `${item.position}, ${item.institution}`,
+            meta: item.duration,
+            detail: item.description,
+          }))}
+        />
+      </div>
+    </section>
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl text-ink">Research interests</h2>
+      <p class="mt-4 max-w-3xl text-ink-soft">{site.research.interests.join(" · ")}</p>
+    </section>
+    <section class="mt-14">
+      <h2 class="font-serif text-2xl text-ink">Research profiles</h2>
+      <div class="mt-4 text-ink-soft">
+        <ProfileLinks />
+      </div>
+    </section>
+    <p class="mt-12 text-sm">
+      <a href="/resume">{site.resume.downloadLabel}</a>
+      ·
+      <a href={`mailto:${primaryEmail()}`}>{primaryEmail()}</a>
+    </p>
+  </Container>
+</BaseLayout>

@@ -1,0 +1,89 @@
+---
+import { site } from "../config/site";
+
+type Props = {
+  years: number[];
+  types?: { value: string; label: string }[];
+  showType?: boolean;
+};
+
+const { years, types = [], showType = true } = Astro.props;
+const { ui } = site;
+---
+
+<form
+  class:list={[
+    "publication-filters mb-10 grid gap-4 border-y border-rule py-5",
+    showType ? "md:grid-cols-[1fr_10rem_12rem]" : "md:grid-cols-[1fr_10rem]",
+  ]}
+  role="search"
+  data-publication-filters
+>
+  <label class="block">
+    <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.searchPublications}</span>
+    <input
+      type="search"
+      name="q"
+      autocomplete="off"
+      class="w-full border border-rule bg-transparent px-3 py-2 text-ink"
+    />
+  </label>
+  <label class="block">
+    <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.filterYear}</span>
+    <select name="year" class="w-full border border-rule bg-transparent px-3 py-2 text-ink">
+      <option value="">{ui.allYears}</option>
+      {years.map((year) => (
+        <option value={year}>{year}</option>
+      ))}
+    </select>
+  </label>
+  {showType && (
+    <label class="block">
+      <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.filterType}</span>
+      <select name="type" class="w-full border border-rule bg-transparent px-3 py-2 text-ink">
+        <option value="">{ui.allTypes}</option>
+        {types.map((type) => (
+          <option value={type.value}>{type.label}</option>
+        ))}
+      </select>
+    </label>
+  )}
+</form>
+<p data-empty hidden class="text-ink-soft">{ui.noResults}</p>
+
+<script>
+  function bindFilters(form: HTMLFormElement) {
+    const root = form.closest("main") ?? document;
+    const empty = form.parentElement?.querySelector<HTMLElement>("[data-empty]");
+
+    const apply = () => {
+      const data = new FormData(form);
+      const query = String(data.get("q") ?? "").trim().toLowerCase();
+      const year = String(data.get("year") ?? "");
+      const type = String(data.get("type") ?? "");
+      const entries = root.querySelectorAll<HTMLElement>("[data-publication]");
+      const sections = root.querySelectorAll<HTMLElement>(".publication-list section");
+      let visible = 0;
+
+      for (const entry of entries) {
+        const show =
+          (!query || (entry.dataset.search ?? "").includes(query)) &&
+          (!year || entry.dataset.year === year) &&
+          (!type || entry.dataset.type === type);
+        entry.hidden = !show;
+        if (show) visible += 1;
+      }
+
+      for (const section of sections) {
+        section.hidden = !section.querySelector("[data-publication]:not([hidden])");
+      }
+
+      if (empty) empty.hidden = visible > 0;
+    };
+
+    form.addEventListener("submit", (event) => event.preventDefault());
+    form.addEventListener("input", apply);
+  }
+
+  document.querySelectorAll<HTMLFormElement>("[data-publication-filters]").forEach(bindFilters);
+</script>

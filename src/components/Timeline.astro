@@ -1,0 +1,25 @@
+---
+type Item = {
+  title: string;
+  meta: string;
+  detail?: string;
+};
+
+type Props = {
+  items: Item[];
+};
+
+const { items } = Astro.props;
+---
+
+<ol class="divide-y divide-rule border-y border-rule">
+  {items.map((item) => (
+    <li class="grid gap-2 py-5 md:grid-cols-[16rem_1fr] md:gap-8">
+      <p class="text-sm text-muted">{item.meta}</p>
+      <div>
+        <p class="font-medium text-ink">{item.title}</p>
+        {item.detail && <p class="mt-1 text-sm leading-relaxed text-ink-soft">{item.detail}</p>}
+      </div>
+    </li>
+  ))}
+</ol>

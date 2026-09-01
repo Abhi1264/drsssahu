@@ -1,0 +1,18 @@
+---
+import { verifiedProfiles } from "../utils/content";
+
+const profiles = verifiedProfiles();
+---
+
+{profiles.length > 0 && (
+  <ul class="space-y-2">
+    {profiles.map((item) => (
+      <li>
+        <a href={item.url} rel="noopener noreferrer">
+          {item.label}
+          {item.identifier ? ` (${item.identifier})` : ""}
+        </a>
+      </li>
+    ))}
+  </ul>
+)}

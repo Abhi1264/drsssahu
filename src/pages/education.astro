@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Timeline from "../components/Timeline.astro";
+import { site } from "../config/site";
+import { visibleItems } from "../utils/content";
+import { pageSeo } from "../utils/seo";
+import { pageJsonLd } from "../utils/jsonld";
+
+const seo = pageSeo("education");
+const jsonLd = pageJsonLd("/education", [{ name: "Education", path: "/education" }]);
+---
+
+<BaseLayout title={seo.title} description={seo.description} canonicalPath="/education" jsonLd={jsonLd}>
+  <Container class="py-12 md:py-16">
+    <Breadcrumbs items={[{ label: "Education" }]} />
+    <PageHeader title="Education" />
+    <div class="mt-8">
+      <Timeline
+        items={visibleItems(site.education).map((item) => ({
+          title: `${item.degree}, ${item.institution}`,
+          meta: item.duration,
+          detail: [item.location, item.major, item.dissertation ? `Dissertation: ${item.dissertation}` : ""]
+            .filter(Boolean)
+            .join(". "),
+        }))}
+      />
+    </div>
+  </Container>
+</BaseLayout>

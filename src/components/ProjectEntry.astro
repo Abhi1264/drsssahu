@@ -1,0 +1,35 @@
+---
+import type { Project } from "../config/types";
+
+type Props = { project: Project };
+
+const { project } = Astro.props;
+---
+
+<article class="border-t border-rule py-7">
+  <h2 class="max-w-4xl font-serif text-xl leading-snug text-ink md:text-2xl">{project.title}</h2>
+  <dl class="mt-4 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <dt class="text-muted">Funding body</dt>
+      <dd class="mt-1 text-ink">{project.fundingBody}</dd>
+    </div>
+    <div>
+      <dt class="text-muted">Duration</dt>
+      <dd class="mt-1 text-ink">{project.duration}</dd>
+    </div>
+    <div>
+      <dt class="text-muted">Amount</dt>
+      <dd class="mt-1 text-ink">{project.amount}</dd>
+    </div>
+    <div>
+      <dt class="text-muted">Role / status</dt>
+      <dd class="mt-1 text-ink capitalize">{project.role} · {project.status}</dd>
+    </div>
+  </dl>
+  {project.description && <p class="mt-4 max-w-3xl text-ink-soft">{project.description}</p>}
+  {project.url && (
+    <p class="mt-3 text-sm">
+      <a href={project.url} rel="noopener noreferrer">{project.url}</a>
+    </p>
+  )}
+</article>

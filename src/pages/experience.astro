@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Timeline from "../components/Timeline.astro";
+import { site } from "../config/site";
+import { visibleItems } from "../utils/content";
+import { pageSeo } from "../utils/seo";
+import { pageJsonLd } from "../utils/jsonld";
+
+const seo = pageSeo("experience");
+const jsonLd = pageJsonLd("/experience", [{ name: "Experience", path: "/experience" }]);
+---
+
+<BaseLayout title={seo.title} description={seo.description} canonicalPath="/experience" jsonLd={jsonLd}>
+  <Container class="py-12 md:py-16">
+    <Breadcrumbs items={[{ label: "Experience" }]} />
+    <PageHeader title="Academic and research experience" />
+    <section class="mt-10">
+      <h2 class="mb-4 font-serif text-2xl text-ink">Academic appointments</h2>
+      <Timeline
+        items={visibleItems(site.academicExperience).map((item) => ({
+          title: `${item.position}, ${item.institution}`,
+          meta: item.duration,
+          detail: [item.location, item.description].filter(Boolean).join(" · "),
+        }))}
+      />
+    </section>
+    <section class="mt-14">
+      <h2 class="mb-4 font-serif text-2xl text-ink">Research appointments</h2>
+      <Timeline
+        items={visibleItems(site.researchExperience).map((item) => ({
+          title: `${item.position}, ${item.institution}`,
+          meta: item.duration,
+          detail: item.location,
+        }))}
+      />
+    </section>
+    <p class="mt-12 text-sm">
+      <a href="/education">Education</a>
+    </p>
+  </Container>
+</BaseLayout>

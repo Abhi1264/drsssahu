@@ -1,17 +1,232 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import PublicationEntry from "../components/PublicationEntry.astro";
+import { site } from "../config/site";
+import {
+  featuredItems,
+  featuredPublications,
+  homepageHeading,
+  homepageSectionEnabled,
+  primaryEmail,
+  verifiedProfiles,
+  visibleItems,
+} from "../utils/content";
+import { absoluteUrl, pageSeo } from "../utils/seo";
+import { breadcrumbJsonLd, personJsonLd, profilePageJsonLd, websiteJsonLd } from "../utils/jsonld";
 
+const seo = pageSeo("home");
+const featuredPubs = featuredPublications();
+const featuredThemes = featuredItems(site.research.themes);
+const featuredProjects = featuredItems(site.projects);
+const featuredPatents = featuredItems(site.patents);
+const featuredAwards = featuredItems(site.awards);
+const workshops = visibleItems(site.workshops).slice(0, 3);
+const ctas = site.homepage.ctas.filter((item) => item.visible);
+const profiles = verifiedProfiles();
+const email = primaryEmail();
+const jsonLd = [
+  websiteJsonLd(),
+  personJsonLd(absoluteUrl("/")),
+  profilePageJsonLd(absoluteUrl("/")),
+  breadcrumbJsonLd([{ name: site.ui.homeLabel, path: "/" }]),
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title={seo.title} description={seo.description} canonicalPath="/" jsonLd={jsonLd}>
+  <Container class="py-14 md:py-20">
+    {homepageSectionEnabled("identity") && (
+      <section aria-labelledby="identity-heading" class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-14">
+        <div class="min-w-0 flex-1">
+          <p class="text-xs tracking-[0.2em] text-muted uppercase">{site.person.departmentShort}</p>
+          <h1 id="identity-heading" class="mt-4 max-w-4xl font-serif text-4xl leading-tight text-ink md:text-5xl">
+            {site.homepage.heroHeading}
+          </h1>
+          <p class="mt-4 text-lg text-ink-soft">
+            {site.homepage.heroSubheading}<br />
+            {site.person.department}<br />
+            {site.person.institution}, {site.person.location}
+          </p>
+          <p class="mt-8 max-w-3xl text-lg leading-relaxed text-ink-soft">{site.homepage.introduction}</p>
+          {ctas.length > 0 && (
+            <p class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              {ctas.map((cta) => (
+                <a href={cta.href}>{cta.label}</a>
+              ))}
+            </p>
+          )}
+        </div>
+        {site.person.showProfileImage && (
+          <figure class="order-first mx-auto w-40 shrink-0 md:order-none md:mx-0 md:w-56">
+            <img
+              src={site.person.profileImage}
+              alt={site.person.name}
+              width="480"
+              height="480"
+              fetchpriority="high"
+              decoding="async"
+              class="aspect-square w-full border border-rule object-cover"
+            />
+          </figure>
+        )}
+      </section>
+    )}
+
+    {homepageSectionEnabled("interests") && (
+      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="interests-heading">
+        <SectionHeading title={homepageHeading("interests")} />
+        <p class="max-w-4xl text-lg leading-relaxed text-ink-soft">
+          {site.research.interests.join(" · ")}
+        </p>
+      </section>
+    )}
+
+    {homepageSectionEnabled("research") && (
+      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="research-heading">
+        <SectionHeading title={homepageHeading("research")} href="/research" linkLabel={site.ui.viewAll} />
+        <ul class="max-w-3xl space-y-5">
+          {featuredThemes.map((theme) => (
+            <li>
+              <h3 class="font-medium text-ink">{theme.title}</h3>
+              <p class="mt-1 text-ink-soft">{theme.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {homepageSectionEnabled("publications") && (
+      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="publications-heading">
+        <SectionHeading title={homepageHeading("publications")} href="/publications" linkLabel={site.ui.viewAll} />
+        <div>
+          {featuredPubs.map((publication) => (
+            <PublicationEntry publication={publication} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {homepageSectionEnabled("projects") && (
+      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="projects-heading">
+        <SectionHeading title={homepageHeading("projects")} href="/projects" linkLabel={site.ui.viewAll} />
+        <ul class="divide-y divide-rule border-y border-rule">
+          {featuredProjects.map((project) => (
+            <li class="py-5">
+              <h3 class="font-serif text-xl text-ink">{project.title}</h3>
+              <p class="mt-2 text-sm text-muted">
+                {project.fundingBody} · {project.duration} · {project.role}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {homepageSectionEnabled("patents") && (
+      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="patents-heading">
+        <SectionHeading title={homepageHeading("patents")} href="/patents" linkLabel={site.ui.viewAll} />
+        <ul class="divide-y divide-rule border-y border-rule">
+          {featuredPatents.map((patent) => (
+            <li class="py-5">
+              <h3 class="font-serif text-xl text-ink">{patent.title}</h3>
+              <p class="mt-2 text-sm text-muted capitalize">
+                {patent.country} · {patent.status}
+                {patent.patentNumber ? ` · ${patent.kind === "design" ? "Design" : "Patent"} No. ${patent.patentNumber}` : ""}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {homepageSectionEnabled("experience") && (
+      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="experience-heading">
+        <SectionHeading title={homepageHeading("experience")} href="/experience" linkLabel={site.ui.viewAll} />
+        <div class="grid gap-10 md:grid-cols-2">
+          <div>
+            <h3 class="text-xs tracking-[0.16em] text-muted uppercase">Academic appointments</h3>
+            <ul class="mt-4 space-y-4">
+              {visibleItems(site.academicExperience).map((item) => (
+                <li>
+                  <p class="font-medium text-ink">{item.position}</p>
+                  <p class="text-sm text-muted">{item.institution} · {item.duration}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xs tracking-[0.16em] text-muted uppercase">Education</h3>
+            <ul class="mt-4 space-y-4">
+              {visibleItems(site.education).map((item) => (
+                <li>
+                  <p class="font-medium text-ink">{item.degree}, {item.institution}</p>
+                  <p class="text-sm text-muted">{item.duration}{item.major ? ` · ${item.major}` : ""}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    )}
+
+    {homepageSectionEnabled("supervision") && (
+      <section class="mt-16 border-t border-rule pt-10">
+        <SectionHeading title={homepageHeading("supervision")} href="/supervision" linkLabel={site.ui.viewAll} />
+        <p class="max-w-3xl text-ink-soft">
+          {visibleItems(site.supervision).length} awarded doctoral scholars, most recently in speech-based Parkinson’s disease analysis, photobiomodulation research, protein–protein interaction, energy harvesting, and image security.
+        </p>
+      </section>
+    )}
+
+    {homepageSectionEnabled("achievements") && (
+      <section class="mt-16 border-t border-rule pt-10">
+        <SectionHeading title={homepageHeading("achievements")} href="/activities" linkLabel={site.ui.viewAll} />
+        <ul class="max-w-3xl space-y-3 text-ink-soft">
+          {featuredAwards.map((item) => (
+            <li>
+              {item.title}
+              {item.organization ? `, ${item.organization}` : ""}
+              {item.date ? ` (${item.date})` : ""}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {homepageSectionEnabled("workshops") && (
+      <section class="mt-16 border-t border-rule pt-10">
+        <SectionHeading title={homepageHeading("workshops")} href="/activities" linkLabel={site.ui.viewAll} />
+        <ul class="divide-y divide-rule border-y border-rule">
+          {workshops.map((item) => (
+            <li class="py-4">
+              <p class="text-ink">{item.title}</p>
+              <p class="text-sm text-muted">{item.date}{item.location ? ` · ${item.location}` : ""}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {homepageSectionEnabled("contact") && (
+      <section class="mt-16 border-t border-rule pt-10">
+        <SectionHeading title={homepageHeading("contact")} />
+        <div class="max-w-xl text-ink-soft">
+          <p>{site.person.department}</p>
+          <p>{site.person.institution}</p>
+          <p>{site.person.location} – {site.person.postalCode}</p>
+          <p class="mt-4">
+            <a href={`mailto:${email}`}>{email}</a>
+          </p>
+          {profiles.length > 0 && (
+            <p class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+              {profiles.slice(0, 4).map((item) => (
+                <a href={item.url} rel="noopener noreferrer">{item.label}</a>
+              ))}
+            </p>
+          )}
+        </div>
+      </section>
+    )}
+  </Container>
+</BaseLayout>

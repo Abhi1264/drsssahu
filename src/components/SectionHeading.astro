@@ -1,0 +1,18 @@
+---
+type Props = {
+  title: string;
+  href?: string;
+  linkLabel?: string;
+};
+
+const { title, href, linkLabel } = Astro.props;
+---
+
+<div class:list={["mb-6", href && "flex flex-wrap items-end justify-between gap-3"]}>
+  <h2 class="font-serif text-2xl text-ink md:text-[1.7rem]">{title}</h2>
+  {href && (
+    <a href={href} class="text-sm">
+      {linkLabel}
+    </a>
+  )}
+</div>

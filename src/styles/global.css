@@ -1,0 +1,62 @@
+@import "@fontsource-variable/source-sans-3";
+@import "@fontsource-variable/source-serif-4";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Source Sans 3 Variable", "Source Sans 3", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Source Serif 4 Variable", "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --color-paper: #f4f1ea;
+  --color-ink: #1c1914;
+  --color-ink-soft: #3d3933;
+  --color-muted: #5e594f;
+  --color-rule: #d3cdc2;
+  --color-navy: #1e3a5f;
+  --color-navy-hover: #152a46;
+  --max-width-page: 72rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+a {
+  color: var(--color-navy);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--color-navy-hover);
+}
+
+::selection {
+  background: #d9e2ee;
+  color: var(--color-ink);
+}

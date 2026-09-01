@@ -1,0 +1,27 @@
+---
+import type { Publication } from "../config/types";
+import PublicationEntry from "./PublicationEntry.astro";
+import { groupByYear } from "../utils/content";
+
+type Props = {
+  publications: Publication[];
+};
+
+const { publications } = Astro.props;
+const groups = groupByYear(publications);
+---
+
+<div class="publication-list">
+  {groups.map((group) => (
+    <section class="mt-10" aria-labelledby={`year-${group.year}`}>
+      <h2 id={`year-${group.year}`} class="font-serif text-2xl text-ink">
+        {group.year}
+      </h2>
+      <div class="mt-2">
+        {group.items.map((publication) => (
+          <PublicationEntry publication={publication} />
+        ))}
+      </div>
+    </section>
+  ))}
+</div>
