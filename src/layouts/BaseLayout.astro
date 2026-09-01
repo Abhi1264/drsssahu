@@ -23,6 +23,7 @@ const ogImage = absoluteUrl(site.seo.defaultOgImage);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f1ea" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={site.person.name} />
@@ -47,12 +48,12 @@ const ogImage = absoluteUrl(site.seo.defaultOgImage);
   <body class="min-h-screen bg-paper text-ink antialiased">
     <a
       href="#content"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-paper focus:px-3 focus:py-2 focus:text-sm"
+      class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:bg-paper focus-visible:px-3 focus-visible:py-2 focus-visible:text-sm"
     >
       {site.ui.skipToContent}
     </a>
     <Header />
-    <main id="content">
+    <main id="content" tabindex="-1">
       <slot />
     </main>
     <Footer />

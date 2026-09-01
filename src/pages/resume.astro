@@ -6,6 +6,7 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { site } from "../config/site";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
+import { externalLinkAttrs } from "../utils/links";
 
 const seo = pageSeo("resume");
 const jsonLd = pageJsonLd("/resume", [{ name: "Curriculum vitae", path: "/resume" }]);
@@ -16,7 +17,7 @@ const jsonLd = pageJsonLd("/resume", [{ name: "Curriculum vitae", path: "/resume
     <Breadcrumbs items={[{ label: "Curriculum vitae" }]} />
     <PageHeader title={site.resume.heading} description={site.resume.intro} />
     <p class="mt-10">
-      <a href={site.resume.file}>{site.resume.downloadLabel}</a>
+      <a href={site.resume.file} {...externalLinkAttrs(site.resume.file)}>{site.resume.downloadLabel}</a>
     </p>
   </Container>
 </BaseLayout>

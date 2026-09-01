@@ -13,6 +13,7 @@ import {
 } from "../../utils/content";
 import { absoluteUrl, publicationSeo } from "../../utils/seo";
 import { breadcrumbJsonLd, personJsonLd, scholarlyArticleJsonLd } from "../../utils/jsonld";
+import { externalLinkAttrs } from "../../utils/links";
 
 export function getStaticPaths() {
   return publicationPaths().map(({ slug }) => ({ params: { slug } }));
@@ -112,7 +113,7 @@ const jsonLd = [
           <ul class="mt-6 flex flex-wrap gap-4 text-sm">
             {links.map((item) => (
               <li>
-                <a href={item.url} rel="noopener noreferrer">{item.label}</a>
+                <a href={item.url} {...externalLinkAttrs(item.url)}>{item.label}</a>
               </li>
             ))}
           </ul>

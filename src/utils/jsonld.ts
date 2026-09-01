@@ -1,3 +1,4 @@
+import profilePhoto from "../assets/profile.jpg";
 import { site } from "../config/site";
 import type { Publication } from "../config/types";
 import { absoluteUrl } from "./seo";
@@ -15,7 +16,7 @@ export function personJsonLd(pageUrl: string) {
     jobTitle: site.person.designation,
     email: `mailto:${primaryEmail()}`,
     url: absoluteUrl("/"),
-    ...(site.person.showProfileImage ? { image: absoluteUrl(site.person.profileImage) } : {}),
+    ...(site.person.showProfileImage ? { image: absoluteUrl(profilePhoto.src) } : {}),
     worksFor: {
       "@type": "CollegeOrUniversity",
       name: site.person.institution,

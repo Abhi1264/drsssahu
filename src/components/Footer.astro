@@ -1,33 +1,40 @@
 ---
 import { site } from "../config/site";
 import { verifiedProfiles } from "../utils/content";
+import { externalLinkAttrs } from "../utils/links";
 import Container from "./Container.astro";
 
 const footerNav = site.footer.links.filter((item) => item.visible);
 const profiles = verifiedProfiles();
 ---
 
-<footer class="mt-20 border-t border-rule">
+<footer class="mt-20 border-t border-rule pb-[env(safe-area-inset-bottom)]">
   <Container class="grid gap-10 py-12 md:grid-cols-3">
     <div>
       <p class="font-serif text-lg text-ink">{site.person.name}</p>
       <p class="mt-2 max-w-sm text-sm leading-relaxed text-muted">{site.footer.tagline}</p>
     </div>
     <nav aria-label="Footer">
-      <ul class="space-y-2 text-sm">
+      <ul class="space-y-1 text-sm">
         {footerNav.map((item) => (
           <li>
-            <a href={item.href} class="text-ink-soft no-underline hover:text-navy hover:underline">{item.label}</a>
+            <a href={item.href} {...externalLinkAttrs(item.href)} class="inline-flex min-h-11 items-center text-ink-soft no-underline hover:text-navy hover:underline md:min-h-0 md:py-1">
+              {item.label}
+            </a>
           </li>
         ))}
       </ul>
     </nav>
     <div>
       <p class="text-xs tracking-[0.16em] text-muted uppercase">Research profiles</p>
-      <ul class="mt-3 space-y-2 text-sm">
+      <ul class="mt-3 space-y-1 text-sm">
         {profiles.map((item) => (
           <li>
-            <a href={item.url} rel="noopener noreferrer" class="text-ink-soft no-underline hover:text-navy hover:underline">
+            <a
+              href={item.url}
+              {...externalLinkAttrs(item.url)}
+              class="inline-flex min-h-11 items-center text-ink-soft no-underline hover:text-navy hover:underline md:min-h-0 md:py-1"
+            >
               {item.label}
             </a>
           </li>

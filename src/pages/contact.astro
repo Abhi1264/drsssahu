@@ -8,6 +8,7 @@ import { site } from "../config/site";
 import { primaryEmail, visibleEmails, visiblePhones } from "../utils/content";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
+import { externalLinkAttrs } from "../utils/links";
 
 const seo = pageSeo("contact");
 const emails = visibleEmails();
@@ -29,7 +30,7 @@ const jsonLd = pageJsonLd("/contact", [{ name: "Contact", path: "/contact" }]);
         </address>
         {site.contact.mapUrl && (
           <p class="mt-4 text-sm">
-            <a href={site.contact.mapUrl} rel="noopener noreferrer">BIT Mesra on OpenStreetMap</a>
+            <a href={site.contact.mapUrl} {...externalLinkAttrs(site.contact.mapUrl)}>BIT Mesra on OpenStreetMap</a>
           </p>
         )}
       </section>
@@ -38,7 +39,7 @@ const jsonLd = pageJsonLd("/contact", [{ name: "Contact", path: "/contact" }]);
         <ul class="mt-4 space-y-2">
           {emails.map((item) => (
             <li>
-              <a href={`mailto:${item.address}`}>{item.address}</a>
+              <a href={`mailto:${item.address}`} class="inline-flex min-h-11 items-center break-all md:min-h-0">{item.address}</a>
               <span class="text-sm text-muted"> · {item.label}</span>
             </li>
           ))}
@@ -49,7 +50,7 @@ const jsonLd = pageJsonLd("/contact", [{ name: "Contact", path: "/contact" }]);
             <ul class="mt-4 space-y-2">
               {phones.map((item) => (
                 <li>
-                  <a href={item.href}>{item.number}</a>
+                  <a href={item.href} class="inline-flex min-h-11 items-center md:min-h-0">{item.number}</a>
                   <span class="text-sm text-muted"> · {item.label}</span>
                 </li>
               ))}

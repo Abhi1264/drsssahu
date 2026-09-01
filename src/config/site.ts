@@ -55,7 +55,6 @@ export const site = {
       { number: "+91 94727 60260", label: "Office", href: "tel:+919472760260" },
       { number: "+91 94374 15338", label: "Residence", href: "tel:+919437415338" },
     ] satisfies PhoneNumber[],
-    profileImage: "/images/profile.jpg",
     showProfileImage: true,
     showPhone: true,
     shortBio:

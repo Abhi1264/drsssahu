@@ -14,7 +14,7 @@ const groups = groupByYear(publications);
 <div class="publication-list">
   {groups.map((group) => (
     <section class="mt-10" aria-labelledby={`year-${group.year}`}>
-      <h2 id={`year-${group.year}`} class="font-serif text-2xl text-ink">
+      <h2 id={`year-${group.year}`} class="font-serif text-2xl tabular-nums text-ink">
         {group.year}
       </h2>
       <div class="mt-2">

@@ -1,22 +1,32 @@
 ---
 import { site } from "../config/site";
 import { visibleNavigation } from "../utils/content";
+import { externalLinkAttrs } from "../utils/links";
 import Container from "./Container.astro";
 
 const items = visibleNavigation();
 const current = Astro.url.pathname;
 ---
 
-<header class="relative border-b border-rule bg-paper">
+<header class="relative border-b border-rule bg-paper pt-[env(safe-area-inset-top)]">
   <Container class="flex items-center justify-between gap-6 py-4">
     <a href="/" class="min-w-0 text-ink no-underline hover:text-navy">
       <span class="block font-serif text-lg leading-tight tracking-tight md:text-xl">{site.person.shortName}</span>
       <span class="mt-0.5 block text-xs tracking-[0.14em] text-muted uppercase">{site.person.institutionShort}</span>
     </a>
-    <input id="nav-toggle" type="checkbox" class="peer sr-only" />
+    <input
+      id="nav-toggle"
+      type="checkbox"
+      class="peer sr-only md:hidden"
+      aria-controls="primary-nav"
+      aria-expanded="false"
+      aria-label={site.ui.menuOpen}
+      data-open-label={site.ui.menuOpen}
+      data-close-label={site.ui.menuClose}
+    />
     <label
       for="nav-toggle"
-      class="inline-flex size-10 shrink-0 cursor-pointer items-center justify-center text-ink hover:text-navy peer-checked:[&_.icon-menu]:hidden peer-checked:[&_.icon-close]:block md:hidden"
+      class="inline-flex size-11 shrink-0 cursor-pointer items-center justify-center text-ink hover:text-navy peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-navy peer-checked:[&_.icon-menu]:hidden peer-checked:[&_.icon-close]:block md:hidden"
     >
       <span class="sr-only">{site.ui.menuOpen}</span>
       <svg class="icon-menu size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -27,19 +37,21 @@ const current = Astro.url.pathname;
       </svg>
     </label>
     <nav
+      id="primary-nav"
       aria-label="Primary"
-      class="absolute left-0 right-0 top-[4.6rem] z-40 hidden border-b border-rule bg-paper px-5 py-4 peer-checked:block md:static md:z-auto md:block md:border-0 md:bg-transparent md:px-0 md:py-0"
+      class="absolute left-0 right-0 top-[4.6rem] z-40 hidden max-h-[min(70vh,32rem)] overflow-y-auto overscroll-contain border-b border-rule bg-paper px-5 py-4 peer-checked:block md:static md:z-auto md:block md:max-h-none md:overflow-visible md:border-0 md:bg-transparent md:px-0 md:py-0"
     >
-      <ul class="flex flex-col gap-3 md:flex-row md:flex-wrap md:justify-end md:gap-x-5 md:gap-y-1">
+      <ul class="flex flex-col gap-1 md:flex-row md:flex-wrap md:justify-end md:gap-x-5 md:gap-y-1">
         {items.map((item) => {
           const active = item.href === "/" ? current === "/" : current === item.href || current.startsWith(`${item.href}/`);
           return (
             <li>
               <a
                 href={item.href}
+                {...externalLinkAttrs(item.href)}
                 aria-current={active ? "page" : undefined}
                 class:list={[
-                  "text-[0.95rem] no-underline hover:text-navy hover:underline",
+                  "inline-flex min-h-11 items-center text-[0.95rem] no-underline hover:text-navy hover:underline md:min-h-0",
                   active ? "text-navy" : "text-ink-soft",
                 ]}
               >
@@ -52,3 +64,27 @@ const current = Astro.url.pathname;
     </nav>
   </Container>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLInputElement>("#nav-toggle");
+  if (toggle) {
+    const label = document.querySelector<HTMLLabelElement>("label[for='nav-toggle']");
+    const openLabel = label?.querySelector(".sr-only");
+    const openText = toggle.dataset.openLabel ?? "Open menu";
+    const closeText = toggle.dataset.closeLabel ?? "Close menu";
+    const sync = () => {
+      const open = toggle.checked;
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? closeText : openText);
+      if (openLabel) openLabel.textContent = open ? closeText : openText;
+    };
+    toggle.addEventListener("change", sync);
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !toggle.checked) return;
+      toggle.checked = false;
+      toggle.dispatchEvent(new Event("change"));
+      toggle.focus();
+    });
+    sync();
+  }
+</script>

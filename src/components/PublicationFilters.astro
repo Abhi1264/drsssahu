@@ -25,12 +25,14 @@ const { ui } = site;
       type="search"
       name="q"
       autocomplete="off"
-      class="w-full border border-rule bg-transparent px-3 py-2 text-ink"
+      spellcheck="false"
+      placeholder="Title, author, or venue…"
+      class="min-h-11 w-full border border-rule bg-transparent px-3 py-2 text-ink"
     />
   </label>
   <label class="block">
     <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.filterYear}</span>
-    <select name="year" class="w-full border border-rule bg-transparent px-3 py-2 text-ink">
+    <select name="year" class="min-h-11 w-full border border-rule bg-transparent px-3 py-2 text-ink">
       <option value="">{ui.allYears}</option>
       {years.map((year) => (
         <option value={year}>{year}</option>
@@ -40,7 +42,7 @@ const { ui } = site;
   {showType && (
     <label class="block">
       <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.filterType}</span>
-      <select name="type" class="w-full border border-rule bg-transparent px-3 py-2 text-ink">
+      <select name="type" class="min-h-11 w-full border border-rule bg-transparent px-3 py-2 text-ink">
         <option value="">{ui.allTypes}</option>
         {types.map((type) => (
           <option value={type.value}>{type.label}</option>
@@ -49,12 +51,15 @@ const { ui } = site;
     </label>
   )}
 </form>
-<p data-empty hidden class="text-ink-soft">{ui.noResults}</p>
+<p data-empty hidden class="text-ink-soft" role="status" aria-live="polite">{ui.noResults}</p>
 
 <script>
   function bindFilters(form: HTMLFormElement) {
     const root = form.closest("main") ?? document;
     const empty = form.parentElement?.querySelector<HTMLElement>("[data-empty]");
+    const queryField = form.elements.namedItem("q");
+    const yearField = form.elements.namedItem("year");
+    const typeField = form.elements.namedItem("type");
 
     const apply = () => {
       const data = new FormData(form);
@@ -81,8 +86,28 @@ const { ui } = site;
       if (empty) empty.hidden = visible > 0;
     };
 
+    const persist = () => {
+      const data = new FormData(form);
+      const next = new URL(location.href);
+      for (const key of ["q", "year", "type"] as const) {
+        const value = String(data.get(key) ?? "").trim();
+        if (value) next.searchParams.set(key, value);
+        else next.searchParams.delete(key);
+      }
+      history.replaceState(null, "", next);
+    };
+
+    const params = new URLSearchParams(location.search);
+    if (queryField instanceof HTMLInputElement && params.has("q")) queryField.value = params.get("q") ?? "";
+    if (yearField instanceof HTMLSelectElement && params.has("year")) yearField.value = params.get("year") ?? "";
+    if (typeField instanceof HTMLSelectElement && params.has("type")) typeField.value = params.get("type") ?? "";
+
     form.addEventListener("submit", (event) => event.preventDefault());
-    form.addEventListener("input", apply);
+    form.addEventListener("input", () => {
+      apply();
+      persist();
+    });
+    apply();
   }
 
   document.querySelectorAll<HTMLFormElement>("[data-publication-filters]").forEach(bindFilters);

@@ -1,17 +1,20 @@
 ---
+import { externalLinkAttrs } from "../utils/links";
+
 type Props = {
   title: string;
   href?: string;
   linkLabel?: string;
+  id?: string;
 };
 
-const { title, href, linkLabel } = Astro.props;
+const { title, href, linkLabel, id } = Astro.props;
 ---
 
 <div class:list={["mb-6", href && "flex flex-wrap items-end justify-between gap-3"]}>
-  <h2 class="font-serif text-2xl text-ink md:text-[1.7rem]">{title}</h2>
+  <h2 id={id} class="font-serif text-2xl text-ink md:text-[1.7rem]">{title}</h2>
   {href && (
-    <a href={href} class="text-sm">
+    <a href={href} {...externalLinkAttrs(href)} class="inline-flex min-h-11 items-center text-sm md:min-h-0">
       {linkLabel}
     </a>
   )}

@@ -1,5 +1,6 @@
 ---
 import { site } from "../config/site";
+import { externalLinkAttrs } from "../utils/links";
 
 type Crumb = { label: string; href?: string };
 type Props = { items: Crumb[] };
@@ -8,19 +9,21 @@ const { items } = Astro.props;
 ---
 
 <nav aria-label="Breadcrumb" class="mb-8 text-sm text-muted">
-  <ol class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+  <ol class="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
     <li>
-      <a href="/" class="text-muted no-underline hover:text-navy hover:underline">{site.ui.homeLabel}</a>
+      <a href="/" class="inline-flex min-h-11 items-center text-muted no-underline hover:text-navy hover:underline md:min-h-0">
+        {site.ui.homeLabel}
+      </a>
     </li>
     {items.map((item, index) => (
-      <li class="flex items-baseline gap-2">
+      <li class="flex min-w-0 items-baseline gap-2">
         <span aria-hidden="true">/</span>
         {item.href && index < items.length - 1 ? (
-          <a href={item.href} class="text-muted no-underline hover:text-navy hover:underline">
+          <a href={item.href} {...externalLinkAttrs(item.href)} class="inline-flex min-h-11 items-center text-muted no-underline hover:text-navy hover:underline md:min-h-0">
             {item.label}
           </a>
         ) : (
-          <span class="text-ink-soft" aria-current="page">{item.label}</span>
+          <span class="min-w-0 break-words text-ink-soft" aria-current="page">{item.label}</span>
         )}
       </li>
     ))}
