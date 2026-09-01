@@ -15,6 +15,16 @@ pnpm preview
 
 Requires Node.js 22.12 or later and pnpm 12.
 
+## Deploy (Cloudflare)
+
+The site is static HTML. Cloudflare serves `dist/` as Workers static assets. There is no Cloudflare adapter and no server runtime.
+
+```sh
+pnpm deploy
+```
+
+That builds the site and uploads it with Wrangler. First-time setup: Cloudflare account, `pnpm wrangler login`, then the command above. Connect the GitHub repo in the Cloudflare dashboard for automatic deploys on push to `main`. Attach a custom domain after the first deploy, then set `seo.siteUrl` in `src/config/site.ts` to that URL.
+
 ## Editing content
 
 Open `src/config/site.ts` and save. Pages are generated from that file.

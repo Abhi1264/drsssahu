@@ -11,6 +11,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "preview:cf": "astro build && wrangler dev",
+    "deploy": "astro build && wrangler deploy",
     "check": "astro check",
     "validate:links": "node scripts/validate-links.mjs",
     "astro": "astro"
@@ -25,10 +27,12 @@
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
-    "esbuild": true
+    "esbuild": true,
+    "workerd": true
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "4.127.1"
   }
 }

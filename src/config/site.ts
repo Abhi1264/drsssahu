@@ -2200,7 +2200,7 @@ export const site = {
   },
 
   seo: {
-    siteUrl: "https://sssahu.bitmesra.ac.in",
+    siteUrl: "https://drsssahu.workers.dev",
     siteTitle: "Dr. Sitanshu Sekhar Sahu",
     siteDescription:
       "Academic website of Dr. Sitanshu Sekhar Sahu, Associate Professor in the Department of Electronics and Communication Engineering at Birla Institute of Technology Mesra, Ranchi.",
