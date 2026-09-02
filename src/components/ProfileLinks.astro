@@ -1,6 +1,6 @@
 ---
 import { verifiedProfiles } from "../utils/content";
-import { externalLinkAttrs } from "../utils/links";
+import { identityLinkAttrs } from "../utils/links";
 
 const profiles = verifiedProfiles();
 ---
@@ -9,7 +9,7 @@ const profiles = verifiedProfiles();
   <ul class="flex flex-wrap gap-2">
     {profiles.map((item) => (
       <li>
-        <a href={item.url} {...externalLinkAttrs(item.url)} class="chip">
+        <a href={item.url} {...identityLinkAttrs(item.url)} class="chip">
           {item.label}
           {item.identifier ? ` (${item.identifier})` : ""}
         </a>

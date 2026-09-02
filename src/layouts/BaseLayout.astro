@@ -4,7 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../config/site";
-import { absoluteUrl } from "../utils/seo";
+import { absoluteUrl, type MetaTag } from "../utils/seo";
 
 type Props = {
   title: string;
@@ -12,36 +12,66 @@ type Props = {
   canonicalPath?: string;
   ogType?: string;
   jsonLd?: unknown[];
+  robots?: string;
+  citationTags?: MetaTag[];
+  publishedTime?: string;
+  authors?: string[];
 };
 
-const { title, description, canonicalPath = Astro.url.pathname, ogType = "website", jsonLd = [] } = Astro.props;
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  ogType = "website",
+  jsonLd = [],
+  robots = "index, follow, max-image-preview:large, max-snippet:-1",
+  citationTags = [],
+  publishedTime,
+  authors = [],
+} = Astro.props;
 const canonical = absoluteUrl(canonicalPath);
 const ogImage = absoluteUrl(site.seo.defaultOgImage);
+const rssUrl = absoluteUrl("/rss.xml");
 ---
 
 <!doctype html>
-<html lang="en" transition:animate="none">
+<html lang="en-IN" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f1f4f3" />
+    <meta name="robots" content={robots} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={site.person.name} />
     <link rel="canonical" href={canonical} />
+    <link rel="author" href={absoluteUrl("/about")} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="alternate" type="application/rss+xml" title={`Publications by ${site.person.name}`} href="/rss.xml" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`Publications by ${site.person.name}`} href={rssUrl} />
+    <link rel="alternate" type="text/markdown" title="LLM summary" href="/llms.txt" />
+    <link rel="alternate" type="application/json" title="Person JSON" href="/profile.json" />
+    <link rel="alternate" type="application/json" title="Publications JSON" href="/publications.json" />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.seo.siteTitle} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={site.person.name} />
     <meta property="og:locale" content={site.seo.locale} />
-    <meta name="twitter:card" content="summary" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {authors.map((name) => <meta property="article:author" content={name} />)}
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={site.person.name} />
+    {citationTags.map((tag) => <meta name={tag.name} content={tag.content} />)}
     {jsonLd.map((data) => (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
     ))}

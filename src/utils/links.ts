@@ -26,3 +26,11 @@ export function externalLinkAttrs(href: string) {
   if (!isExternalHref(href)) return {};
   return { target: "_blank" as const, rel: "noopener noreferrer" as const };
 }
+
+export function identityLinkAttrs(href: string) {
+  const attrs = externalLinkAttrs(href);
+  return {
+    ...attrs,
+    rel: attrs.rel ? `${attrs.rel} me` : "me",
+  };
+}

@@ -10,7 +10,10 @@ import { pageJsonLd } from "../utils/jsonld";
 
 const seo = pageSeo("supervision");
 const scholars = visibleItems(site.supervision);
-const jsonLd = pageJsonLd("/supervision", [{ name: "Supervision", path: "/supervision" }]);
+const jsonLd = pageJsonLd("/supervision", [{ name: "Supervision", path: "/supervision" }], {
+  name: "Ph.D. supervision",
+  numberOfItems: scholars.length,
+});
 ---
 
 <BaseLayout title={seo.title} description={seo.description} canonicalPath="/supervision" jsonLd={jsonLd}>

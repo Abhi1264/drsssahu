@@ -19,7 +19,7 @@ import {
 } from "../utils/content";
 import { absoluteUrl, pageSeo } from "../utils/seo";
 import { breadcrumbJsonLd, personJsonLd, profilePageJsonLd, websiteJsonLd } from "../utils/jsonld";
-import { externalLinkAttrs } from "../utils/links";
+import { identityLinkAttrs, externalLinkAttrs } from "../utils/links";
 
 const seo = pageSeo("home");
 const featuredPubs = featuredPublications();
@@ -31,10 +31,11 @@ const workshops = visibleItems(site.workshops).slice(0, 3);
 const ctas = visibleItems(site.homepage.ctas);
 const profiles = verifiedProfiles();
 const email = primaryEmail();
+const scholars = visibleItems(site.supervision);
 const stats = [
   { value: String(allPublications().length), label: "Publications" },
   { value: String(visibleItems(site.patents).length), label: "Patents & designs" },
-  { value: String(visibleItems(site.supervision).length), label: "Ph.D. scholars" },
+  { value: String(scholars.length), label: "Ph.D. scholars" },
   { value: String(visibleItems(site.projects).length), label: "Funded projects" },
 ];
 const jsonLd = [
@@ -206,7 +207,7 @@ const jsonLd = [
       <section class="mt-16" aria-labelledby="supervision-heading">
         <SectionHeading id="supervision-heading" title={homepageHeading("supervision")} href="/supervision" linkLabel={site.ui.viewAll} />
         <p class="max-w-3xl text-ink-soft">
-          {visibleItems(site.supervision).length} awarded doctoral scholars, most recently in speech-based Parkinson’s disease analysis, photobiomodulation research, protein–protein interaction, energy harvesting, and image security.
+          {scholars.length} awarded doctoral scholars, most recently in speech-based Parkinson’s disease analysis, photobiomodulation research, protein–protein interaction, energy harvesting, and image security.
         </p>
       </section>
     )}
@@ -253,7 +254,7 @@ const jsonLd = [
           {profiles.length > 0 && (
             <p class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
               {profiles.slice(0, 4).map((item) => (
-                <a href={item.url} {...externalLinkAttrs(item.url)} class="inline-flex min-h-11 items-center md:min-h-0">{item.label}</a>
+                <a href={item.url} {...identityLinkAttrs(item.url)} class="inline-flex min-h-11 items-center md:min-h-0">{item.label}</a>
               ))}
             </p>
           )}

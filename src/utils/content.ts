@@ -37,6 +37,10 @@ export function verifiedProfiles() {
   return site.profiles.filter((item) => item.visible && item.verified && item.url);
 }
 
+export function orcidProfile(profiles = verifiedProfiles()) {
+  return profiles.find((item) => item.label === "ORCID");
+}
+
 export function homepageSectionEnabled(id: string): boolean {
   const section = site.homepage.sections.find((item) => item.id === id);
   if (!section) return true;
@@ -117,9 +121,9 @@ export function publicationPaths(): { slug: string; publication: Publication }[]
 }
 
 export function featuredPublications(): Publication[] {
-  const featured = sortPublications(allPublications().filter((item) => item.featured));
-  if (featured.length > 0) return featured;
-  return sortPublications(allPublications()).slice(0, 5);
+  const sorted = sortPublications(allPublications());
+  const featured = sorted.filter((item) => item.featured);
+  return featured.length > 0 ? featured : sorted.slice(0, 5);
 }
 
 export function relatedPublications(publication: Publication, limit = 3): Publication[] {

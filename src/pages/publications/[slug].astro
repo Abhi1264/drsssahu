@@ -11,7 +11,7 @@ import {
   publicationPaths,
   relatedPublications,
 } from "../../utils/content";
-import { absoluteUrl, publicationSeo } from "../../utils/seo";
+import { absoluteUrl, publicationCitationTags, publicationSeo } from "../../utils/seo";
 import { breadcrumbJsonLd, personJsonLd, scholarlyArticleJsonLd } from "../../utils/jsonld";
 import { externalLinkAttrs } from "../../utils/links";
 
@@ -27,6 +27,7 @@ if (!publication) throw new Error(`Unknown publication: ${slug}`);
 const seo = publicationSeo(publication.title, publication.year);
 const related = relatedPublications(publication);
 const links = externalSources(publication);
+const citationTags = publicationCitationTags(publication);
 const jsonLd = [
   personJsonLd(absoluteUrl(`/publications/${slug}`)),
   scholarlyArticleJsonLd(publication),
@@ -43,6 +44,9 @@ const jsonLd = [
   description={seo.description}
   canonicalPath={`/publications/${slug}`}
   ogType="article"
+  publishedTime={`${publication.year}-01-01`}
+  authors={publication.authors}
+  citationTags={citationTags}
   jsonLd={jsonLd}
 >
   <Container class="py-12 md:py-16">

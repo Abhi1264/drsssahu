@@ -1,7 +1,7 @@
 ---
 import { site } from "../config/site";
 import { verifiedProfiles, visibleItems } from "../utils/content";
-import { externalLinkAttrs } from "../utils/links";
+import { identityLinkAttrs, externalLinkAttrs } from "../utils/links";
 import Container from "./Container.astro";
 
 const footerNav = visibleItems(site.footer.links);
@@ -33,7 +33,7 @@ const profiles = verifiedProfiles();
           <li>
             <a
               href={item.url}
-              {...externalLinkAttrs(item.url)}
+              {...identityLinkAttrs(item.url)}
               class="inline-flex min-h-11 items-center text-ink-soft no-underline hover:text-navy hover:underline md:min-h-0 md:py-1"
             >
               {item.label}

@@ -13,7 +13,10 @@ import { pageJsonLd } from "../../utils/jsonld";
 
 const seo = pageSeo("publications");
 const publications = allPublications();
-const jsonLd = pageJsonLd("/publications", [{ name: "Publications", path: "/publications" }]);
+const jsonLd = pageJsonLd("/publications", [{ name: "Publications", path: "/publications" }], {
+  name: "Publications",
+  numberOfItems: publications.length,
+});
 ---
 
 <BaseLayout title={seo.title} description={seo.description} canonicalPath="/publications" jsonLd={jsonLd}>

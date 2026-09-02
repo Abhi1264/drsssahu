@@ -12,10 +12,14 @@ import { pageJsonLd } from "../../utils/jsonld";
 
 const seo = pageSeo("conferences");
 const publications = publicationsByType("conference");
-const jsonLd = pageJsonLd("/publications/conferences", [
-  { name: "Publications", path: "/publications" },
-  { name: "Conferences", path: "/publications/conferences" },
-]);
+const jsonLd = pageJsonLd(
+  "/publications/conferences",
+  [
+    { name: "Publications", path: "/publications" },
+    { name: "Conferences", path: "/publications/conferences" },
+  ],
+  { name: "Conference publications", numberOfItems: publications.length },
+);
 ---
 
 <BaseLayout title={seo.title} description={seo.description} canonicalPath="/publications/conferences" jsonLd={jsonLd}>

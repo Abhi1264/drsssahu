@@ -11,7 +11,7 @@ export function GET(context: APIContext) {
     items: sortPublications(allPublications()).map((publication) => ({
       title: publication.title,
       pubDate: new Date(`${publication.year}-01-01`),
-      link: `/publications/${slugFor(publication)}/`,
+      link: `/publications/${slugFor(publication)}`,
       description: `${publication.authors.join(", ")}. ${publication.venue}, ${publication.year}.`,
     })),
   });
