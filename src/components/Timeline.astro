@@ -1,8 +1,12 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
 type Item = {
   title: string;
   meta: string;
   detail?: string;
+  logo?: ImageMetadata;
 };
 
 type Props = {
@@ -13,13 +17,32 @@ const { items } = Astro.props;
 ---
 
 <ol class="space-y-3">
-  {items.map((item) => (
-    <li class="panel grid gap-2 p-5 md:grid-cols-[16rem_1fr] md:gap-8 md:p-6">
-      <p class="text-sm text-muted">{item.meta}</p>
-      <div>
-        <p class="font-medium text-ink">{item.title}</p>
-        {item.detail && <p class="mt-1 text-sm leading-relaxed text-ink-soft">{item.detail}</p>}
-      </div>
-    </li>
-  ))}
+  {
+    items.map((item) => (
+      <li class="panel flex items-center gap-4 p-5 md:gap-6 md:p-6">
+        <div class="grid min-w-0 flex-1 gap-2 md:grid-cols-[16rem_1fr] md:gap-8">
+          <p class="text-sm text-muted">{item.meta}</p>
+          <div>
+            <p class="font-medium text-ink">{item.title}</p>
+            {item.detail && (
+              <p class="mt-1 text-sm leading-relaxed text-ink-soft">
+                {item.detail}
+              </p>
+            )}
+          </div>
+        </div>
+        {item.logo && (
+          <Image
+            src={item.logo}
+            alt=""
+            width={128}
+            height={128}
+            densities={[1.5, 2]}
+            decoding="async"
+            class="size-14 shrink-0 object-contain md:size-16"
+          />
+        )}
+      </li>
+    ))
+  }
 </ol>

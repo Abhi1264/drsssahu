@@ -4,11 +4,17 @@ import Container from "../components/Container.astro";
 import { site } from "../config/site";
 ---
 
-<BaseLayout title={`Page not found | ${site.person.name}`} description="The requested page could not be found." robots="noindex, nofollow">
+<BaseLayout
+  title={`Page not found | ${site.person.name}`}
+  description="The requested page could not be found."
+  robots="noindex, nofollow"
+>
   <Container class="py-20">
     <span class="mark mb-6"></span>
     <h1 class="text-4xl font-medium text-ink">Page not found</h1>
-    <p class="mt-4 max-w-xl text-ink-soft">The page you requested is not part of this site.</p>
+    <p class="mt-4 max-w-xl text-ink-soft">
+      The page you requested is not part of this site.
+    </p>
     <p class="mt-8 flex flex-wrap gap-3">
       <a href="/" class="btn-primary">Home</a>
       <a href="/publications" class="btn-ghost">Publications</a>

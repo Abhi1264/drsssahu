@@ -16,7 +16,10 @@ export function isExternalHref(href: string): boolean {
 
   try {
     const url = new URL(href, site.seo.siteUrl);
-    return (url.protocol === "http:" || url.protocol === "https:") && url.origin !== siteOrigin;
+    return (
+      (url.protocol === "http:" || url.protocol === "https:") &&
+      url.origin !== siteOrigin
+    );
   } catch {
     return false;
   }

@@ -64,7 +64,10 @@ export function llmsTxt(): string {
     ...featuredPublications().map(publicationLine),
     "",
     "## Academic profiles",
-    ...profiles.map((item) => `- [${item.label}](${item.url}): ${item.identifier ?? item.type}`),
+    ...profiles.map(
+      (item) =>
+        `- [${item.label}](${item.url}): ${item.identifier ?? item.type}`,
+    ),
     "",
     "## Machine-readable",
     `- [Complete record](${absoluteUrl("/llms-full.txt")}): Full markdown of publications, projects, patents, and supervision.`,
@@ -105,7 +108,9 @@ export function llmsFullTxt(): string {
     ...site.research.interests.map((item) => `- ${item}`),
     "",
     "## Research themes",
-    ...visibleItems(site.research.themes).map((item) => `- **${item.title}.** ${item.description}`),
+    ...visibleItems(site.research.themes).map(
+      (item) => `- **${item.title}.** ${item.description}`,
+    ),
     "",
     `## Journal articles (${journals.length})`,
     ...journals.map(publicationLine),
@@ -118,7 +123,8 @@ export function llmsFullTxt(): string {
     "",
     `## Funded projects (${projects.length})`,
     ...projects.map(
-      (item) => `- ${item.title}. ${item.fundingBody}; ${item.duration}; ${item.role}; ${item.status}.`,
+      (item) =>
+        `- ${item.title}. ${item.fundingBody}; ${item.duration}; ${item.role}; ${item.status}.`,
     ),
     "",
     `## Patents and designs (${patents.length})`,
@@ -128,11 +134,14 @@ export function llmsFullTxt(): string {
     }),
     "",
     `## Doctoral supervision (${scholars.length})`,
-    ...scholars.map((item) => `- ${item.year}. ${item.scholar}. ${item.thesis}.`),
+    ...scholars.map(
+      (item) => `- ${item.year}. ${item.scholar}. ${item.thesis}.`,
+    ),
     "",
     "## Education",
     ...visibleItems(site.education).map(
-      (item) => `- ${item.degree}, ${item.institution} (${item.duration})${item.dissertation ? `. Dissertation: ${item.dissertation}` : ""}`,
+      (item) =>
+        `- ${item.degree}, ${item.institution} (${item.duration})${item.dissertation ? `. Dissertation: ${item.dissertation}` : ""}`,
     ),
     "",
     "## Academic appointments",

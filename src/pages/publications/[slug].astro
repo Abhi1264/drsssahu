@@ -11,8 +11,16 @@ import {
   publicationPaths,
   relatedPublications,
 } from "../../utils/content";
-import { absoluteUrl, publicationCitationTags, publicationSeo } from "../../utils/seo";
-import { breadcrumbJsonLd, personJsonLd, scholarlyArticleJsonLd } from "../../utils/jsonld";
+import {
+  absoluteUrl,
+  publicationCitationTags,
+  publicationSeo,
+} from "../../utils/seo";
+import {
+  breadcrumbJsonLd,
+  personJsonLd,
+  scholarlyArticleJsonLd,
+} from "../../utils/jsonld";
 import { externalLinkAttrs } from "../../utils/links";
 
 export function getStaticPaths() {
@@ -50,16 +58,35 @@ const jsonLd = [
   jsonLd={jsonLd}
 >
   <Container class="py-12 md:py-16">
-    <Breadcrumbs items={[{ label: "Publications", href: "/publications" }, { label: publication.title }]} />
+    <Breadcrumbs
+      items={[
+        { label: "Publications", href: "/publications" },
+        { label: publication.title },
+      ]}
+    />
     <article>
       <p class="text-xs tracking-[0.16em] text-signal uppercase">
-        {publication.type === "journal" ? "Journal article" : publication.type === "conference" ? "Conference paper" : "Book chapter"}
+        {
+          publication.type === "journal"
+            ? "Journal article"
+            : publication.type === "conference"
+              ? "Conference paper"
+              : "Book chapter"
+        }
         · {publication.year}
       </p>
-      <h1 class="mt-3 max-w-4xl text-3xl leading-tight font-medium text-ink md:text-5xl">{publication.title}</h1>
-      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft">{publication.authors.join(" · ")}</p>
+      <h1
+        class="mt-3 max-w-4xl text-3xl leading-tight font-medium text-ink md:text-5xl"
+      >
+        {publication.title}
+      </h1>
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft">
+        {publication.authors.join(" · ")}
+      </p>
       <section class="panel mt-10 p-6 md:p-8">
-        <h2 class="text-2xl font-medium text-ink">{site.ui.bibliographicDetails}</h2>
+        <h2 class="text-2xl font-medium text-ink">
+          {site.ui.bibliographicDetails}
+        </h2>
         <dl class="mt-4 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
           <div>
             <dt class="text-muted">Venue</dt>
@@ -69,74 +96,102 @@ const jsonLd = [
             <dt class="text-muted">Year</dt>
             <dd class="mt-1 text-ink">{publication.year}</dd>
           </div>
-          {publication.volume && (
-            <div>
-              <dt class="text-muted">Volume</dt>
-              <dd class="mt-1 text-ink">{publication.volume}</dd>
-            </div>
-          )}
-          {publication.issue && (
-            <div>
-              <dt class="text-muted">Issue</dt>
-              <dd class="mt-1 text-ink">{publication.issue}</dd>
-            </div>
-          )}
-          {publication.pages && (
-            <div>
-              <dt class="text-muted">Pages</dt>
-              <dd class="mt-1 text-ink">{publication.pages}</dd>
-            </div>
-          )}
-          {publication.articleNumber && (
-            <div>
-              <dt class="text-muted">Article number</dt>
-              <dd class="mt-1 text-ink">{publication.articleNumber}</dd>
-            </div>
-          )}
-          {publication.publisher && (
-            <div>
-              <dt class="text-muted">Publisher</dt>
-              <dd class="mt-1 text-ink">{publication.publisher}</dd>
-            </div>
-          )}
-          {publication.isbn && (
-            <div>
-              <dt class="text-muted">ISBN</dt>
-              <dd class="mt-1 text-ink">{publication.isbn}</dd>
-            </div>
-          )}
-          {publication.indexing && (
-            <div>
-              <dt class="text-muted">Indexing</dt>
-              <dd class="mt-1 text-ink">{publication.indexing}</dd>
-            </div>
-          )}
+          {
+            publication.volume && (
+              <div>
+                <dt class="text-muted">Volume</dt>
+                <dd class="mt-1 text-ink">{publication.volume}</dd>
+              </div>
+            )
+          }
+          {
+            publication.issue && (
+              <div>
+                <dt class="text-muted">Issue</dt>
+                <dd class="mt-1 text-ink">{publication.issue}</dd>
+              </div>
+            )
+          }
+          {
+            publication.pages && (
+              <div>
+                <dt class="text-muted">Pages</dt>
+                <dd class="mt-1 text-ink">{publication.pages}</dd>
+              </div>
+            )
+          }
+          {
+            publication.articleNumber && (
+              <div>
+                <dt class="text-muted">Article number</dt>
+                <dd class="mt-1 text-ink">{publication.articleNumber}</dd>
+              </div>
+            )
+          }
+          {
+            publication.publisher && (
+              <div>
+                <dt class="text-muted">Publisher</dt>
+                <dd class="mt-1 text-ink">{publication.publisher}</dd>
+              </div>
+            )
+          }
+          {
+            publication.isbn && (
+              <div>
+                <dt class="text-muted">ISBN</dt>
+                <dd class="mt-1 text-ink">{publication.isbn}</dd>
+              </div>
+            )
+          }
+          {
+            publication.indexing && (
+              <div>
+                <dt class="text-muted">Indexing</dt>
+                <dd class="mt-1 text-ink">{publication.indexing}</dd>
+              </div>
+            )
+          }
         </dl>
-        {publication.notes && <p class="mt-6 max-w-3xl text-ink-soft">{publication.notes}</p>}
-        {links.length > 0 && (
-          <ul class="mt-6 flex flex-wrap gap-4 text-sm">
-            {links.map((item) => (
-              <li>
-                <a href={item.url} {...externalLinkAttrs(item.url)}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        )}
+        {
+          publication.notes && (
+            <p class="mt-6 max-w-3xl text-ink-soft">{publication.notes}</p>
+          )
+        }
+        {
+          links.length > 0 && (
+            <ul class="mt-6 flex flex-wrap gap-4 text-sm">
+              {links.map((item) => (
+                <li>
+                  <a href={item.url} {...externalLinkAttrs(item.url)}>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
       </section>
       <section class="panel mt-10 p-6 md:p-8">
         <h2 class="text-2xl font-medium text-ink">{site.ui.citation}</h2>
-        <p class="mt-4 max-w-3xl text-sm leading-relaxed text-ink-soft">{apaCitation(publication)}</p>
+        <p class="mt-4 max-w-3xl text-sm leading-relaxed text-ink-soft">
+          {apaCitation(publication)}
+        </p>
       </section>
     </article>
-    {related.length > 0 && (
-      <section class="mt-14">
-        <h2 class="text-2xl font-medium text-ink">{site.ui.relatedPublications}</h2>
-        <div class="panel mt-4 overflow-hidden px-5 md:px-7">
-          {related.map((item) => (
-            <PublicationEntry publication={item} />
-          ))}
-        </div>
-      </section>
-    )}
+    {
+      related.length > 0 && (
+        <section class="mt-14">
+          <h2 class="text-2xl font-medium text-ink">
+            {site.ui.relatedPublications}
+          </h2>
+          <div class="panel mt-4 overflow-hidden px-5 md:px-7">
+            {related.map((item) => (
+              <PublicationEntry publication={item} />
+            ))}
+          </div>
+        </section>
+      )
+    }
   </Container>
 </BaseLayout>

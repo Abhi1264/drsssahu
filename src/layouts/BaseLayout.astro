@@ -49,10 +49,30 @@ const rssUrl = absoluteUrl("/rss.xml");
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-    <link rel="alternate" type="application/rss+xml" title={`Publications by ${site.person.name}`} href={rssUrl} />
-    <link rel="alternate" type="text/markdown" title="LLM summary" href="/llms.txt" />
-    <link rel="alternate" type="application/json" title="Person JSON" href="/profile.json" />
-    <link rel="alternate" type="application/json" title="Publications JSON" href="/publications.json" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`Publications by ${site.person.name}`}
+      href={rssUrl}
+    />
+    <link
+      rel="alternate"
+      type="text/markdown"
+      title="LLM summary"
+      href="/llms.txt"
+    />
+    <link
+      rel="alternate"
+      type="application/json"
+      title="Person JSON"
+      href="/profile.json"
+    />
+    <link
+      rel="alternate"
+      type="application/json"
+      title="Publications JSON"
+      href="/publications.json"
+    />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.seo.siteTitle} />
     <meta property="og:title" content={title} />
@@ -64,7 +84,11 @@ const rssUrl = absoluteUrl("/rss.xml");
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={site.person.name} />
     <meta property="og:locale" content={site.seo.locale} />
-    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {
+      publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )
+    }
     {authors.map((name) => <meta property="article:author" content={name} />)}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -72,18 +96,25 @@ const rssUrl = absoluteUrl("/rss.xml");
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={site.person.name} />
     {citationTags.map((tag) => <meta name={tag.name} content={tag.content} />)}
-    {jsonLd.map((data) => (
-      <script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
-    ))}
+    {
+      jsonLd.map((data) => (
+        <script
+          is:inline
+          type="application/ld+json"
+          set:html={JSON.stringify(data)}
+        />
+      ))
+    }
     <ClientRouter />
   </head>
   <body class="min-h-screen bg-paper text-ink antialiased">
     <div
       id="route-progress"
-      class="pointer-events-none fixed inset-x-0 top-0 z-[80] h-0.5 bg-navy"
+      class="pointer-events-none fixed inset-x-0 top-0 z-80 h-0.5 bg-navy"
       aria-hidden="true"
       transition:persist="route-progress"
-    ></div>
+    >
+    </div>
     <a
       href="#content"
       class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:rounded-md focus-visible:bg-surface focus-visible:px-3 focus-visible:py-2 focus-visible:text-sm"

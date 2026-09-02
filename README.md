@@ -11,6 +11,7 @@ pnpm install
 pnpm dev
 pnpm build
 pnpm preview
+pnpm check
 ```
 
 Requires Node.js 22.12 or later and pnpm 12.
@@ -37,10 +38,3 @@ Open `src/config/site.ts` and save. Pages are generated from that file.
 - Feature an item on the homepage: set `featured: true`.
 - Hide an item without deleting it: set `visible: false`.
 - Change the public site URL: edit `seo.siteUrl`.
-
-## Optional checks
-
-```sh
-pnpm check
-pnpm validate:links
-```

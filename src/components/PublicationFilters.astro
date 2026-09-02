@@ -20,7 +20,9 @@ const { ui } = site;
   data-publication-filters
 >
   <label class="block">
-    <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.searchPublications}</span>
+    <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase"
+      >{ui.searchPublications}</span
+    >
     <input
       type="search"
       name="q"
@@ -31,43 +33,57 @@ const { ui } = site;
     />
   </label>
   <label class="block">
-    <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.filterYear}</span>
+    <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase"
+      >{ui.filterYear}</span
+    >
     <select name="year" class="input-field min-h-11 w-full px-3 py-2 text-ink">
       <option value="">{ui.allYears}</option>
-      {years.map((year) => (
-        <option value={year}>{year}</option>
-      ))}
+      {years.map((year) => <option value={year}>{year}</option>)}
     </select>
   </label>
-  {showType && (
-    <label class="block">
-      <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.filterType}</span>
-      <select name="type" class="input-field min-h-11 w-full px-3 py-2 text-ink">
-        <option value="">{ui.allTypes}</option>
-        {types.map((type) => (
-          <option value={type.value}>{type.label}</option>
-        ))}
-      </select>
-    </label>
-  )}
+  {
+    showType && (
+      <label class="block">
+        <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">
+          {ui.filterType}
+        </span>
+        <select
+          name="type"
+          class="input-field min-h-11 w-full px-3 py-2 text-ink"
+        >
+          <option value="">{ui.allTypes}</option>
+          {types.map((type) => (
+            <option value={type.value}>{type.label}</option>
+          ))}
+        </select>
+      </label>
+    )
+  }
 </form>
-<p data-empty hidden class="text-ink-soft" role="status" aria-live="polite">{ui.noResults}</p>
+<p data-empty hidden class="text-ink-soft" role="status" aria-live="polite">
+  {ui.noResults}
+</p>
 
 <script>
   function bindFilters(form: HTMLFormElement) {
     const root = form.closest("main") ?? document;
-    const empty = form.parentElement?.querySelector<HTMLElement>("[data-empty]");
+    const empty =
+      form.parentElement?.querySelector<HTMLElement>("[data-empty]");
     const queryField = form.elements.namedItem("q");
     const yearField = form.elements.namedItem("year");
     const typeField = form.elements.namedItem("type");
 
     const apply = () => {
       const data = new FormData(form);
-      const query = String(data.get("q") ?? "").trim().toLowerCase();
+      const query = String(data.get("q") ?? "")
+        .trim()
+        .toLowerCase();
       const year = String(data.get("year") ?? "");
       const type = String(data.get("type") ?? "");
       const entries = root.querySelectorAll<HTMLElement>("[data-publication]");
-      const sections = root.querySelectorAll<HTMLElement>(".publication-list section");
+      const sections = root.querySelectorAll<HTMLElement>(
+        ".publication-list section",
+      );
       let visible = 0;
 
       for (const entry of entries) {
@@ -80,7 +96,9 @@ const { ui } = site;
       }
 
       for (const section of sections) {
-        section.hidden = !section.querySelector("[data-publication]:not([hidden])");
+        section.hidden = !section.querySelector(
+          "[data-publication]:not([hidden])",
+        );
       }
 
       if (empty) empty.hidden = visible > 0;
@@ -98,9 +116,12 @@ const { ui } = site;
     };
 
     const params = new URLSearchParams(location.search);
-    if (queryField instanceof HTMLInputElement) queryField.value = params.get("q") ?? "";
-    if (yearField instanceof HTMLSelectElement) yearField.value = params.get("year") ?? "";
-    if (typeField instanceof HTMLSelectElement) typeField.value = params.get("type") ?? "";
+    if (queryField instanceof HTMLInputElement)
+      queryField.value = params.get("q") ?? "";
+    if (yearField instanceof HTMLSelectElement)
+      yearField.value = params.get("year") ?? "";
+    if (typeField instanceof HTMLSelectElement)
+      typeField.value = params.get("type") ?? "";
 
     form.addEventListener("submit", (event) => event.preventDefault());
     form.addEventListener("input", () => {
@@ -111,11 +132,13 @@ const { ui } = site;
   }
 
   const startFilters = () => {
-    document.querySelectorAll<HTMLFormElement>("[data-publication-filters]").forEach((form) => {
-      if (form.dataset.bound === "true") return;
-      form.dataset.bound = "true";
-      bindFilters(form);
-    });
+    document
+      .querySelectorAll<HTMLFormElement>("[data-publication-filters]")
+      .forEach((form) => {
+        if (form.dataset.bound === "true") return;
+        form.dataset.bound = "true";
+        bindFilters(form);
+      });
   };
 
   startFilters();

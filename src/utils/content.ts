@@ -6,19 +6,23 @@ export function isVisible<T extends { visible?: boolean }>(item: T): boolean {
   return item.visible !== false;
 }
 
-export function visibleItems<T extends { visible?: boolean }>(items: readonly T[]): T[] {
+export function visibleItems<T extends { visible?: boolean }>(
+  items: readonly T[],
+): T[] {
   return items.filter(isVisible);
 }
 
-export function featuredItems<T extends { visible?: boolean; featured?: boolean }>(
-  items: readonly T[],
-): T[] {
+export function featuredItems<
+  T extends { visible?: boolean; featured?: boolean },
+>(items: readonly T[]): T[] {
   return visibleItems(items).filter((item) => item.featured);
 }
 
 export function primaryEmail(): string {
   const emails = site.person.emails;
-  return emails.find((item) => item.primary)?.address ?? emails[0]?.address ?? "";
+  return (
+    emails.find((item) => item.primary)?.address ?? emails[0]?.address ?? ""
+  );
 }
 
 export function visibleEmails() {
@@ -34,7 +38,9 @@ export function visibleNavigation() {
 }
 
 export function verifiedProfiles() {
-  return site.profiles.filter((item) => item.visible && item.verified && item.url);
+  return site.profiles.filter(
+    (item) => item.visible && item.verified && item.url,
+  );
 }
 
 export function orcidProfile(profiles = verifiedProfiles()) {
@@ -76,11 +82,15 @@ export function sortPublications(items: Publication[]): Publication[] {
   });
 }
 
-export function publicationYears(items: Publication[] = allPublications()): number[] {
+export function publicationYears(
+  items: Publication[] = allPublications(),
+): number[] {
   return [...new Set(items.map((item) => item.year))].sort((a, b) => b - a);
 }
 
-export function groupByYear(items: Publication[]): { year: number; items: Publication[] }[] {
+export function groupByYear(
+  items: Publication[],
+): { year: number; items: Publication[] }[] {
   const grouped = new Map<number, Publication[]>();
   for (const item of sortPublications(items)) {
     const list = grouped.get(item.year) ?? [];
@@ -109,15 +119,24 @@ const { bySlug, byPublication } = (() => {
 })();
 
 export function slugFor(publication: Publication): string {
-  return byPublication.get(publication) ?? publicationSlug(publication.title, publication.year);
+  return (
+    byPublication.get(publication) ??
+    publicationSlug(publication.title, publication.year)
+  );
 }
 
 export function publicationBySlug(slug: string): Publication | undefined {
   return bySlug.get(slug);
 }
 
-export function publicationPaths(): { slug: string; publication: Publication }[] {
-  return [...bySlug.entries()].map(([slug, publication]) => ({ slug, publication }));
+export function publicationPaths(): {
+  slug: string;
+  publication: Publication;
+}[] {
+  return [...bySlug.entries()].map(([slug, publication]) => ({
+    slug,
+    publication,
+  }));
 }
 
 export function featuredPublications(): Publication[] {
@@ -126,10 +145,16 @@ export function featuredPublications(): Publication[] {
   return featured.length > 0 ? featured : sorted.slice(0, 5);
 }
 
-export function relatedPublications(publication: Publication, limit = 3): Publication[] {
+export function relatedPublications(
+  publication: Publication,
+  limit = 3,
+): Publication[] {
   return sortPublications(allPublications())
     .filter((item) => item.title !== publication.title)
-    .filter((item) => item.type === publication.type || item.year === publication.year)
+    .filter(
+      (item) =>
+        item.type === publication.type || item.year === publication.year,
+    )
     .slice(0, limit);
 }
 
@@ -141,7 +166,11 @@ export function externalSources(publication: Publication) {
   const links = [...(publication.sources ?? [])].filter((item) => item.url);
   const { doi } = publication;
   if (doi && !links.some((item) => item.url.includes(doi))) {
-    links.unshift({ label: site.ui.doi, url: doiUrl(doi), verified: publication.source.verified });
+    links.unshift({
+      label: site.ui.doi,
+      url: doiUrl(doi),
+      verified: publication.source.verified,
+    });
   }
   const seen = new Set<string>();
   return links.filter((item) => {
@@ -152,17 +181,35 @@ export function externalSources(publication: Publication) {
 }
 
 export function searchText(publication: Publication): string {
-  return [publication.title, publication.authors.join(" "), publication.venue, publication.year, publication.doi]
+  return [
+    publication.title,
+    publication.authors.join(" "),
+    publication.venue,
+    publication.year,
+    publication.doi,
+  ]
     .filter(Boolean)
     .join(" ")
     .toLowerCase();
 }
 
 export function matchesAuthor(name: string): boolean {
-  const normalized = name.replace(/\./g, "").replace(/\s+/g, " ").trim().toLowerCase();
+  const normalized = name
+    .replace(/\./g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
   return site.person.nameVariants.some((variant) => {
-    const value = variant.replace(/\./g, "").replace(/\s+/g, " ").trim().toLowerCase();
-    return normalized === value || normalized.includes(value) || value.includes(normalized);
+    const value = variant
+      .replace(/\./g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+    return (
+      normalized === value ||
+      normalized.includes(value) ||
+      value.includes(normalized)
+    );
   });
 }
 

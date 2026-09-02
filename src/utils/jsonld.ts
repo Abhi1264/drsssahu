@@ -2,7 +2,14 @@ import profilePhoto from "../assets/profile.jpg";
 import { site } from "../config/site";
 import type { Publication } from "../config/types";
 import { absoluteUrl, pageRange } from "./seo";
-import { doiUrl, matchesAuthor, orcidProfile, primaryEmail, slugFor, verifiedProfiles } from "./content";
+import {
+  doiUrl,
+  matchesAuthor,
+  orcidProfile,
+  primaryEmail,
+  slugFor,
+  verifiedProfiles,
+} from "./content";
 
 const personId = `${absoluteUrl("/")}#person`;
 const siteAddress = {
@@ -27,7 +34,9 @@ export function personJsonLd(pageUrl: string) {
     jobTitle: site.person.designation,
     email: `mailto:${primaryEmail()}`,
     url: absoluteUrl("/"),
-    ...(site.person.showProfileImage ? { image: absoluteUrl(profilePhoto.src) } : {}),
+    ...(site.person.showProfileImage
+      ? { image: absoluteUrl(profilePhoto.src) }
+      : {}),
     address: {
       ...siteAddress,
       streetAddress: site.person.department,
@@ -144,7 +153,8 @@ export function scholarlyArticleJsonLd(publication: Publication) {
   const { first, last } = pageRange(publication.pages);
   return {
     "@context": "https://schema.org",
-    "@type": publication.type === "book-chapter" ? "Chapter" : "ScholarlyArticle",
+    "@type":
+      publication.type === "book-chapter" ? "Chapter" : "ScholarlyArticle",
     headline: publication.title,
     name: publication.title,
     author: publication.authors.map((name) =>
@@ -160,8 +170,19 @@ export function scholarlyArticleJsonLd(publication: Publication) {
     },
     url: pageUrl,
     mainEntityOfPage: pageUrl,
-    ...(doi ? { sameAs: doi, identifier: { "@type": "PropertyValue", propertyID: "DOI", value: publication.doi } } : {}),
-    ...(publication.publisher ? { publisher: { "@type": "Organization", name: publication.publisher } } : {}),
+    ...(doi
+      ? {
+          sameAs: doi,
+          identifier: {
+            "@type": "PropertyValue",
+            propertyID: "DOI",
+            value: publication.doi,
+          },
+        }
+      : {}),
+    ...(publication.publisher
+      ? { publisher: { "@type": "Organization", name: publication.publisher } }
+      : {}),
     ...(publication.isbn ? { isbn: publication.isbn } : {}),
     ...(first ? { pageStart: first } : {}),
     ...(last ? { pageEnd: last } : {}),

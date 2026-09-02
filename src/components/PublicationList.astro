@@ -12,16 +12,21 @@ const groups = groupByYear(publications);
 ---
 
 <div class="publication-list">
-  {groups.map((group) => (
-    <section class="mt-10" aria-labelledby={`year-${group.year}`}>
-      <h2 id={`year-${group.year}`} class="text-2xl font-medium tabular-nums text-ink">
-        {group.year}
-      </h2>
-      <div class="panel mt-3 overflow-hidden px-5 md:px-7">
-        {group.items.map((publication) => (
-          <PublicationEntry publication={publication} />
-        ))}
-      </div>
-    </section>
-  ))}
+  {
+    groups.map((group) => (
+      <section class="mt-10" aria-labelledby={`year-${group.year}`}>
+        <h2
+          id={`year-${group.year}`}
+          class="text-2xl font-medium tabular-nums text-ink"
+        >
+          {group.year}
+        </h2>
+        <div class="panel mt-3 overflow-hidden px-5 md:px-7">
+          {group.items.map((publication) => (
+            <PublicationEntry publication={publication} />
+          ))}
+        </div>
+      </section>
+    ))
+  }
 </div>

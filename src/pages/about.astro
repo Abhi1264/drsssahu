@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 import PageHeader from "../components/PageHeader.astro";
@@ -6,7 +7,9 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ProfileLinks from "../components/ProfileLinks.astro";
 import Timeline from "../components/Timeline.astro";
 import { site } from "../config/site";
+import profilePhoto from "../assets/profile.jpg";
 import { primaryEmail, visibleItems } from "../utils/content";
+import { institutionLogo } from "../utils/logos";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
 
@@ -14,15 +17,53 @@ const seo = pageSeo("about");
 const jsonLd = pageJsonLd("/about", [{ name: "About", path: "/about" }]);
 ---
 
-<BaseLayout title={seo.title} description={seo.description} canonicalPath="/about" jsonLd={jsonLd}>
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  canonicalPath="/about"
+  jsonLd={jsonLd}
+>
   <Container class="py-12 md:py-16">
     <Breadcrumbs items={[{ label: "About" }]} />
-    <PageHeader title="About" description={`${site.person.designation}, ${site.person.department}, ${site.person.institution}.`} />
-    <div class="mt-10 max-w-3xl space-y-6 text-lg leading-relaxed text-ink-soft">
-      <p>{site.person.bio}</p>
-      <p>
-        He has supervised {visibleItems(site.supervision).length} awarded Ph.D. scholars and has led funded projects with SERB-DST, NPIU-MHRD, and the Technology Innovation Hubs at ISI Kolkata.
-      </p>
+    <PageHeader
+      title="About"
+      description={`${site.person.designation}, ${site.person.department}, ${site.person.institution}.`}
+    />
+    <div
+      class="mt-10 grid items-start gap-10 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-14"
+    >
+      <div class="max-w-3xl space-y-6 text-lg leading-relaxed text-ink-soft">
+        <p>{site.person.bio}</p>
+        <p>
+          He has supervised {visibleItems(site.supervision).length} awarded Ph.D.
+          scholars and has led funded projects with SERB-DST, NPIU-MHRD, and the Technology
+          Innovation Hubs at ISI Kolkata.
+        </p>
+      </div>
+      {
+        site.person.showProfileImage && (
+          <figure
+            class="order-first mx-auto w-44 shrink-0 md:order-0 md:mx-0 md:w-full"
+            transition:name="profile-photo"
+          >
+            <div class="overflow-hidden rounded-2xl border border-rule bg-surface shadow-[0_18px_40px_0.08]">
+              <Image
+                src={profilePhoto}
+                alt={site.person.name}
+                width={480}
+                height={480}
+                densities={[1.5, 2]}
+                decoding="async"
+                draggable="false"
+                class="profile-photo aspect-square w-full object-cover"
+              />
+            </div>
+            <figcaption class="mt-3 text-sm leading-snug text-muted">
+              {site.person.designation}, {site.person.institutionShort}
+            </figcaption>
+          </figure>
+        )
+      }
     </div>
     <section class="mt-14">
       <h2 class="text-2xl font-medium text-ink">Appointments</h2>
@@ -32,6 +73,7 @@ const jsonLd = pageJsonLd("/about", [{ name: "About", path: "/about" }]);
             title: `${item.position}, ${item.institution}`,
             meta: item.duration,
             detail: item.description,
+            logo: institutionLogo(item.institution),
           }))}
         />
       </div>
@@ -39,9 +81,11 @@ const jsonLd = pageJsonLd("/about", [{ name: "About", path: "/about" }]);
     <section class="mt-14">
       <h2 class="text-2xl font-medium text-ink">Research interests</h2>
       <ul class="mt-4 flex flex-wrap gap-2">
-        {site.research.interests.map((interest) => (
-          <li class="chip">{interest}</li>
-        ))}
+        {
+          site.research.interests.map((interest) => (
+            <li class="chip">{interest}</li>
+          ))
+        }
       </ul>
     </section>
     <section class="mt-14">
@@ -52,7 +96,8 @@ const jsonLd = pageJsonLd("/about", [{ name: "About", path: "/about" }]);
     </section>
     <p class="mt-12 flex flex-wrap gap-3">
       <a href="/resume" class="btn-primary">{site.resume.downloadLabel}</a>
-      <a href={`mailto:${primaryEmail()}`} class="btn-ghost">{primaryEmail()}</a>
+      <a href={`mailto:${primaryEmail()}`} class="btn-ghost">{primaryEmail()}</a
+      >
     </p>
   </Container>
 </BaseLayout>
