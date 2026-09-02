@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../config/site";
@@ -19,11 +20,11 @@ const ogImage = absoluteUrl(site.seo.defaultOgImage);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f4f1ea" />
+    <meta name="theme-color" content="#f1f4f3" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={site.person.name} />
@@ -44,18 +45,40 @@ const ogImage = absoluteUrl(site.seo.defaultOgImage);
     {jsonLd.map((data) => (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(data)} />
     ))}
+    <ClientRouter />
   </head>
   <body class="min-h-screen bg-paper text-ink antialiased">
+    <div
+      id="route-progress"
+      class="pointer-events-none fixed inset-x-0 top-0 z-[80] h-0.5 bg-navy"
+      aria-hidden="true"
+      transition:persist="route-progress"
+    ></div>
     <a
       href="#content"
-      class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:bg-paper focus-visible:px-3 focus-visible:py-2 focus-visible:text-sm"
+      class="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:left-4 focus-visible:top-4 focus-visible:z-50 focus-visible:rounded-md focus-visible:bg-surface focus-visible:px-3 focus-visible:py-2 focus-visible:text-sm"
     >
       {site.ui.skipToContent}
     </a>
     <Header />
-    <main id="content" tabindex="-1">
+    <main id="content" tabindex="-1" transition:animate="fade">
       <slot />
     </main>
     <Footer />
+    <script>
+      const progress = () => document.getElementById("route-progress");
+
+      document.addEventListener("astro:before-preparation", () => {
+        const bar = progress();
+        if (!bar) return;
+        bar.classList.remove("is-active");
+        void bar.offsetWidth;
+        bar.classList.add("is-active");
+      });
+
+      document.addEventListener("astro:page-load", () => {
+        progress()?.classList.remove("is-active");
+      });
+    </script>
   </body>
 </html>

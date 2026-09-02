@@ -20,9 +20,9 @@ const jsonLd = pageJsonLd("/contact", [{ name: "Contact", path: "/contact" }]);
   <Container class="py-12 md:py-16">
     <Breadcrumbs items={[{ label: "Contact" }]} />
     <PageHeader title={site.contact.heading} description={site.contact.intro} />
-    <div class="mt-10 grid gap-12 md:grid-cols-2">
-      <section>
-        <h2 class="font-serif text-2xl text-ink">Department</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      <section class="panel p-6">
+        <h2 class="text-2xl font-medium text-ink">Department</h2>
         <address class="mt-4 not-italic leading-relaxed text-ink-soft">
           {site.person.addressLines.map((line) => (
             <p>{line}</p>
@@ -34,8 +34,8 @@ const jsonLd = pageJsonLd("/contact", [{ name: "Contact", path: "/contact" }]);
           </p>
         )}
       </section>
-      <section>
-        <h2 class="font-serif text-2xl text-ink">Email</h2>
+      <section class="panel p-6">
+        <h2 class="text-2xl font-medium text-ink">Email</h2>
         <ul class="mt-4 space-y-2">
           {emails.map((item) => (
             <li>
@@ -46,7 +46,7 @@ const jsonLd = pageJsonLd("/contact", [{ name: "Contact", path: "/contact" }]);
         </ul>
         {phones.length > 0 && (
           <div class="mt-8">
-            <h2 class="font-serif text-2xl text-ink">Telephone</h2>
+            <h2 class="text-2xl font-medium text-ink">Telephone</h2>
             <ul class="mt-4 space-y-2">
               {phones.map((item) => (
                 <li>
@@ -60,15 +60,14 @@ const jsonLd = pageJsonLd("/contact", [{ name: "Contact", path: "/contact" }]);
       </section>
     </div>
     <section class="mt-14">
-      <h2 class="font-serif text-2xl text-ink">Research profiles</h2>
+      <h2 class="text-2xl font-medium text-ink">Research profiles</h2>
       <div class="mt-4 text-ink-soft">
         <ProfileLinks />
       </div>
     </section>
-    <p class="mt-12 text-sm">
-      <a href={`mailto:${primaryEmail()}`}>{site.ui.email}</a>
-      ·
-      <a href="/resume">{site.resume.downloadLabel}</a>
+    <p class="mt-12 flex flex-wrap gap-3">
+      <a href={`mailto:${primaryEmail()}`} class="btn-ghost">{site.ui.email}</a>
+      <a href="/resume" class="btn-primary">{site.resume.downloadLabel}</a>
     </p>
   </Container>
 </BaseLayout>

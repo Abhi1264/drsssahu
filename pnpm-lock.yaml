@@ -115,10 +115,10 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.4
         version: 3.7.4
-      '@fontsource-variable/source-sans-3':
+      '@fontsource-variable/fraunces':
         specifier: ^5.3.0
         version: 5.3.0
-      '@fontsource-variable/source-serif-4':
+      '@fontsource-variable/source-sans-3':
         specifier: ^5.3.0
         version: 5.3.0
       '@tailwindcss/vite':
@@ -129,7 +129,7 @@ importers:
         version: 7.2.10(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
       sharp:
         specifier: ^0.35.4
-        version: 0.35.4
+        version: 0.35.4(@types/node@24.13.3)
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -725,11 +725,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@fontsource-variable/fraunces@5.3.0':
+    resolution: {integrity: sha512-9BYGySn4AHEJdgp9Z28tQ3X+laJMEOITXkQarZXeloWQZDq5oOvXJ3kDA8c7MGIfpogIaZfjrQBqmda8POOCKA==}
+
   '@fontsource-variable/source-sans-3@5.3.0':
     resolution: {integrity: sha512-dpi0GZk7EQe2tYpg6Q0Fx0OmUgnuGu+0rHPgtXqtKhglYmJuP7jZ12Mu1uN+NfRaJRY1Emn8AQJEWzmoZ4wa9g==}
-
-  '@fontsource-variable/source-serif-4@5.3.0':
-    resolution: {integrity: sha512-9vch9WqxjaaA+1o9Ur8pOgIGbCYLjRReOUel23A6lOpD1syptgjtkORevvNmldJ5kGXQL29onQUqI5Ltz0s3bQ==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -2975,9 +2975,9 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@fontsource-variable/source-sans-3@5.3.0': {}
+  '@fontsource-variable/fraunces@5.3.0': {}
 
-  '@fontsource-variable/source-serif-4@5.3.0': {}
+  '@fontsource-variable/source-sans-3@5.3.0': {}
 
   '@img/colour@1.1.0': {}
 
@@ -3587,7 +3587,7 @@ snapshots:
       yargs-parser: 22.0.0
       zod: 4.5.4
     optionalDependencies:
-      sharp: 0.35.4
+      sharp: 0.35.4(@types/node@24.13.3)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -4275,7 +4275,7 @@ snapshots:
       '@img/sharp-win32-ia32': 0.35.2
       '@img/sharp-win32-x64': 0.35.2
 
-  sharp@0.35.4:
+  sharp@0.35.4(@types/node@24.13.3):
     dependencies:
       '@img/colour': 1.1.0
       detect-libc: 2.1.2
@@ -4306,6 +4306,7 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.4
       '@img/sharp-win32-ia32': 0.35.4
       '@img/sharp-win32-x64': 0.35.4
+      '@types/node': 24.13.3
 
   shiki@4.4.3:
     dependencies:

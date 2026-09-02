@@ -18,11 +18,11 @@ const number =
 const links = (patent.sources ?? []).filter((item) => item.url);
 ---
 
-<article class="border-t border-rule py-7">
-  <p class="text-xs tracking-[0.16em] text-muted uppercase">
+<article class="panel mb-4 p-5 md:p-6">
+  <p class="text-xs tracking-[0.16em] text-signal uppercase">
     {patent.country} · {patent.status} · {patent.kind}
   </p>
-  <h2 class="mt-2 max-w-4xl font-serif text-xl leading-snug text-ink md:text-2xl">{patent.title}</h2>
+  <h2 class="mt-2 max-w-4xl text-xl leading-snug font-medium text-ink md:text-2xl">{patent.title}</h2>
   <p class="mt-3 text-sm text-ink-soft">
     {number}
     {patent.date ? ` · ${patent.date}` : ""}

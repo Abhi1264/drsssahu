@@ -13,7 +13,7 @@ const { ui } = site;
 
 <form
   class:list={[
-    "publication-filters mb-10 grid gap-4 border-y border-rule py-5",
+    "publication-filters panel mb-10 grid gap-4 p-5",
     showType ? "md:grid-cols-[1fr_10rem_12rem]" : "md:grid-cols-[1fr_10rem]",
   ]}
   role="search"
@@ -27,12 +27,12 @@ const { ui } = site;
       autocomplete="off"
       spellcheck="false"
       placeholder="Title, author, or venue…"
-      class="min-h-11 w-full border border-rule bg-transparent px-3 py-2 text-ink"
+      class="input-field min-h-11 w-full px-3 py-2 text-ink"
     />
   </label>
   <label class="block">
     <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.filterYear}</span>
-    <select name="year" class="min-h-11 w-full border border-rule bg-transparent px-3 py-2 text-ink">
+    <select name="year" class="input-field min-h-11 w-full px-3 py-2 text-ink">
       <option value="">{ui.allYears}</option>
       {years.map((year) => (
         <option value={year}>{year}</option>
@@ -42,7 +42,7 @@ const { ui } = site;
   {showType && (
     <label class="block">
       <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">{ui.filterType}</span>
-      <select name="type" class="min-h-11 w-full border border-rule bg-transparent px-3 py-2 text-ink">
+      <select name="type" class="input-field min-h-11 w-full px-3 py-2 text-ink">
         <option value="">{ui.allTypes}</option>
         {types.map((type) => (
           <option value={type.value}>{type.label}</option>
@@ -98,9 +98,9 @@ const { ui } = site;
     };
 
     const params = new URLSearchParams(location.search);
-    if (queryField instanceof HTMLInputElement && params.has("q")) queryField.value = params.get("q") ?? "";
-    if (yearField instanceof HTMLSelectElement && params.has("year")) yearField.value = params.get("year") ?? "";
-    if (typeField instanceof HTMLSelectElement && params.has("type")) typeField.value = params.get("type") ?? "";
+    if (queryField instanceof HTMLInputElement) queryField.value = params.get("q") ?? "";
+    if (yearField instanceof HTMLSelectElement) yearField.value = params.get("year") ?? "";
+    if (typeField instanceof HTMLSelectElement) typeField.value = params.get("type") ?? "";
 
     form.addEventListener("submit", (event) => event.preventDefault());
     form.addEventListener("input", () => {
@@ -110,5 +110,14 @@ const { ui } = site;
     apply();
   }
 
-  document.querySelectorAll<HTMLFormElement>("[data-publication-filters]").forEach(bindFilters);
+  const startFilters = () => {
+    document.querySelectorAll<HTMLFormElement>("[data-publication-filters]").forEach((form) => {
+      if (form.dataset.bound === "true") return;
+      form.dataset.bound = "true";
+      bindFilters(form);
+    });
+  };
+
+  startFilters();
+  document.addEventListener("astro:page-load", startFilters);
 </script>

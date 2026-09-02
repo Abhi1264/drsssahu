@@ -4,9 +4,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import PublicationEntry from "../components/PublicationEntry.astro";
+import Waveform from "../components/Waveform.astro";
 import { site } from "../config/site";
 import profilePhoto from "../assets/profile.jpg";
 import {
+  allPublications,
   featuredItems,
   featuredPublications,
   homepageHeading,
@@ -26,9 +28,15 @@ const featuredProjects = featuredItems(site.projects);
 const featuredPatents = featuredItems(site.patents);
 const featuredAwards = featuredItems(site.awards);
 const workshops = visibleItems(site.workshops).slice(0, 3);
-const ctas = site.homepage.ctas.filter((item) => item.visible);
+const ctas = visibleItems(site.homepage.ctas);
 const profiles = verifiedProfiles();
 const email = primaryEmail();
+const stats = [
+  { value: String(allPublications().length), label: "Publications" },
+  { value: String(visibleItems(site.patents).length), label: "Patents & designs" },
+  { value: String(visibleItems(site.supervision).length), label: "Ph.D. scholars" },
+  { value: String(visibleItems(site.projects).length), label: "Funded projects" },
+];
 const jsonLd = [
   websiteJsonLd(),
   personJsonLd(absoluteUrl("/")),
@@ -38,63 +46,82 @@ const jsonLd = [
 ---
 
 <BaseLayout title={seo.title} description={seo.description} canonicalPath="/" jsonLd={jsonLd}>
-  <Container class="py-14 md:py-20">
+  <Container class="py-12 md:py-16">
     {homepageSectionEnabled("identity") && (
-      <section aria-labelledby="identity-heading" class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-14">
-        <div class="min-w-0 flex-1">
-          <p class="text-xs tracking-[0.2em] text-muted uppercase">{site.person.departmentShort}</p>
-          <h1 id="identity-heading" class="mt-4 max-w-4xl font-serif text-4xl leading-tight text-ink md:text-5xl">
+      <section aria-labelledby="identity-heading" class="grid items-start gap-10 md:grid-cols-[minmax(0,1fr)_16.5rem] md:gap-14">
+        <div class="min-w-0">
+          <p class="reveal text-xs tracking-[0.22em] text-signal uppercase">{site.person.departmentShort}</p>
+          <h1 id="identity-heading" class="reveal reveal-delay-1 mt-4 max-w-4xl text-[2.35rem] leading-[1.12] font-medium text-ink md:text-6xl">
             {site.homepage.heroHeading}
           </h1>
-          <p class="mt-4 text-lg text-ink-soft">
+          <Waveform class="reveal reveal-delay-2 mt-5" />
+          <p class="reveal reveal-delay-2 mt-6 text-lg text-ink-soft">
             {site.homepage.heroSubheading}<br />
             {site.person.department}<br />
             {site.person.institution}, {site.person.location}
           </p>
-          <p class="mt-8 max-w-3xl text-lg leading-relaxed text-ink-soft">{site.homepage.introduction}</p>
+          <p class="mt-7 max-w-3xl text-lg leading-relaxed text-ink-soft">{site.homepage.introduction}</p>
           {ctas.length > 0 && (
-            <p class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-              {ctas.map((cta) => (
-                <a href={cta.href} {...externalLinkAttrs(cta.href)} class="inline-flex min-h-11 items-center md:min-h-0">{cta.label}</a>
+            <p class="mt-8 flex flex-wrap gap-3">
+              {ctas.map((cta, index) => (
+                <a href={cta.href} {...externalLinkAttrs(cta.href)} class={index === 0 ? "btn-primary" : "btn-ghost"}>
+                  {cta.label}
+                </a>
               ))}
             </p>
           )}
         </div>
         {site.person.showProfileImage && (
-          <figure class="order-first mx-auto w-40 shrink-0 md:order-none md:mx-0 md:w-56">
-            <Image
-              src={profilePhoto}
-              alt={site.person.name}
-              width={480}
-              height={480}
-              densities={[1.5, 2]}
-              fetchpriority="high"
-              decoding="async"
-              draggable="false"
-              class="profile-photo aspect-square w-full border border-rule object-cover"
-            />
+          <figure class="reveal order-first mx-auto w-44 shrink-0 md:order-none md:mx-0 md:w-full" transition:name="profile-photo">
+            <div class="overflow-hidden rounded-2xl border border-rule bg-surface shadow-[0_18px_40px_rgb(23_28_31_/_0.08)]">
+              <Image
+                src={profilePhoto}
+                alt={site.person.name}
+                width={480}
+                height={480}
+                densities={[1.5, 2]}
+                fetchpriority="high"
+                decoding="async"
+                draggable="false"
+                class="profile-photo aspect-square w-full object-cover"
+              />
+            </div>
+            <figcaption class="mt-3 text-sm leading-snug text-muted">
+              {site.person.designation}, {site.person.institutionShort}
+            </figcaption>
           </figure>
         )}
       </section>
     )}
 
+    <dl class="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
+      {stats.map((item) => (
+        <div class="panel px-4 py-4 md:px-5">
+          <dt class="text-[0.68rem] tracking-[0.16em] text-muted uppercase">{item.label}</dt>
+          <dd class="mt-1 font-serif text-3xl tabular-nums text-ink">{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+
     {homepageSectionEnabled("interests") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="interests-heading">
+      <section class="mt-16" aria-labelledby="interests-heading">
         <SectionHeading id="interests-heading" title={homepageHeading("interests")} />
-        <p class="max-w-4xl text-lg leading-relaxed text-ink-soft">
-          {site.research.interests.join(" · ")}
-        </p>
+        <ul class="flex flex-wrap gap-2">
+          {site.research.interests.map((interest) => (
+            <li class="chip">{interest}</li>
+          ))}
+        </ul>
       </section>
     )}
 
     {homepageSectionEnabled("research") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="research-heading">
+      <section class="mt-16" aria-labelledby="research-heading">
         <SectionHeading id="research-heading" title={homepageHeading("research")} href="/research" linkLabel={site.ui.viewAll} />
-        <ul class="max-w-3xl space-y-5">
+        <ul class="grid gap-4 md:grid-cols-2">
           {featuredThemes.map((theme) => (
-            <li>
-              <h3 class="font-medium text-ink">{theme.title}</h3>
-              <p class="mt-1 text-ink-soft">{theme.description}</p>
+            <li class="panel panel-hover p-5 md:p-6">
+              <h3 class="text-xl font-medium text-ink">{theme.title}</h3>
+              <p class="mt-2 text-ink-soft">{theme.description}</p>
             </li>
           ))}
         </ul>
@@ -102,9 +129,9 @@ const jsonLd = [
     )}
 
     {homepageSectionEnabled("publications") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="publications-heading">
+      <section class="mt-16" aria-labelledby="publications-heading">
         <SectionHeading id="publications-heading" title={homepageHeading("publications")} href="/publications" linkLabel={site.ui.viewAll} />
-        <div>
+        <div class="panel overflow-hidden px-5 md:px-7">
           {featuredPubs.map((publication) => (
             <PublicationEntry publication={publication} />
           ))}
@@ -113,12 +140,12 @@ const jsonLd = [
     )}
 
     {homepageSectionEnabled("projects") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="projects-heading">
+      <section class="mt-16" aria-labelledby="projects-heading">
         <SectionHeading id="projects-heading" title={homepageHeading("projects")} href="/projects" linkLabel={site.ui.viewAll} />
-        <ul class="divide-y divide-rule border-y border-rule">
+        <ul class="grid gap-4">
           {featuredProjects.map((project) => (
-            <li class="py-5">
-              <h3 class="font-serif text-xl text-ink">{project.title}</h3>
+            <li class="panel panel-hover p-5 md:p-6">
+              <h3 class="text-xl font-medium text-ink">{project.title}</h3>
               <p class="mt-2 text-sm text-muted">
                 {project.fundingBody} · {project.duration} · {project.role}
               </p>
@@ -129,12 +156,12 @@ const jsonLd = [
     )}
 
     {homepageSectionEnabled("patents") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="patents-heading">
+      <section class="mt-16" aria-labelledby="patents-heading">
         <SectionHeading id="patents-heading" title={homepageHeading("patents")} href="/patents" linkLabel={site.ui.viewAll} />
-        <ul class="divide-y divide-rule border-y border-rule">
+        <ul class="grid gap-4">
           {featuredPatents.map((patent) => (
-            <li class="py-5">
-              <h3 class="font-serif text-xl text-ink">{patent.title}</h3>
+            <li class="panel panel-hover p-5 md:p-6">
+              <h3 class="text-xl font-medium text-ink">{patent.title}</h3>
               <p class="mt-2 text-sm text-muted capitalize">
                 {patent.country} · {patent.status}
                 {patent.patentNumber ? ` · ${patent.kind === "design" ? "Design" : "Patent"} No. ${patent.patentNumber}` : ""}
@@ -146,11 +173,11 @@ const jsonLd = [
     )}
 
     {homepageSectionEnabled("experience") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="experience-heading">
+      <section class="mt-16" aria-labelledby="experience-heading">
         <SectionHeading id="experience-heading" title={homepageHeading("experience")} href="/experience" linkLabel={site.ui.viewAll} />
-        <div class="grid gap-10 md:grid-cols-2">
-          <div>
-            <h3 class="text-xs tracking-[0.16em] text-muted uppercase">Academic appointments</h3>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="panel p-5 md:p-6">
+            <h3 class="font-sans text-xs tracking-[0.16em] text-muted uppercase">Academic appointments</h3>
             <ul class="mt-4 space-y-4">
               {visibleItems(site.academicExperience).map((item) => (
                 <li>
@@ -160,8 +187,8 @@ const jsonLd = [
               ))}
             </ul>
           </div>
-          <div>
-            <h3 class="text-xs tracking-[0.16em] text-muted uppercase">Education</h3>
+          <div class="panel p-5 md:p-6">
+            <h3 class="font-sans text-xs tracking-[0.16em] text-muted uppercase">Education</h3>
             <ul class="mt-4 space-y-4">
               {visibleItems(site.education).map((item) => (
                 <li>
@@ -176,7 +203,7 @@ const jsonLd = [
     )}
 
     {homepageSectionEnabled("supervision") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="supervision-heading">
+      <section class="mt-16" aria-labelledby="supervision-heading">
         <SectionHeading id="supervision-heading" title={homepageHeading("supervision")} href="/supervision" linkLabel={site.ui.viewAll} />
         <p class="max-w-3xl text-ink-soft">
           {visibleItems(site.supervision).length} awarded doctoral scholars, most recently in speech-based Parkinson’s disease analysis, photobiomodulation research, protein–protein interaction, energy harvesting, and image security.
@@ -185,7 +212,7 @@ const jsonLd = [
     )}
 
     {homepageSectionEnabled("achievements") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="achievements-heading">
+      <section class="mt-16" aria-labelledby="achievements-heading">
         <SectionHeading id="achievements-heading" title={homepageHeading("achievements")} href="/activities" linkLabel={site.ui.viewAll} />
         <ul class="max-w-3xl space-y-3 text-ink-soft">
           {featuredAwards.map((item) => (
@@ -200,11 +227,11 @@ const jsonLd = [
     )}
 
     {homepageSectionEnabled("workshops") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="workshops-heading">
+      <section class="mt-16" aria-labelledby="workshops-heading">
         <SectionHeading id="workshops-heading" title={homepageHeading("workshops")} href="/activities" linkLabel={site.ui.viewAll} />
-        <ul class="divide-y divide-rule border-y border-rule">
+        <ul class="grid gap-3">
           {workshops.map((item) => (
-            <li class="py-4">
+            <li class="panel px-5 py-4">
               <p class="text-ink">{item.title}</p>
               <p class="text-sm text-muted">{item.date}{item.location ? ` · ${item.location}` : ""}</p>
             </li>
@@ -214,9 +241,9 @@ const jsonLd = [
     )}
 
     {homepageSectionEnabled("contact") && (
-      <section class="mt-16 border-t border-rule pt-10" aria-labelledby="contact-heading">
+      <section class="mt-16" aria-labelledby="contact-heading">
         <SectionHeading id="contact-heading" title={homepageHeading("contact")} />
-        <div class="max-w-xl text-ink-soft">
+        <div class="panel max-w-xl p-6 text-ink-soft">
           <p>{site.person.department}</p>
           <p>{site.person.institution}</p>
           <p>{site.person.location} – {site.person.postalCode}</p>

@@ -6,14 +6,13 @@ import { site } from "../config/site";
 
 <BaseLayout title={`Page not found | ${site.person.name}`} description="The requested page could not be found.">
   <Container class="py-20">
-    <h1 class="font-serif text-4xl text-ink">Page not found</h1>
+    <span class="mark mb-6"></span>
+    <h1 class="text-4xl font-medium text-ink">Page not found</h1>
     <p class="mt-4 max-w-xl text-ink-soft">The page you requested is not part of this site.</p>
-    <p class="mt-8 text-sm">
-      <a href="/">Home</a>
-      ·
-      <a href="/publications">Publications</a>
-      ·
-      <a href="/contact">Contact</a>
+    <p class="mt-8 flex flex-wrap gap-3">
+      <a href="/" class="btn-primary">Home</a>
+      <a href="/publications" class="btn-ghost">Publications</a>
+      <a href="/contact" class="btn-ghost">Contact</a>
     </p>
   </Container>
 </BaseLayout>

@@ -19,14 +19,15 @@ const links = externalSources(publication);
 ---
 
 <article
-  class="publication-entry border-t border-rule py-6"
+  class="publication-entry border-t border-rule py-6 first:border-t-0"
   data-publication
   data-year={publication.year}
   data-type={publication.type}
   data-search={searchText(publication)}
 >
-  <h3 class="max-w-4xl font-serif text-xl leading-snug text-pretty text-ink md:text-[1.35rem]">
-    <a href={`/publications/${slug}`} class="text-ink no-underline hover:underline">
+  <p class="text-xs tabular-nums tracking-[0.14em] text-signal uppercase">{publication.year}</p>
+  <h3 class="mt-1.5 max-w-4xl text-xl leading-snug font-medium text-ink md:text-[1.35rem]">
+    <a href={`/publications/${slug}`} class="text-ink no-underline decoration-navy/30 underline-offset-4 transition-colors hover:text-navy hover:underline">
       {publication.title}
     </a>
   </h3>

@@ -18,10 +18,10 @@ const jsonLd = pageJsonLd("/activities", [{ name: "Activities", path: "/activiti
     <PageHeader title="Professional activities" description="Awards, fellowships, professional service, and workshops listed in the curriculum vitae." />
 
     <section class="mt-12">
-      <h2 class="font-serif text-2xl text-ink">Awards and distinctions</h2>
-      <ul class="mt-4 divide-y divide-rule border-y border-rule">
+      <h2 class="text-2xl font-medium text-ink">Awards and distinctions</h2>
+      <ul class="mt-4 space-y-3">
         {visibleItems(site.awards).map((item) => (
-          <li class="py-5">
+          <li class="panel p-5">
             <p class="text-ink">{item.title}</p>
             <p class="mt-1 text-sm text-muted">
               {[item.organization, item.date].filter(Boolean).join(" · ")}
@@ -32,10 +32,10 @@ const jsonLd = pageJsonLd("/activities", [{ name: "Activities", path: "/activiti
     </section>
 
     <section class="mt-12">
-      <h2 class="font-serif text-2xl text-ink">Fellowships and scholarships</h2>
-      <ul class="mt-4 divide-y divide-rule border-y border-rule">
+      <h2 class="text-2xl font-medium text-ink">Fellowships and scholarships</h2>
+      <ul class="mt-4 space-y-3">
         {visibleItems(site.fellowships).map((item) => (
-          <li class="py-5">
+          <li class="panel p-5">
             <p class="text-ink">{item.title}</p>
             <p class="mt-1 text-sm text-muted">{item.organization} · {item.date}</p>
             {item.description && <p class="mt-2 text-sm text-ink-soft">{item.description}</p>}
@@ -45,10 +45,10 @@ const jsonLd = pageJsonLd("/activities", [{ name: "Activities", path: "/activiti
     </section>
 
     <section class="mt-12">
-      <h2 class="font-serif text-2xl text-ink">Professional service</h2>
-      <ul class="mt-4 divide-y divide-rule border-y border-rule">
+      <h2 class="text-2xl font-medium text-ink">Professional service</h2>
+      <ul class="mt-4 space-y-3">
         {visibleItems(site.professionalActivities).map((item) => (
-          <li class="py-5">
+          <li class="panel p-5">
             <p class="text-ink">{item.activity}</p>
             <p class="mt-1 text-sm text-muted">
               {[item.organization, item.date].filter(Boolean).join(" · ")}
@@ -60,10 +60,10 @@ const jsonLd = pageJsonLd("/activities", [{ name: "Activities", path: "/activiti
     </section>
 
     <section class="mt-12">
-      <h2 class="font-serif text-2xl text-ink">Workshops organised</h2>
-      <ul class="mt-4 divide-y divide-rule border-y border-rule">
+      <h2 class="text-2xl font-medium text-ink">Workshops organised</h2>
+      <ul class="mt-4 space-y-3">
         {visibleItems(site.workshops).map((item) => (
-          <li class="py-5">
+          <li class="panel p-5">
             <p class="text-ink">{item.title}</p>
             <p class="mt-1 text-sm text-muted">
               {[item.date, item.location, item.sponsor].filter(Boolean).join(" · ")}

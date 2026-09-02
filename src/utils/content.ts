@@ -118,8 +118,8 @@ export function publicationPaths(): { slug: string; publication: Publication }[]
 
 export function featuredPublications(): Publication[] {
   const featured = sortPublications(allPublications().filter((item) => item.featured));
-  const items = featured.length > 0 ? featured : sortPublications(allPublications());
-  return items.slice(0, 5);
+  if (featured.length > 0) return featured;
+  return sortPublications(allPublications()).slice(0, 5);
 }
 
 export function relatedPublications(publication: Publication, limit = 3): Publication[] {

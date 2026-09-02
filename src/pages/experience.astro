@@ -18,7 +18,7 @@ const jsonLd = pageJsonLd("/experience", [{ name: "Experience", path: "/experien
     <Breadcrumbs items={[{ label: "Experience" }]} />
     <PageHeader title="Academic and research experience" />
     <section class="mt-10">
-      <h2 class="mb-4 font-serif text-2xl text-ink">Academic appointments</h2>
+      <h2 class="mb-4 text-2xl font-medium text-ink">Academic appointments</h2>
       <Timeline
         items={visibleItems(site.academicExperience).map((item) => ({
           title: `${item.position}, ${item.institution}`,
@@ -28,7 +28,7 @@ const jsonLd = pageJsonLd("/experience", [{ name: "Experience", path: "/experien
       />
     </section>
     <section class="mt-14">
-      <h2 class="mb-4 font-serif text-2xl text-ink">Research appointments</h2>
+      <h2 class="mb-4 text-2xl font-medium text-ink">Research appointments</h2>
       <Timeline
         items={visibleItems(site.researchExperience).map((item) => ({
           title: `${item.position}, ${item.institution}`,
