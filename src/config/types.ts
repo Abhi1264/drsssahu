@@ -182,18 +182,6 @@ export type PhoneNumber = {
   href: string;
 };
 
-export type Cta = {
-  label: string;
-  href: string;
-  visible: boolean;
-};
-
-export type HomepageSection = {
-  id: string;
-  heading: string;
-  enabled: boolean;
-};
-
 export type PageSeo = {
   title: string;
   description: string;

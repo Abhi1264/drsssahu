@@ -10,15 +10,8 @@ export function absoluteUrl(path = "/"): string {
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-export function pageSeo(
-  key: keyof typeof site.seo.pages,
-  titleOverride?: string,
-): PageSeo {
-  const page = site.seo.pages[key];
-  return {
-    title: titleOverride ?? page.title,
-    description: page.description,
-  };
+export function pageSeo(key: keyof typeof site.seo.pages): PageSeo {
+  return site.seo.pages[key];
 }
 
 export function publicationSeo(title: string, year: number): PageSeo {

@@ -4,7 +4,6 @@ import type {
   EmailAddress,
   Experience,
   Fellowship,
-  HomepageSection,
   NavItem,
   PageSeo,
   Patent,
@@ -22,7 +21,6 @@ export const site = {
   person: {
     name: "Dr. Sitanshu Sekhar Sahu",
     shortName: "Sitanshu Sekhar Sahu",
-    honorificName: "Dr. Sitanshu Sekhar Sahu",
     nameVariants: [
       "Sitanshu Sekhar Sahu",
       "Sitanshu S. Sahu",
@@ -3288,30 +3286,6 @@ export const site = {
     },
   ] satisfies ProfileLink[],
 
-  homepage: {
-    heroHeading: "Dr. Sitanshu Sekhar Sahu",
-    heroSubheading: "Associate Professor",
-    introduction:
-      "His research spans bio-signal processing, image processing, artificial intelligence and machine learning, embedded AI, bioinformatics, and computer vision, with particular work in speech-based analysis, biomedical signal processing, and computational biology.",
-    ctas: [
-      { label: "Research", href: "/research", visible: true },
-      { label: "Publications", href: "/publications", visible: true },
-    ],
-    sections: [
-      { id: "identity", heading: "Introduction", enabled: true },
-      { id: "interests", heading: "Research interests", enabled: true },
-      { id: "research", heading: "Research", enabled: true },
-      { id: "publications", heading: "Recent publications", enabled: true },
-      { id: "projects", heading: "Research projects", enabled: true },
-      { id: "patents", heading: "Patents", enabled: true },
-      { id: "experience", heading: "Academic journey", enabled: true },
-      { id: "supervision", heading: "Supervision", enabled: true },
-      { id: "achievements", heading: "Selected activities", enabled: true },
-      { id: "workshops", heading: "Workshops", enabled: true },
-      { id: "contact", heading: "Contact", enabled: true },
-    ] satisfies HomepageSection[],
-  },
-
   contact: {
     heading: "Contact",
     intro:
@@ -3331,7 +3305,6 @@ export const site = {
     tagline:
       "Associate Professor, Department of Electronics and Communication Engineering, Birla Institute of Technology Mesra",
     copyrightName: "Dr. Sitanshu Sekhar Sahu",
-    useCurrentYear: true,
     links: [
       { label: "Research", href: "/research", visible: true },
       { label: "Publications", href: "/publications", visible: true },
@@ -3423,37 +3396,5 @@ export const site = {
         description: "Curriculum vitae of Dr. Sitanshu Sekhar Sahu.",
       },
     } satisfies Record<string, PageSeo>,
-  },
-
-  settings: {
-    publicationPageSize: 0,
-    defaultPublicationSort: "year-desc",
-    showPhoneOnHomepage: false,
-    authorHighlight: true,
-  },
-
-  ui: {
-    menuOpen: "Open menu",
-    menuClose: "Close menu",
-    skipToContent: "Skip to content",
-    searchPublications: "Search publications",
-    filterYear: "Year",
-    filterType: "Type",
-    allYears: "All years",
-    allTypes: "All types",
-    typeJournal: "Journal",
-    typeConference: "Conference",
-    typeBook: "Book chapter",
-    noResults: "No publications match the current filters.",
-    viewAll: "View all",
-    doi: "DOI",
-    publisher: "Publisher",
-    externalLink: "External link",
-    download: "Download",
-    email: "Email",
-    homeLabel: "Home",
-    relatedPublications: "Related publications",
-    bibliographicDetails: "Bibliographic details",
-    citation: "Citation",
   },
 } as const;

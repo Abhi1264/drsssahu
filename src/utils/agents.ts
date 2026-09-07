@@ -15,9 +15,6 @@ import {
 import { personJsonLd } from "./jsonld";
 import { absoluteUrl } from "./seo";
 
-const markdownHeaders = { "Content-Type": "text/markdown; charset=utf-8" };
-const jsonHeaders = { "Content-Type": "application/json; charset=utf-8" };
-
 function publicationRecord(publication: Publication) {
   return {
     title: publication.title,
@@ -168,12 +165,4 @@ export function publicationsJson(): string {
     null,
     2,
   )}\n`;
-}
-
-export function markdownResponse(body: string) {
-  return new Response(body, { headers: markdownHeaders });
-}
-
-export function jsonResponse(body: string) {
-  return new Response(body, { headers: jsonHeaders });
 }

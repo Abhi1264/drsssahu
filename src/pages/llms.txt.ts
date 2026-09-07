@@ -1,4 +1,7 @@
 import type { APIRoute } from "astro";
-import { llmsTxt, markdownResponse } from "../utils/agents";
+import { llmsTxt } from "../utils/agents";
 
-export const GET: APIRoute = () => markdownResponse(llmsTxt());
+export const GET: APIRoute = () =>
+  new Response(llmsTxt(), {
+    headers: { "Content-Type": "text/markdown; charset=utf-8" },
+  });

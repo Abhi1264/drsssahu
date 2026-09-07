@@ -3,7 +3,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Container from "../../components/Container.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import PublicationEntry from "../../components/PublicationEntry.astro";
-import { site } from "../../config/site";
 import {
   apaCitation,
   externalSources,
@@ -40,7 +39,7 @@ const jsonLd = [
   personJsonLd(absoluteUrl(`/publications/${slug}`)),
   scholarlyArticleJsonLd(publication),
   breadcrumbJsonLd([
-    { name: site.ui.homeLabel, path: "/" },
+    { name: "Home", path: "/" },
     { name: "Publications", path: "/publications" },
     { name: publication.title, path: `/publications/${slug}` },
   ]),
@@ -85,7 +84,7 @@ const jsonLd = [
       </p>
       <section class="panel mt-10 p-6 md:p-8">
         <h2 class="text-2xl font-medium text-ink">
-          {site.ui.bibliographicDetails}
+          Bibliographic details
         </h2>
         <dl class="mt-4 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
           <div>
@@ -173,7 +172,7 @@ const jsonLd = [
         }
       </section>
       <section class="panel mt-10 p-6 md:p-8">
-        <h2 class="text-2xl font-medium text-ink">{site.ui.citation}</h2>
+        <h2 class="text-2xl font-medium text-ink">Citation</h2>
         <p class="mt-4 max-w-3xl text-sm leading-relaxed text-ink-soft">
           {apaCitation(publication)}
         </p>
@@ -183,7 +182,7 @@ const jsonLd = [
       related.length > 0 && (
         <section class="mt-14">
           <h2 class="text-2xl font-medium text-ink">
-            {site.ui.relatedPublications}
+            Related publications
           </h2>
           <div class="panel mt-4 overflow-hidden px-5 md:px-7">
             {related.map((item) => (

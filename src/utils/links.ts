@@ -2,7 +2,7 @@ import { site } from "../config/site";
 
 const siteOrigin = new URL(site.seo.siteUrl).origin;
 
-export function isExternalHref(href: string): boolean {
+function isExternalHref(href: string): boolean {
   if (!href) return false;
   if (
     href.startsWith("#") ||

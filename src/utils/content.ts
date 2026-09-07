@@ -1,9 +1,23 @@
 import { site } from "../config/site";
 import type { Publication, PublicationType } from "../config/types";
-import { publicationSlug } from "./slug";
 
-export function isVisible<T extends { visible?: boolean }>(item: T): boolean {
+function isVisible<T extends { visible?: boolean }>(item: T): boolean {
   return item.visible !== false;
+}
+
+function slugify(value: string): string {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 90);
+}
+
+function publicationSlug(title: string, year: number): string {
+  return `${year}-${slugify(title)}`;
 }
 
 export function visibleItems<T extends { visible?: boolean }>(
@@ -25,16 +39,8 @@ export function primaryEmail(): string {
   );
 }
 
-export function visibleEmails() {
-  return site.person.emails;
-}
-
 export function visiblePhones() {
   return site.person.showPhone ? site.person.phones : [];
-}
-
-export function visibleNavigation() {
-  return site.navigation.filter((item) => item.visible);
 }
 
 export function verifiedProfiles() {
@@ -45,16 +51,6 @@ export function verifiedProfiles() {
 
 export function orcidProfile(profiles = verifiedProfiles()) {
   return profiles.find((item) => item.label === "ORCID");
-}
-
-export function homepageSectionEnabled(id: string): boolean {
-  const section = site.homepage.sections.find((item) => item.id === id);
-  if (!section) return true;
-  return section.enabled;
-}
-
-export function homepageHeading(id: string): string {
-  return site.homepage.sections.find((item) => item.id === id)?.heading ?? id;
 }
 
 const publicationsByKind: Record<PublicationType, readonly Publication[]> = {
@@ -167,7 +163,7 @@ export function externalSources(publication: Publication) {
   const { doi } = publication;
   if (doi && !links.some((item) => item.url.includes(doi))) {
     links.unshift({
-      label: site.ui.doi,
+      label: "DOI",
       url: doiUrl(doi),
       verified: publication.source.verified,
     });
