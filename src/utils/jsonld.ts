@@ -127,7 +127,7 @@ export function pageJsonLd(
 ) {
   const base = [
     personJsonLd(absoluteUrl(path)),
-    breadcrumbJsonLd([{ name: site.ui.homeLabel, path: "/" }, ...crumbs]),
+    breadcrumbJsonLd([{ name: "Home", path: "/" }, ...crumbs]),
   ];
   if (!collection) return base;
   return [

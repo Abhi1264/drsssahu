@@ -1,6 +1,4 @@
 ---
-import { site } from "../config/site";
-
 type Props = {
   years: number[];
   types?: { value: string; label: string }[];
@@ -8,7 +6,6 @@ type Props = {
 };
 
 const { years, types = [], showType = true } = Astro.props;
-const { ui } = site;
 ---
 
 <form
@@ -21,7 +18,7 @@ const { ui } = site;
 >
   <label class="block">
     <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase"
-      >{ui.searchPublications}</span
+      >Search publications</span
     >
     <input
       type="search"
@@ -34,10 +31,10 @@ const { ui } = site;
   </label>
   <label class="block">
     <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase"
-      >{ui.filterYear}</span
+      >Year</span
     >
     <select name="year" class="input-field min-h-11 w-full px-3 py-2 text-ink">
-      <option value="">{ui.allYears}</option>
+      <option value="">All years</option>
       {years.map((year) => <option value={year}>{year}</option>)}
     </select>
   </label>
@@ -45,13 +42,13 @@ const { ui } = site;
     showType && (
       <label class="block">
         <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">
-          {ui.filterType}
+          Type
         </span>
         <select
           name="type"
           class="input-field min-h-11 w-full px-3 py-2 text-ink"
         >
-          <option value="">{ui.allTypes}</option>
+          <option value="">All types</option>
           {types.map((type) => (
             <option value={type.value}>{type.label}</option>
           ))}
@@ -61,7 +58,7 @@ const { ui } = site;
   }
 </form>
 <p data-empty hidden class="text-ink-soft" role="status" aria-live="polite">
-  {ui.noResults}
+  No publications match the current filters.
 </p>
 
 <script>

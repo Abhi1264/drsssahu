@@ -1,7 +1,4 @@
 ---
-import { site } from "../config/site";
-import { externalLinkAttrs } from "../utils/links";
-
 type Crumb = { label: string; href?: string };
 type Props = { items: Crumb[] };
 
@@ -15,7 +12,7 @@ const { items } = Astro.props;
         href="/"
         class="inline-flex min-h-11 items-center text-muted no-underline hover:text-navy hover:underline md:min-h-0"
       >
-        {site.ui.homeLabel}
+        Home
       </a>
     </li>
     {
@@ -25,7 +22,6 @@ const { items } = Astro.props;
           {item.href && index < items.length - 1 ? (
             <a
               href={item.href}
-              {...externalLinkAttrs(item.href)}
               class="inline-flex min-h-11 items-center text-muted no-underline hover:text-navy hover:underline md:min-h-0"
             >
               {item.label}

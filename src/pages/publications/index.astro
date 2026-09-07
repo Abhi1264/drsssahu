@@ -40,9 +40,9 @@ const jsonLd = pageJsonLd(
       <PublicationFilters
         years={publicationYears(publications)}
         types={[
-          { value: "journal", label: site.ui.typeJournal },
-          { value: "conference", label: site.ui.typeConference },
-          { value: "book-chapter", label: site.ui.typeBook },
+          { value: "journal", label: "Journal" },
+          { value: "conference", label: "Conference" },
+          { value: "book-chapter", label: "Book chapter" },
         ]}
       />
       <PublicationList publications={publications} />

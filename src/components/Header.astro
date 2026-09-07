@@ -1,10 +1,9 @@
 ---
 import { site } from "../config/site";
-import { visibleNavigation } from "../utils/content";
-import { externalLinkAttrs } from "../utils/links";
+import { visibleItems } from "../utils/content";
 import Container from "./Container.astro";
 
-const items = visibleNavigation();
+const items = visibleItems(site.navigation);
 const current = Astro.url.pathname;
 ---
 
@@ -23,15 +22,15 @@ const current = Astro.url.pathname;
       class="peer sr-only lg:hidden"
       aria-controls="primary-nav"
       aria-expanded="false"
-      aria-label={site.ui.menuOpen}
-      data-open-label={site.ui.menuOpen}
-      data-close-label={site.ui.menuClose}
+      aria-label="Open menu"
+      data-open-label="Open menu"
+      data-close-label="Close menu"
     />
     <label
       for="nav-toggle"
       class="inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-ink hover:bg-surface hover:text-navy peer-focus-visible:outline peer-focus-visible:outline-offset-2 peer-focus-visible:outline-navy peer-checked:[&_.icon-menu]:hidden peer-checked:[&_.icon-close]:block lg:hidden"
     >
-      <span class="sr-only">{site.ui.menuOpen}</span>
+      <span class="sr-only">Open menu</span>
       <svg class="icon-menu size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
       </svg>
@@ -51,7 +50,6 @@ const current = Astro.url.pathname;
             <li>
               <a
                 href={item.href}
-                {...externalLinkAttrs(item.href)}
                 aria-current={active ? "page" : undefined}
                 class:list={[
                   "nav-link inline-flex min-h-11 items-center text-[0.92rem] lg:min-h-0 lg:text-[0.88rem] xl:text-[0.95rem]",
