@@ -39,7 +39,8 @@ html {
     animation: none !important;
   }
 
-  .panel-hover:hover {
+  .panel-hover:hover,
+  .btn-primary:hover .btn-icon-circle {
     transform: none;
   }
 }
@@ -65,19 +66,25 @@ body {
 
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: var(--font-serif);
   font-optical-sizing: auto;
   font-weight: 400;
   letter-spacing: -0.02em;
   text-wrap: pretty;
   overflow-wrap: anywhere;
-  scroll-margin-top: 1.25rem;
+  scroll-margin-top: 5rem;
 }
 
 :focus-visible {
   outline: 2px solid var(--color-navy);
   outline-offset: 3px;
+}
+
+footer :focus-visible,
+.bg-navy :focus-visible {
+  outline-color: #f2a663;
 }
 
 @layer base {
@@ -286,10 +293,15 @@ a.chip:hover {
     box-shadow 180ms ease;
 }
 
-.input-field:focus {
+.input-field:focus-visible {
   outline: none;
   border-color: var(--color-navy);
   box-shadow: 0 0 0 3px rgb(26 69 60 / 0.14);
+}
+
+select.input-field option {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
 }
 
 .type-pill[aria-current="page"] {

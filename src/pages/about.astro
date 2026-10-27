@@ -41,10 +41,7 @@ const jsonLd = pageJsonLd("/about", [{ name: "About", path: "/about" }]);
           Kolkata.
         </p>
       </div>
-      <figure
-        class="w-36 shrink-0 sm:w-full"
-        transition:name="profile-photo"
-      >
+      <figure class="w-36 shrink-0 sm:w-full">
         <div class="overflow-hidden rounded-2xl border border-rule bg-surface shadow-[0_18px_40px_rgb(18_23_26/0.08)]">
           <Image
             src={profilePhoto}
@@ -52,6 +49,7 @@ const jsonLd = pageJsonLd("/about", [{ name: "About", path: "/about" }]);
             width={480}
             height={480}
             densities={[1.5, 2]}
+            fetchpriority="high"
             decoding="async"
             draggable="false"
             class="profile-photo aspect-square w-full object-cover"

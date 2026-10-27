@@ -33,7 +33,11 @@ const { years, types = [], showType = true } = Astro.props;
     <span class="mb-1 block text-xs tracking-[0.14em] text-muted uppercase">
       Year
     </span>
-    <select name="year" class="input-field min-h-11 w-full px-3 py-2 text-ink">
+    <select
+      name="year"
+      autocomplete="off"
+      class="input-field min-h-11 w-full px-3 py-2 tabular-nums text-ink"
+    >
       <option value="">All years</option>
       {years.map((year) => <option value={year}>{year}</option>)}
     </select>
@@ -46,6 +50,7 @@ const { years, types = [], showType = true } = Astro.props;
         </span>
         <select
           name="type"
+          autocomplete="off"
           class="input-field min-h-11 w-full px-3 py-2 text-ink"
         >
           <option value="">All types</option>

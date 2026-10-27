@@ -12,7 +12,7 @@ const profiles = site.profiles;
         <a href={item.url} {...identityLinkAttrs(item.url)} class="chip">
           <span>{item.label}</span>
           {item.identifier && (
-            <span class="text-xs text-muted">({item.identifier})</span>
+            <span class="text-xs text-muted" translate="no">({item.identifier})</span>
           )}
           <svg
             class="size-3.5 text-muted"
