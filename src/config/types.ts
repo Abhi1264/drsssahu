@@ -35,10 +35,20 @@ export type NavItem = {
 export type ProfileLink = {
   label: string;
   url: string;
-  type: "academic" | "institutional";
+  type: "academic" | "institutional" | "social";
   identifier?: string;
   visible: boolean;
   verified: boolean;
+};
+
+export type HighlightWork = {
+  title: string;
+  subtitle: string;
+  year: string;
+  metric: string;
+  description: string;
+  url: string;
+  image?: string;
 };
 
 export type PublicationType = "journal" | "conference" | "book-chapter";
@@ -61,6 +71,8 @@ export type Publication = {
   publisher?: string;
   month?: string;
   notes?: string;
+  abstract?: string;
+  citations?: number;
   featured?: boolean;
   visible?: boolean;
   source: Verification;
@@ -75,6 +87,7 @@ export type Project = {
   role: string;
   status: "completed" | "ongoing";
   description?: string;
+  image?: string;
   url?: string;
   featured?: boolean;
   visible?: boolean;
@@ -92,6 +105,8 @@ export type Patent = {
   applicationNumber?: string;
   publicationNumber?: string;
   date?: string;
+  inventors?: string[];
+  description?: string;
   featured?: boolean;
   visible?: boolean;
   source: Verification;
@@ -124,6 +139,7 @@ export type Supervision = {
   thesis: string;
   year: number;
   status: "awarded" | "ongoing";
+  description?: string;
   visible?: boolean;
 };
 
@@ -166,6 +182,8 @@ export type Workshop = {
 export type ResearchTheme = {
   title: string;
   description: string;
+  image?: string;
+  methods?: string[];
   featured?: boolean;
   visible?: boolean;
 };

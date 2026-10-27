@@ -42,7 +42,7 @@ const jsonLd = pageJsonLd("/experience", [
         items={visibleItems(site.researchExperience).map((item) => ({
           title: `${item.position}, ${item.institution}`,
           meta: item.duration,
-          detail: item.location,
+          detail: [item.location, item.description].filter(Boolean).join(" — "),
         }))}
       />
     </section>

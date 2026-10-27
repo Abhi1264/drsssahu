@@ -30,23 +30,24 @@ const jsonLd = pageJsonLd("/about", [{ name: "About", path: "/about" }]);
       description={`${site.person.designation}, ${site.person.department}, ${site.person.institution}.`}
     />
     <div
-      class="mt-10 grid items-start gap-10 md:grid-cols-[minmax(0,1fr)_15rem] md:gap-14"
+      class="mt-10 grid items-start gap-8 sm:grid-cols-[minmax(0,1fr)_12.5rem] md:grid-cols-[minmax(0,1fr)_15rem] md:gap-14"
     >
       <div class="max-w-3xl space-y-6 text-lg leading-relaxed text-ink-soft">
         <p>{site.person.bio}</p>
         <p>
           He has supervised {visibleItems(site.supervision).length} awarded Ph.D.
-          scholars and has led funded projects with SERB-DST, NPIU-MHRD, and the Technology
-          Innovation Hubs at ISI Kolkata.
+          scholars and has led funded research projects with NM-ICPS (DST),
+          SERB-DST, NPIU-MHRD, JCST, and the Technology Innovation Hubs at ISI
+          Kolkata.
         </p>
       </div>
       {
         site.person.showProfileImage && (
           <figure
-            class="order-first mx-auto w-44 shrink-0 md:order-0 md:mx-0 md:w-full"
+            class="w-36 shrink-0 sm:w-full"
             transition:name="profile-photo"
           >
-            <div class="overflow-hidden rounded-2xl border border-rule bg-surface shadow-[0_18px_40px_0.08]">
+            <div class="overflow-hidden rounded-2xl border border-rule bg-surface shadow-[0_18px_40px_rgb(18_23_26/0.08)]">
               <Image
                 src={profilePhoto}
                 alt={site.person.name}
@@ -96,8 +97,7 @@ const jsonLd = pageJsonLd("/about", [{ name: "About", path: "/about" }]);
     </section>
     <p class="mt-12 flex flex-wrap gap-3">
       <a href="/resume" class="btn-primary">{site.resume.downloadLabel}</a>
-      <a href={`mailto:${primaryEmail()}`} class="btn-ghost">{primaryEmail()}</a
-      >
+      <a href={`mailto:${primaryEmail()}`} class="btn-ghost">{primaryEmail()}</a>
     </p>
   </Container>
 </BaseLayout>

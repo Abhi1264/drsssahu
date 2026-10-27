@@ -27,6 +27,11 @@ const links = externalSources(publication);
 >
   <p class="text-xs tabular-nums tracking-[0.14em] text-signal uppercase">
     {publication.year}
+    {
+      publication.citations && publication.citations > 0
+        ? ` · ${publication.citations}+ citations`
+        : ""
+    }
   </p>
   <h3
     class="mt-1.5 max-w-4xl text-xl leading-snug font-medium text-ink md:text-[1.35rem]"
@@ -60,6 +65,13 @@ const links = externalSources(publication);
   {
     publication.indexing && (
       <p class="mt-1 text-sm text-muted">{publication.indexing}</p>
+    )
+  }
+  {
+    publication.abstract && (
+      <p class="mt-2.5 max-w-3xl text-sm leading-relaxed text-ink-soft">
+        {publication.abstract}
+      </p>
     )
   }
   {

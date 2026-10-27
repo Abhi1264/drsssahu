@@ -11,8 +11,24 @@ const profiles = verifiedProfiles();
       {profiles.map((item) => (
         <li>
           <a href={item.url} {...identityLinkAttrs(item.url)} class="chip">
-            {item.label}
-            {item.identifier ? ` (${item.identifier})` : ""}
+            <span>{item.label}</span>
+            {item.identifier && (
+              <span class="text-xs text-muted">({item.identifier})</span>
+            )}
+            <svg
+              class="size-3.5 text-muted"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 14 14 6m0 0H7.5M14 6v6.5"
+              />
+            </svg>
           </a>
         </li>
       ))}

@@ -64,7 +64,7 @@ const jsonLd = [
       ]}
     />
     <article>
-      <p class="text-xs tracking-[0.16em] text-signal uppercase">
+      <p class="text-xs tabular-nums tracking-[0.16em] text-signal uppercase">
         {
           publication.type === "journal"
             ? "Journal article"
@@ -73,6 +73,11 @@ const jsonLd = [
               : "Book chapter"
         }
         · {publication.year}
+        {
+          publication.citations && publication.citations > 0
+            ? ` · ${publication.citations}+ citations`
+            : ""
+        }
       </p>
       <h1
         class="mt-3 max-w-4xl text-3xl leading-tight font-medium text-ink md:text-5xl"
@@ -82,10 +87,15 @@ const jsonLd = [
       <p class="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft">
         {publication.authors.join(" · ")}
       </p>
+      {
+        publication.abstract && (
+          <p class="mt-5 max-w-3xl leading-relaxed text-ink-soft">
+            {publication.abstract}
+          </p>
+        )
+      }
       <section class="panel mt-10 p-6 md:p-8">
-        <h2 class="text-2xl font-medium text-ink">
-          Bibliographic details
-        </h2>
+        <h2 class="text-2xl font-medium text-ink">Bibliographic details</h2>
         <dl class="mt-4 grid max-w-3xl gap-3 text-sm sm:grid-cols-2">
           <div>
             <dt class="text-muted">Venue</dt>
@@ -93,13 +103,13 @@ const jsonLd = [
           </div>
           <div>
             <dt class="text-muted">Year</dt>
-            <dd class="mt-1 text-ink">{publication.year}</dd>
+            <dd class="mt-1 tabular-nums text-ink">{publication.year}</dd>
           </div>
           {
             publication.volume && (
               <div>
                 <dt class="text-muted">Volume</dt>
-                <dd class="mt-1 text-ink">{publication.volume}</dd>
+                <dd class="mt-1 tabular-nums text-ink">{publication.volume}</dd>
               </div>
             )
           }
@@ -107,7 +117,7 @@ const jsonLd = [
             publication.issue && (
               <div>
                 <dt class="text-muted">Issue</dt>
-                <dd class="mt-1 text-ink">{publication.issue}</dd>
+                <dd class="mt-1 tabular-nums text-ink">{publication.issue}</dd>
               </div>
             )
           }
@@ -115,7 +125,7 @@ const jsonLd = [
             publication.pages && (
               <div>
                 <dt class="text-muted">Pages</dt>
-                <dd class="mt-1 text-ink">{publication.pages}</dd>
+                <dd class="mt-1 tabular-nums text-ink">{publication.pages}</dd>
               </div>
             )
           }
@@ -123,7 +133,9 @@ const jsonLd = [
             publication.articleNumber && (
               <div>
                 <dt class="text-muted">Article number</dt>
-                <dd class="mt-1 text-ink">{publication.articleNumber}</dd>
+                <dd class="mt-1 tabular-nums text-ink">
+                  {publication.articleNumber}
+                </dd>
               </div>
             )
           }
@@ -139,7 +151,7 @@ const jsonLd = [
             publication.isbn && (
               <div>
                 <dt class="text-muted">ISBN</dt>
-                <dd class="mt-1 text-ink">{publication.isbn}</dd>
+                <dd class="mt-1 tabular-nums text-ink">{publication.isbn}</dd>
               </div>
             )
           }
@@ -181,9 +193,7 @@ const jsonLd = [
     {
       related.length > 0 && (
         <section class="mt-14">
-          <h2 class="text-2xl font-medium text-ink">
-            Related publications
-          </h2>
+          <h2 class="text-2xl font-medium text-ink">Related publications</h2>
           <div class="panel mt-4 overflow-hidden px-5 md:px-7">
             {related.map((item) => (
               <PublicationEntry publication={item} />

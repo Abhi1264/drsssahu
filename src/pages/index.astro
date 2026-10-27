@@ -2,16 +2,15 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
-import SectionHeading from "../components/SectionHeading.astro";
 import PublicationEntry from "../components/PublicationEntry.astro";
 import Waveform from "../components/Waveform.astro";
 import { site } from "../config/site";
 import profilePhoto from "../assets/profile.jpg";
+import bitLogo from "../assets/logos/bit-mesra.png";
 import {
   allPublications,
   featuredItems,
   featuredPublications,
-  primaryEmail,
   verifiedProfiles,
   visibleItems,
 } from "../utils/content";
@@ -22,30 +21,21 @@ import {
   profilePageJsonLd,
   websiteJsonLd,
 } from "../utils/jsonld";
-import { identityLinkAttrs } from "../utils/links";
+import { externalLinkAttrs, identityLinkAttrs } from "../utils/links";
+import { institutionLogo, researchImage } from "../utils/logos";
 
 const seo = pageSeo("home");
-const featuredPubs = featuredPublications();
-const featuredThemes = featuredItems(site.research.themes);
+const featuredPubs = featuredPublications().slice(0, 7);
+const themes = visibleItems(site.research.themes);
+const highlights = site.research.highlights;
 const featuredProjects = featuredItems(site.projects);
 const featuredPatents = featuredItems(site.patents);
 const featuredAwards = featuredItems(site.awards);
-const workshops = visibleItems(site.workshops).slice(0, 3);
+const workshops = visibleItems(site.workshops).slice(0, 4);
 const profiles = verifiedProfiles();
-const email = primaryEmail();
 const scholars = visibleItems(site.supervision);
-const stats = [
-  { value: String(allPublications().length), label: "Publications" },
-  {
-    value: String(visibleItems(site.patents).length),
-    label: "Patents & designs",
-  },
-  { value: String(scholars.length), label: "Ph.D. scholars" },
-  {
-    value: String(visibleItems(site.projects).length),
-    label: "Funded projects",
-  },
-];
+const totalPubs = allPublications().length;
+
 const jsonLd = [
   websiteJsonLd(),
   personJsonLd(absoluteUrl("/")),
@@ -60,284 +50,699 @@ const jsonLd = [
   canonicalPath="/"
   jsonLd={jsonLd}
 >
-  <Container class="py-12 md:py-16">
-    <section
-      aria-labelledby="identity-heading"
-      class="grid items-start gap-10 md:grid-cols-[minmax(0,1fr)_16.5rem] md:gap-14"
-    >
-      <div class="min-w-0">
-        <p class="reveal text-xs tracking-[0.22em] text-signal uppercase">
-          {site.person.departmentShort}
-        </p>
-        <h1
-          id="identity-heading"
-          class="reveal reveal-delay-1 mt-4 max-w-4xl text-[2.35rem] leading-[1.12] font-medium text-ink md:text-6xl"
-        >
-          {site.person.name}
-        </h1>
-        <Waveform class="reveal reveal-delay-2 mt-5" />
-        <p class="reveal reveal-delay-2 mt-6 text-lg text-ink-soft">
-          {site.person.designation}
-          <br />
-          {site.person.department}
-          <br />
-          {site.person.institution}, {site.person.location}
-        </p>
-        <p class="mt-7 max-w-3xl text-lg leading-relaxed text-ink-soft">
-          {site.person.shortBio}
-        </p>
-        <p class="mt-8 flex flex-wrap gap-3">
-          <a href="/research" class="btn-primary">Research</a>
-          <a href="/publications" class="btn-ghost">Publications</a>
-        </p>
-      </div>
-      {
-        site.person.showProfileImage && (
-          <figure
-            class="reveal order-first mx-auto w-44 shrink-0 md:order-0 md:mx-0 md:w-full"
-            transition:name="profile-photo"
-          >
-            <div class="overflow-hidden rounded-2xl border border-rule bg-surface shadow-[0_18px_40px_0.08]">
+  <!-- OPENING SECTION (TEKURIOUS + DUNE EDITORIAL COMPOSITION) -->
+  <section aria-labelledby="identity-heading" class="pt-8 pb-14 md:pt-14 md:pb-20">
+    <Container>
+      <div class="grid items-start gap-10 lg:grid-cols-[1fr_21rem] xl:grid-cols-[1fr_23rem] xl:gap-14">
+        <div class="min-w-0">
+          <!-- Pill Badge with Institution Emblem -->
+          <div class="inline-flex items-center gap-2.5 rounded-full border border-rule bg-surface py-1.5 pl-2 pr-4 text-xs text-ink-soft">
+            <span class="inline-flex size-6 items-center justify-center rounded-full bg-paper p-0.5">
               <Image
-                src={profilePhoto}
-                alt={site.person.name}
-                width={480}
-                height={480}
-                densities={[1.5, 2]}
-                fetchpriority="high"
-                decoding="async"
-                draggable="false"
-                class="profile-photo aspect-square w-full object-cover"
+                src={bitLogo}
+                alt=""
+                width={48}
+                height={48}
+                class="size-full object-contain"
               />
-            </div>
-            <figcaption class="mt-3 text-sm leading-snug text-muted">
-              {site.person.designation}, {site.person.institutionShort}
-            </figcaption>
-          </figure>
-        )
-      }
-    </section>
-
-    <dl class="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
-      {
-        stats.map((item) => (
-          <div class="panel px-4 py-4 md:px-5">
-            <dt class="text-[0.68rem] tracking-[0.16em] text-muted uppercase">
-              {item.label}
-            </dt>
-            <dd class="mt-1 font-serif text-3xl tabular-nums text-ink">
-              {item.value}
-            </dd>
+            </span>
+            <span class="font-medium text-ink">{site.person.institutionShort}</span>
+            <span aria-hidden="true" class="text-rule">·</span>
+            <span>{site.person.departmentShort}</span>
           </div>
-        ))
-      }
-    </dl>
 
-    <section class="mt-16" aria-labelledby="interests-heading">
-      <SectionHeading id="interests-heading" title="Research interests" />
-      <ul class="flex flex-wrap gap-2">
-        {site.research.interests.map((interest) => (
-          <li class="chip">{interest}</li>
-        ))}
-      </ul>
-    </section>
+          <h1
+            id="identity-heading"
+            class="mt-5 max-w-4xl text-4xl leading-[1.08] text-ink sm:text-5xl lg:text-[3.65rem]"
+          >
+            {site.person.name}
+          </h1>
 
-    <section class="mt-16" aria-labelledby="research-heading">
-      <SectionHeading
-        id="research-heading"
-        title="Research"
-        href="/research"
-        linkLabel="View all"
-      />
-      <ul class="grid gap-4 md:grid-cols-2">
-        {featuredThemes.map((theme) => (
-          <li class="panel panel-hover p-5 md:p-6">
-            <h3 class="text-xl font-medium text-ink">{theme.title}</h3>
-            <p class="mt-2 text-ink-soft">{theme.description}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
+          <p class="mt-3 max-w-3xl font-serif text-xl leading-snug text-ink-soft md:text-2xl">
+            Decoding the <em class="italic text-signal">mathematical structure</em> of biological, acoustic, and physical signals.
+          </p>
 
-    <section class="mt-16" aria-labelledby="publications-heading">
-      <SectionHeading
-        id="publications-heading"
-        title="Recent publications"
-        href="/publications"
-        linkLabel="View all"
-      />
-      <div class="panel overflow-hidden px-5 md:px-7">
-        {featuredPubs.map((publication) => (
-          <PublicationEntry publication={publication} />
-        ))}
-      </div>
-    </section>
+          <Waveform class="mt-5" />
 
-    <section class="mt-16" aria-labelledby="projects-heading">
-      <SectionHeading
-        id="projects-heading"
-        title="Research projects"
-        href="/projects"
-        linkLabel="View all"
-      />
-      <ul class="grid gap-4">
-        {featuredProjects.map((project) => (
-          <li class="panel panel-hover p-5 md:p-6">
-            <h3 class="text-xl font-medium text-ink">{project.title}</h3>
-            <p class="mt-2 text-sm text-muted">
-              {project.fundingBody} · {project.duration} · {project.role}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </section>
+          <p class="mt-5 max-w-3xl text-base leading-relaxed text-ink-soft md:text-[1.08rem]">
+            {site.person.bio}
+          </p>
 
-    <section class="mt-16" aria-labelledby="patents-heading">
-      <SectionHeading
-        id="patents-heading"
-        title="Patents"
-        href="/patents"
-        linkLabel="View all"
-      />
-      <ul class="grid gap-4">
-        {featuredPatents.map((patent) => (
-          <li class="panel panel-hover p-5 md:p-6">
-            <h3 class="text-xl font-medium text-ink">{patent.title}</h3>
-            <p class="mt-2 text-sm text-muted capitalize">
-              {patent.country} · {patent.status}
-              {patent.patentNumber
-                ? ` · ${patent.kind === "design" ? "Design" : "Patent"} No. ${patent.patentNumber}`
-                : ""}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </section>
+          <!-- Tekurious-Style Pill CTAs -->
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="/research" class="btn-primary">
+              <span>Explore Research</span>
+              <span class="btn-icon-circle" aria-hidden="true">
+                <svg class="size-3.5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 14 14 6m0 0H7.5M14 6v6.5" />
+                </svg>
+              </span>
+            </a>
+            <a href="/publications" class="btn-ghost">
+              Publications ({totalPubs})
+            </a>
+            <a href="/projects" class="btn-ghost">
+              Sponsored Grants (₹1.58 Cr+)
+            </a>
+          </div>
 
-    <section class="mt-16" aria-labelledby="experience-heading">
-      <SectionHeading
-        id="experience-heading"
-        title="Academic journey"
-        href="/experience"
-        linkLabel="View all"
-      />
-      <div class="grid gap-4 md:grid-cols-2">
-        <div class="panel p-5 md:p-6">
-          <h3 class="font-sans text-xs tracking-[0.16em] text-muted uppercase">
-            Academic appointments
-          </h3>
-          <ul class="mt-4 space-y-4">
-            {visibleItems(site.academicExperience).map((item) => (
-              <li>
-                <p class="font-medium text-ink">{item.position}</p>
-                <p class="text-sm text-muted">
-                  {item.institution} · {item.duration}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div class="panel p-5 md:p-6">
-          <h3 class="font-sans text-xs tracking-[0.16em] text-muted uppercase">
-            Education
-          </h3>
-          <ul class="mt-4 space-y-4">
-            {visibleItems(site.education).map((item) => (
-              <li>
-                <p class="font-medium text-ink">
-                  {item.degree}, {item.institution}
-                </p>
-                <p class="text-sm text-muted">
-                  {item.duration}
-                  {item.major ? ` · ${item.major}` : ""}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="mt-16" aria-labelledby="supervision-heading">
-      <SectionHeading
-        id="supervision-heading"
-        title="Supervision"
-        href="/supervision"
-        linkLabel="View all"
-      />
-      <p class="max-w-3xl text-ink-soft">
-        {scholars.length} awarded doctoral scholars, most recently in
-        speech-based Parkinson’s disease analysis, photobiomodulation
-        research, protein–protein interaction, energy harvesting, and image
-        security.
-      </p>
-    </section>
-
-    <section class="mt-16" aria-labelledby="achievements-heading">
-      <SectionHeading
-        id="achievements-heading"
-        title="Selected activities"
-        href="/activities"
-        linkLabel="View all"
-      />
-      <ul class="max-w-3xl space-y-3 text-ink-soft">
-        {featuredAwards.map((item) => (
-          <li>
-            {item.title}
-            {item.organization ? `, ${item.organization}` : ""}
-            {item.date ? ` (${item.date})` : ""}
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section class="mt-16" aria-labelledby="workshops-heading">
-      <SectionHeading
-        id="workshops-heading"
-        title="Workshops"
-        href="/activities"
-        linkLabel="View all"
-      />
-      <ul class="grid gap-3">
-        {workshops.map((item) => (
-          <li class="panel px-5 py-4">
-            <p class="text-ink">{item.title}</p>
-            <p class="text-sm text-muted">
-              {item.date}
-              {item.location ? ` · ${item.location}` : ""}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section class="mt-16" aria-labelledby="contact-heading">
-      <SectionHeading id="contact-heading" title="Contact" />
-      <div class="panel max-w-xl p-6 text-ink-soft">
-        <p>{site.person.department}</p>
-        <p>{site.person.institution}</p>
-        <p>
-          {site.person.location} – {site.person.postalCode}
-        </p>
-        <p class="mt-4">
-          <a href={`mailto:${email}`}>{email}</a>
-        </p>
-        {
-          profiles.length > 0 && (
-            <p class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-              {profiles.slice(0, 4).map((item) => (
+          <!-- Social & Academic Profile Strip -->
+          <div class="mt-8 flex flex-wrap items-center gap-2 border-t border-rule pt-5">
+            <span class="mr-1 text-xs tracking-[0.14em] text-muted uppercase">
+              Profiles &amp; Socials:
+            </span>
+            {
+              profiles.slice(0, 7).map((item) => (
                 <a
                   href={item.url}
                   {...identityLinkAttrs(item.url)}
-                  class="inline-flex min-h-11 items-center md:min-h-0"
+                  class="inline-flex min-h-8 items-center gap-1 rounded-full border border-rule bg-surface px-3 py-1 text-xs font-medium text-ink-soft no-underline transition-colors hover:border-navy hover:text-navy"
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  <svg class="size-3 text-muted" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 14 14 6m0 0H7.5M14 6v6.5" />
+                  </svg>
                 </a>
-              ))}
-            </p>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Portrait & Pedigree Card -->
+        {
+          site.person.showProfileImage && (
+            <figure
+              class="panel-inset mx-auto w-full max-w-xs lg:mx-0 lg:max-w-none"
+              transition:name="profile-photo"
+            >
+              <div class="overflow-hidden rounded-xl bg-paper">
+                <Image
+                  src={profilePhoto}
+                  alt={site.person.name}
+                  width={480}
+                  height={480}
+                  densities={[1.5, 2]}
+                  fetchpriority="high"
+                  decoding="async"
+                  draggable="false"
+                  class="profile-photo aspect-square w-full object-cover"
+                />
+              </div>
+              <figcaption class="p-3.5">
+                <p class="font-serif text-lg text-ink">
+                  {site.person.designation}
+                </p>
+                <p class="mt-0.5 text-xs text-muted">
+                  {site.person.department}, {site.person.institution}
+                </p>
+                <dl class="mt-3.5 grid grid-cols-2 gap-2 border-t border-rule pt-3 text-xs">
+                  <div>
+                    <dt class="text-muted">Doctorate</dt>
+                    <dd class="font-medium text-ink">NIT Rourkela</dd>
+                  </div>
+                  <div>
+                    <dt class="text-muted">Postdoc (USA)</dt>
+                    <dd class="font-medium text-ink">Oklahoma State</dd>
+                  </div>
+                  <div>
+                    <dt class="text-muted">Visiting Scholar</dt>
+                    <dd class="font-medium text-ink">Western Ontario</dd>
+                  </div>
+                  <div>
+                    <dt class="text-muted">ORCID</dt>
+                    <dd class="tabular-nums font-medium text-ink">0000-0003-1236-2255</dd>
+                  </div>
+                </dl>
+              </figcaption>
+            </figure>
           )
         }
       </div>
-    </section>
-  </Container>
+
+      <!-- TEKURIOUS-STYLE ASYMMETRIC BENTO IMPACT STRIP -->
+      <div class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-12">
+        <!-- Card 1: Deep Forest Jade Counter Card -->
+        <div class="flex flex-col justify-between rounded-2xl bg-navy p-6 text-white lg:col-span-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs tracking-[0.16em] text-white/70 uppercase">
+              Scholarly Impact
+            </span>
+            <span class="rounded-full bg-white/12 px-2.5 py-0.5 text-xs text-[#f2a663]">
+              Top 5% DSP
+            </span>
+          </div>
+          <div class="my-4">
+            <p class="font-serif text-5xl tabular-nums leading-none text-white">
+              1,603+
+            </p>
+            <p class="mt-2 text-sm text-white/85">
+              Verified Google Scholar citations across signal processing, physiology &amp; molecular biology
+            </p>
+          </div>
+          <p class="border-t border-white/15 pt-3 text-xs tabular-nums text-white/75">
+            h-index: 21 · i10-index: 36+
+          </p>
+        </div>
+
+        <!-- Card 2: Tekurious Double-Framed Split Grant Card -->
+        <div class="panel-inset grid gap-5 sm:grid-cols-[12.5rem_1fr] sm:items-center lg:col-span-6">
+          <div class="flex h-full flex-col justify-center rounded-xl border border-rule bg-paper/65 p-5 text-center">
+            <p class="text-xs tracking-[0.14em] text-muted uppercase">
+              Sponsored R&amp;D
+            </p>
+            <p class="mt-2 font-serif text-4xl tabular-nums text-navy">
+              ₹1.58 Cr+
+            </p>
+            <p class="mt-1 text-xs font-medium text-ink-soft">
+              6 Grants as Principal Investigator
+            </p>
+          </div>
+          <div class="px-2 py-2 sm:pr-4">
+            <p class="text-xs tracking-[0.14em] text-signal uppercase">
+              National Funding Agencies
+            </p>
+            <h2 class="mt-1 text-xl leading-snug text-ink">
+              NM-ICPS (DST), SERB (DST), IDEAS-TIH (ISI Kolkata), NPIU (MHRD) &amp; JCST
+            </h2>
+            <p class="mt-2 text-sm leading-relaxed text-ink-soft">
+              Leading interdisciplinary grants in cyber-physical systems (₹1.00 Cr), rice–blast host–pathogen interactomics (₹21.62L), precision agriculture (₹15.00L), wavelet sleep EEG (₹14.42L), and Parkinson’s speech AI (₹5.14L).
+            </p>
+            <p class="mt-3">
+              <a href="/projects" class="text-sm font-semibold text-navy">
+                Explore all 6 funded projects →
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3: Burnt Sienna Counter Card -->
+        <div class="flex flex-col justify-between rounded-2xl bg-sienna p-6 text-white lg:col-span-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs tracking-[0.16em] text-white/75 uppercase">
+              Output &amp; IP
+            </span>
+            <span class="rounded-full bg-white/15 px-2.5 py-0.5 text-xs text-white">
+              2007–2026
+            </span>
+          </div>
+          <div class="my-4">
+            <p class="font-serif text-5xl tabular-nums leading-none text-white">
+              {totalPubs}
+            </p>
+            <p class="mt-2 text-sm text-white/85">
+              {site.publications.journals.length} Journal articles · {site.publications.conferences.length} Conferences · {site.publications.bookChapters.length} Book chapters
+            </p>
+          </div>
+          <p class="border-t border-white/15 pt-3 text-xs tabular-nums text-white/80">
+            {visibleItems(site.patents).length} Patents &amp; Designs · {scholars.length} Ph.D.s Awarded
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- FULL-BLEED WHITE SECTION: PUBLIC-DOMAIN TOOLS, WEB SERVERS & PATENTED SYSTEMS -->
+  <section
+    aria-labelledby="highlights-heading"
+    class="border-y border-rule bg-surface py-16 md:py-24"
+  >
+    <Container>
+      <div class="flex flex-col justify-between gap-6 pb-10 md:flex-row md:items-end">
+        <div class="max-w-2xl">
+          <p class="text-xs tracking-[0.18em] text-signal uppercase">
+            Public-Domain Systems, Web Servers &amp; Inventions
+          </p>
+          <h2
+            id="highlights-heading"
+            class="mt-2 text-3xl leading-[1.14] text-ink md:text-5xl"
+          >
+            Landmark <em class="italic text-signal">scientific tools</em> &amp; translational breakthroughs
+          </h2>
+        </div>
+        <p class="max-w-md text-sm leading-relaxed text-ink-soft">
+          From publicly deployed bioinformatics servers at Utah State / Oklahoma State University to granted Indian and UK biomedical &amp; agricultural patents at BIT Mesra.
+        </p>
+      </div>
+
+      <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {
+          highlights.map((item, idx) => {
+            const img = researchImage(item.image);
+            const isExternal = item.url.startsWith("http");
+            return (
+              <li class="panel panel-hover flex flex-col justify-between overflow-hidden bg-paper/45">
+                <div>
+                  {img && (
+                    <div class="relative overflow-hidden border-b border-rule">
+                      <Image
+                        src={img}
+                        alt={item.title}
+                        width={640}
+                        height={360}
+                        densities={[1.5, 2]}
+                        loading={idx < 3 ? "eager" : "lazy"}
+                        decoding="async"
+                        class="aspect-video w-full object-cover"
+                      />
+                      <span class="absolute bottom-3 left-3 rounded-full bg-navy/90 px-3 py-1 text-xs font-medium tabular-nums text-white backdrop-blur-xs">
+                        {item.metric}
+                      </span>
+                    </div>
+                  )}
+                  <div class="p-5 md:p-6">
+                    <p class="text-xs tabular-nums tracking-[0.12em] text-muted uppercase">
+                      {item.year} · {item.subtitle}
+                    </p>
+                    <h3 class="mt-2 text-xl leading-snug text-ink">
+                      <a
+                        href={item.url}
+                        {...(isExternal ? externalLinkAttrs(item.url) : {})}
+                        class="text-ink no-underline hover:text-navy"
+                      >
+                        {item.title}
+                      </a>
+                    </h3>
+                    <p class="mt-2.5 text-sm leading-relaxed text-ink-soft">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+                <div class="border-t border-rule px-5 py-3.5 md:px-6">
+                  <a
+                    href={item.url}
+                    {...(isExternal ? externalLinkAttrs(item.url) : {})}
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider text-navy uppercase no-underline hover:underline"
+                  >
+                    <span>{isExternal ? "View DOI / Public Record" : "Read Paper Details"}</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </Container>
+  </section>
+
+  <!-- DUNE-STYLE STICKY SPLIT-SCREEN: RESEARCH DOMAINS -->
+  <section aria-labelledby="research-heading" class="py-16 md:py-24">
+    <Container>
+      <div class="grid items-start gap-10 lg:grid-cols-[21rem_1fr] lg:gap-14">
+        <div class="lg:sticky lg:top-28">
+          <span class="mark mb-4"></span>
+          <p class="text-xs tracking-[0.18em] text-signal uppercase">
+            Research Architecture
+          </p>
+          <h2
+            id="research-heading"
+            class="mt-2 text-3xl leading-[1.15] text-ink md:text-4xl"
+          >
+            Six core <em class="italic text-signal">domains</em> of inquiry
+          </h2>
+          <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+            Unifying non-stationary time-frequency signal representations (S-Transform, VMD, Hilbert spectrum, RRM) with deep neural architectures and VLSI hardware synthesis.
+          </p>
+          <ul class="mt-6 flex flex-wrap gap-1.5">
+            {
+              site.research.interests.map((interest) => (
+                <li class="chip text-xs">{interest}</li>
+              ))
+            }
+          </ul>
+          <p class="mt-7">
+            <a href="/research" class="btn-primary">
+              <span>All research domains</span>
+              <span class="btn-icon-circle" aria-hidden="true">→</span>
+            </a>
+          </p>
+        </div>
+
+        <ul class="grid gap-5 sm:grid-cols-2">
+          {
+            themes.map((theme) => {
+              const img = researchImage(theme.image);
+              return (
+                <li class="panel panel-hover flex flex-col overflow-hidden">
+                  {img && (
+                    <Image
+                      src={img}
+                      alt={theme.title}
+                      width={640}
+                      height={360}
+                      densities={[1.5, 2]}
+                      loading="lazy"
+                      decoding="async"
+                      class="aspect-video w-full object-cover"
+                    />
+                  )}
+                  <div class="flex flex-1 flex-col justify-between p-5 md:p-6">
+                    <div>
+                      <h3 class="text-xl leading-snug text-ink">
+                        {theme.title}
+                      </h3>
+                      <p class="mt-2.5 text-sm leading-relaxed text-ink-soft">
+                        {theme.description}
+                      </p>
+                    </div>
+                    {theme.methods && theme.methods.length > 0 && (
+                      <p class="mt-4 border-t border-rule pt-3 text-xs text-muted">
+                        {theme.methods.join(" · ")}
+                      </p>
+                    )}
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </Container>
+  </section>
+
+  <!-- DUNE-STYLE STICKY SPLIT-SCREEN: SELECTED & LANDMARK PUBLICATIONS -->
+  <section
+    aria-labelledby="publications-heading"
+    class="border-t border-rule bg-paper-alt/65 py-16 md:py-24"
+  >
+    <Container>
+      <div class="grid items-start gap-10 lg:grid-cols-[21rem_1fr] lg:gap-14">
+        <div class="lg:sticky lg:top-28">
+          <span class="mark mb-4"></span>
+          <p class="text-xs tracking-[0.18em] text-signal uppercase">
+            Bibliography · {totalPubs} Works
+          </p>
+          <h2
+            id="publications-heading"
+            class="mt-2 text-3xl leading-[1.15] text-ink md:text-4xl"
+          >
+            Selected &amp; <em class="italic text-signal">most-cited</em> publications
+          </h2>
+          <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+            Published across <em>Briefings in Bioinformatics</em>, <em>IEEE/ACM TCBB</em>, <em>IEEE Transactions on NanoBioscience</em>, <em>Computer Speech &amp; Language</em>, <em>AoB PLANTS</em>, and <em>Biomedical Signal Processing &amp; Control</em>.
+          </p>
+
+          <div class="panel mt-6 p-4 text-xs">
+            <p class="font-semibold tracking-wider text-navy uppercase">
+              Citation Highlights
+            </p>
+            <ul class="mt-2.5 space-y-2 text-ink-soft">
+              <li class="flex justify-between gap-2">
+                <span>Chou’s PseAAC Protein Class (2010)</span>
+                <strong class="tabular-nums text-ink">207+</strong>
+              </li>
+              <li class="flex justify-between gap-2">
+                <span>IMF Parkinson’s Speech (2020)</span>
+                <strong class="tabular-nums text-ink">165+</strong>
+              </li>
+              <li class="flex justify-between gap-2">
+                <span>Plant-mSubP Framework (2019)</span>
+                <strong class="tabular-nums text-ink">103+</strong>
+              </li>
+              <li class="flex justify-between gap-2">
+                <span>NMF Voice Features (2021)</span>
+                <strong class="tabular-nums text-ink">73+</strong>
+              </li>
+              <li class="flex justify-between gap-2">
+                <span>Hilbert Spectrum Speech (2020)</span>
+                <strong class="tabular-nums text-ink">69+</strong>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-6 flex flex-wrap gap-2">
+            <a href="/publications" class="btn-primary">
+              <span>All {totalPubs} Publications</span>
+              <span class="btn-icon-circle" aria-hidden="true">→</span>
+            </a>
+            <a href="/publications/journals" class="btn-ghost text-sm">
+              Journals ({site.publications.journals.length})
+            </a>
+          </div>
+        </div>
+
+        <div class="panel overflow-hidden px-5 md:px-8">
+          {
+            featuredPubs.map((publication) => (
+              <PublicationEntry publication={publication} />
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- DUNE-STYLE STICKY SPLIT-SCREEN: SPONSORED R&D PROJECTS & PATENTS -->
+  <section
+    aria-labelledby="projects-heading"
+    class="border-t border-rule py-16 md:py-24"
+  >
+    <Container>
+      <div class="grid items-start gap-10 lg:grid-cols-[21rem_1fr] lg:gap-14">
+        <div class="lg:sticky lg:top-28">
+          <span class="mark mb-4"></span>
+          <p class="text-xs tracking-[0.18em] text-signal uppercase">
+            Grants &amp; Intellectual Property
+          </p>
+          <h2
+            id="projects-heading"
+            class="mt-2 text-3xl leading-[1.15] text-ink md:text-4xl"
+          >
+            Sponsored <em class="italic text-signal">projects</em> &amp; patents
+          </h2>
+          <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+            6 completed sponsored R&amp;D grants as Principal Investigator (₹1.58+ Crore) alongside 8 granted patents, UK design registrations, and patent filings.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-2.5">
+            <a href="/projects" class="btn-primary">
+              <span>All Projects</span>
+              <span class="btn-icon-circle" aria-hidden="true">→</span>
+            </a>
+            <a href="/patents" class="btn-ghost">
+              All Patents ({visibleItems(site.patents).length})
+            </a>
+          </div>
+        </div>
+
+        <div class="space-y-10">
+          <div>
+            <h3 class="mb-4 font-sans text-xs font-semibold tracking-[0.16em] text-muted uppercase">
+              Principal Investigator R&amp;D Grants
+            </h3>
+            <ul class="grid gap-4 sm:grid-cols-2">
+              {
+                featuredProjects.map((project) => (
+                  <li class="panel panel-hover flex flex-col justify-between p-5 md:p-6">
+                    <div>
+                      <div class="flex items-center justify-between gap-2 text-xs tabular-nums">
+                        <span class="rounded-full bg-navy px-2.5 py-0.5 font-semibold text-white">
+                          {project.amount}
+                        </span>
+                        <span class="text-muted">
+                          {project.duration} · {project.role}
+                        </span>
+                      </div>
+                      <h4 class="mt-3 font-serif text-xl leading-snug text-ink">
+                        {project.title}
+                      </h4>
+                      <p class="mt-1.5 text-xs font-medium text-signal">
+                        {project.fundingBody}
+                      </p>
+                      {project.description && (
+                        <p class="mt-2.5 text-sm leading-relaxed text-ink-soft">
+                          {project.description}
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="mb-4 font-sans text-xs font-semibold tracking-[0.16em] text-muted uppercase">
+              Featured Patents &amp; Design Registrations
+            </h3>
+            <ul class="grid gap-4 sm:grid-cols-2">
+              {
+                featuredPatents.map((patent) => (
+                  <li class="panel panel-hover p-5 md:p-6">
+                    <p class="text-xs tabular-nums tracking-[0.14em] text-signal uppercase">
+                      {patent.country} · {patent.status}
+                      {patent.patentNumber
+                        ? ` · ${patent.kind === "design" ? "Design" : "Patent"} No. ${patent.patentNumber}`
+                        : patent.applicationNumber
+                          ? ` · App. No. ${patent.applicationNumber}`
+                          : ""}
+                    </p>
+                    <h4 class="mt-2 font-serif text-xl leading-snug text-ink">
+                      {patent.title}
+                    </h4>
+                    {patent.description && (
+                      <p class="mt-2 text-sm leading-relaxed text-ink-soft">
+                        {patent.description}
+                      </p>
+                    )}
+                    {patent.inventors && (
+                      <p class="mt-3 border-t border-rule pt-2.5 text-xs text-muted">
+                        Inventors: {patent.inventors.join(", ")}
+                      </p>
+                    )}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- DUNE-STYLE STICKY SPLIT-SCREEN: ACADEMIC JOURNEY, SUPERVISION & HONOURS -->
+  <section
+    aria-labelledby="experience-heading"
+    class="border-t border-rule bg-surface py-16 md:py-24"
+  >
+    <Container>
+      <div class="grid items-start gap-10 lg:grid-cols-[21rem_1fr] lg:gap-14">
+        <div class="lg:sticky lg:top-28">
+          <span class="mark mb-4"></span>
+          <p class="text-xs tracking-[0.18em] text-signal uppercase">
+            Mentorship &amp; Career
+          </p>
+          <h2
+            id="experience-heading"
+            class="mt-2 text-3xl leading-[1.15] text-ink md:text-4xl"
+          >
+            Academic <em class="italic text-signal">trajectory</em> &amp; Ph.D. supervision
+          </h2>
+          <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+            15+ years of research and teaching across BIT Mesra, Oklahoma State University (USA), IIT Bhubaneswar, University of Western Ontario (Canada), and NIT Rourkela, with {scholars.length} awarded Ph.D. scholars.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-2.5">
+            <a href="/supervision" class="btn-primary">
+              <span>Ph.D. Supervision ({scholars.length})</span>
+              <span class="btn-icon-circle" aria-hidden="true">→</span>
+            </a>
+            <a href="/experience" class="btn-ghost">
+              Experience &amp; Bio
+            </a>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          <!-- Appointments & Education -->
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="panel bg-paper/45 p-5 md:p-6">
+              <h3 class="font-sans text-xs font-semibold tracking-[0.16em] text-muted uppercase">
+                Academic &amp; Research Appointments
+              </h3>
+              <ul class="mt-4 space-y-4">
+                {
+                  [
+                    ...visibleItems(site.academicExperience),
+                    ...visibleItems(site.researchExperience),
+                  ].map((item) => {
+                    const logo = institutionLogo(item.institution);
+                    return (
+                      <li class="flex items-start justify-between gap-3 border-b border-rule/70 pb-3.5 last:border-b-0 last:pb-0">
+                        <div>
+                          <p class="font-medium text-ink">{item.position}</p>
+                          <p class="text-sm text-ink-soft">{item.institution}</p>
+                          <p class="text-xs tabular-nums text-muted">
+                            {item.duration}{item.location ? ` · ${item.location}` : ""}
+                          </p>
+                        </div>
+                        {logo && (
+                          <Image
+                            src={logo}
+                            alt=""
+                            width={80}
+                            height={80}
+                            class="size-10 shrink-0 object-contain"
+                          />
+                        )}
+                      </li>
+                    );
+                  })
+                }
+              </ul>
+            </div>
+
+            <div class="panel bg-paper/45 p-5 md:p-6">
+              <h3 class="font-sans text-xs font-semibold tracking-[0.16em] text-muted uppercase">
+                Awarded Doctoral Scholars ({scholars.length})
+              </h3>
+              <ul class="mt-4 space-y-3.5">
+                {
+                  scholars.map((item) => (
+                    <li class="border-b border-rule/70 pb-3 last:border-b-0 last:pb-0">
+                      <div class="flex items-baseline justify-between gap-2">
+                        <p class="font-medium text-ink">{item.scholar}</p>
+                        <span class="text-xs tabular-nums font-semibold text-signal">
+                          {item.year}
+                        </span>
+                      </div>
+                      <p class="mt-0.5 text-xs leading-relaxed text-ink-soft">
+                        {item.thesis}
+                      </p>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+
+          <!-- Honours & Organised Workshops -->
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="panel bg-paper/45 p-5 md:p-6">
+              <h3 class="font-sans text-xs font-semibold tracking-[0.16em] text-muted uppercase">
+                Selected Honours &amp; Fellowships
+              </h3>
+              <ul class="mt-4 space-y-3 text-sm text-ink-soft">
+                {
+                  featuredAwards.map((item) => (
+                    <li>
+                      <span class="font-medium text-ink">{item.title}</span>
+                      {item.organization ? ` — ${item.organization}` : ""}
+                      {item.date ? ` (${item.date})` : ""}
+                    </li>
+                  ))
+                }
+                {
+                  visibleItems(site.fellowships).map((item) => (
+                    <li>
+                      <span class="font-medium text-ink">{item.title}</span>
+                      {` — ${item.organization} (${item.date})`}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+
+            <div class="panel bg-paper/45 p-5 md:p-6">
+              <h3 class="font-sans text-xs font-semibold tracking-[0.16em] text-muted uppercase">
+                Recent Workshops &amp; FDPs Organised
+              </h3>
+              <ul class="mt-4 space-y-3 text-sm text-ink-soft">
+                {
+                  workshops.map((item) => (
+                    <li>
+                      <span class="font-medium text-ink">{item.title}</span>
+                      <span class="block text-xs tabular-nums text-muted">
+                        {[item.date, item.location, item.sponsor]
+                          .filter(Boolean)
+                          .join(" · ")}
+                      </span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
 </BaseLayout>

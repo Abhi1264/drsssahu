@@ -33,6 +33,7 @@ const jsonLd = pageJsonLd("/education", [
             item.location,
             item.major,
             item.dissertation ? `Dissertation: ${item.dissertation}` : "",
+            item.description,
           ]
             .filter(Boolean)
             .join(". "),

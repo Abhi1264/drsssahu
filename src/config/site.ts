@@ -4,6 +4,7 @@ import type {
   EmailAddress,
   Experience,
   Fellowship,
+  HighlightWork,
   NavItem,
   PageSeo,
   Patent,
@@ -64,8 +65,8 @@ export const site = {
     showProfileImage: true,
     showPhone: true,
     shortBio:
-      "His research spans bio-signal processing, image processing, artificial intelligence and machine learning, embedded AI, bioinformatics, and computer vision, with particular work in speech-based analysis, biomedical signal processing, and computational biology.",
-    bio: "Dr. Sitanshu Sekhar Sahu is Associate Professor in the Department of Electronics and Communication Engineering at Birla Institute of Technology Mesra, Ranchi. He received his Ph.D. from the National Institute of Technology, Rourkela, for a dissertation on the analysis of genomic and proteomic signals using signal processing and soft-computing techniques, and later held a postdoctoral research fellowship at Oklahoma State University. His research concerns bio-signal processing, image processing, artificial intelligence and machine learning, embedded AI, bioinformatics, and computer vision, including speech-based analysis for Parkinson's disease, protein-protein interaction prediction, genomic signal processing, and related biomedical and computational work.",
+      "His research spans bio-signal processing, time-frequency analysis, artificial intelligence and machine learning, embedded AI, bioinformatics, and computer vision—with a focus on neurological speech diagnostics, protein interactomics, and genomic signal processing.",
+    bio: "Dr. Sitanshu Sekhar Sahu is an Associate Professor in the Department of Electronics and Communication Engineering at Birla Institute of Technology Mesra, Ranchi. He received his Ph.D. from the National Institute of Technology, Rourkela under Prof. Ganapati Panda for a dissertation on the analysis of genomic and proteomic signals using time-frequency signal processing and soft-computing techniques, was a DFAIT-GSEP Visiting Research Scholar at the University of Western Ontario (Canada), and completed a Postdoctoral Research Fellowship at Oklahoma State University (USA). He has led ₹1.58+ Crore in sponsored R&D projects from DST-SERB, NM-ICPS, IDEAS-TIH (ISI Kolkata), NPIU-MHRD, and JCST, authored over 100 peer-reviewed publications with 1,600+ citations (h-index 21), and holds 8 patents and design registrations.",
   },
 
   navigation: [
@@ -83,53 +84,162 @@ export const site = {
   research: {
     interests: [
       "Bio-Signal Processing",
-      "Image Processing",
-      "Artificial Intelligence and Machine Learning",
-      "Embedded AI",
-      "Bioinformatics",
-      "Computer Vision",
+      "Time-Frequency Analysis (S-Transform & VMD)",
+      "Speech & Voice Biomarkers",
+      "Artificial Intelligence & Machine Learning",
+      "Computational Biology & Interactomics",
+      "Genomic DSP & VLSI/FPGA",
+      "Biophotonics (PBMT)",
+      "Embedded AI & Cyber-Physical Systems",
+      "Computer Vision & Image Security",
     ],
+    highlights: [
+      {
+        title: "Plant-mSubP Web Server",
+        subtitle: "AoB PLANTS (Oxford) · Utah State & Oklahoma State Collaboration",
+        year: "2019",
+        metric: "103+ Citations · 81.1% Dual-Target Accuracy",
+        description:
+          "Publicly deployed bioinformatics web server (bioinfo.usu.edu/Plant-mSubP) predicting 11 single and 3 dual subcellular localizations across plant proteomes using hybrid PseAAC-NCC-DIPEP physicochemical descriptors.",
+        url: "https://doi.org/10.1093/aobpla/plz068",
+        image: "protein",
+      },
+      {
+        title: "Multilingual Parkinson’s Speech AI",
+        subtitle: "Computer Speech & Language · Journal of Voice · BSPC",
+        year: "2019–2026",
+        metric: "380+ Domain Citations · 6 Languages",
+        description:
+          "Non-invasive vocal biomarker pipelines combining Variational Mode Decomposition (VMD), Hilbert spectrum, NMF, Siamese Neural Networks, and Kernel Mean Matching domain adaptation across Spanish (PC-GITA), German, Czech, Italian, English (MDVR-KCL), and Indian cohorts.",
+        url: "/publications/2026-multilingual-voice-signal-analysis-for-parkinson-s-disease-detection-using-instance-based-",
+        image: "speech",
+      },
+      {
+        title: "RRM-Guided Photobiomodulation Device",
+        subtitle: "Granted Indian Patent No. 564886 · Lasers in Medical Science",
+        year: "2025",
+        metric: "Granted 3 Apr 2025 · Non-Pharmacological PBMT",
+        description:
+          "Co-invented with Tuhin Mukherjee and Dr. Ashok Pattnaik at BIT Mesra. Uses Resonant Recognition Model (RRM) frequencies to modulate POMC, leptin, adiponectin, and BDNF signaling pathways for non-invasive obesity attenuation.",
+        url: "https://doi.org/10.1007/s10103-025-04544-2",
+        image: "biomedical",
+      },
+      {
+        title: "Tubulin Drug-Hotspot S-Transform Filter",
+        subtitle: "IEEE Transactions on NanoBioscience · Vol. 20(3)",
+        year: "2021",
+        metric: "60% Taxol/Colchicine Hotspot Recall (vs 20% ML)",
+        description:
+          "Integrates the Resonant Recognition Model with time-frequency Stockwell Transform masking to localize 32 of 53 experimentally validated Taxol and Colchicine anti-cancer drug binding residues in Tubulin.",
+        url: "https://doi.org/10.1109/tnb.2021.3077710",
+        image: "genomic",
+      },
+      {
+        title: "LacSubPred & Host–Pathogen Interactomics",
+        subtitle: "BMC Bioinformatics · Frontiers in Plant Science · NIMFFAB OSU",
+        year: "2014–2023",
+        metric: "99.03% CV / 97.98% Test Accuracy",
+        description:
+          "Homology-independent classification of 12 Laccase enzyme subtypes for biofuel and lignin metabolism at Oklahoma State University (PMC4251044), alongside genome-wide Rice–Magnaporthe grisea and Arabidopsis–Pseudomonas syringae interactomes.",
+        url: "https://doi.org/10.1186/1471-2105-15-s11-s15",
+        image: "protein",
+      },
+      {
+        title: "ABCDLR Autonomous Robotics & FPGA Exon DSP",
+        subtitle: "Int. J. Intelligent Robotics (2026) · IET CDT · IJCTA",
+        year: "2020–2026",
+        metric: "Millisecond 3-Class Control · FPGA Synthesized",
+        description:
+          "Adaptive Block Coordinate Descent Logistic Regression (ABCDLR) converting continuous robot obstacle avoidance into rapid discrete decisions (featured in Bioengineer.org & Scienmag), plus tunable IIR anti-notch lattice filters on FPGA for eukaryotic exon detection.",
+        url: "https://doi.org/10.1007/s41315-026-00599-8",
+        image: "cps",
+      },
+    ] satisfies HighlightWork[],
     themes: [
       {
-        title: "Speech and voice analysis for Parkinson's disease",
+        title: "Speech and voice analysis for Parkinson’s disease",
+        image: "speech",
         description:
-          "Work on speech and multilingual voice signals for Parkinson's disease detection and assessment, including time-frequency features, deep models, and related biomedical speech analysis.",
+          "Non-invasive detection and dysarthria severity grading of Parkinson’s disease from sustained phonations and multilingual voice signals using Variational Mode Decomposition (VMD), Hilbert spectrum, Non-Negative Matrix Factorization (NMF), Siamese neural networks, cascade CNN-autoencoders, and Kernel Mean Matching domain adaptation across Spanish (PC-GITA), Italian, German, Czech, English, and Indian cohorts.",
+        methods: [
+          "Variational Mode Decomposition",
+          "Hilbert Spectrum",
+          "Non-Negative Matrix Factorization",
+          "Siamese Neural Networks",
+          "Kernel Mean Matching",
+        ],
         featured: true,
         visible: true,
       },
       {
-        title: "Biomedical signal and image processing",
+        title: "Protein–protein interaction and computational biology",
+        image: "protein",
         description:
-          "Methods for ECG and EEG analysis, sleep-stage-related signal processing, MRI and medical image filtering, heart-sound classification, and related biomedical imaging tasks.",
+          "Machine learning, Functional-Link Siamese neural networks, and DNN-XGBoost hybrid classifiers for genome-scale protein–protein interaction (PPI) prediction, host–pathogen interactomics in rice (Oryza sativa) and rice blast fungus (Magnaporthe grisea) as well as Arabidopsis–Pseudomonas syringae, and single/multi-target plant protein subcellular localization (Plant-mSubP).",
+        methods: [
+          "Functional-Link Siamese Net",
+          "DNN-XGBoost Hybrid",
+          "Chou’s PseAAC",
+          "Plant-mSubP",
+          "Host–Pathogen Interactomics",
+        ],
         featured: true,
         visible: true,
       },
       {
-        title: "Protein-protein interaction and computational biology",
+        title: "Genomic signal processing and VLSI architectures",
+        image: "genomic",
         description:
-          "Machine learning and signal-processing approaches for protein-protein interaction prediction, host-pathogen interaction, and related computational biology, including work on rice and rice blast.",
+          "Time-frequency Stockwell Transform (S-Transform) filtering and Resonant Recognition Modeling (RRM) for localizing period-3 protein-coding exon regions in eukaryotic DNA and active binding hotspots in Tubulin, SARS-CoV-2, and VEGFA/VEGFR1 proteins—synthesized into high-speed tunable IIR anti-notch lattice filters on FPGA and VLSI hardware.",
+        methods: [
+          "Stockwell Transform (S-Transform)",
+          "Resonant Recognition Model",
+          "Period-3 Exon Filtering",
+          "FPGA / VLSI Anti-Notch Lattice",
+        ],
         featured: true,
         visible: true,
       },
       {
-        title: "Genomic signal processing",
+        title: "Biomedical signal processing and photobiomodulation",
+        image: "biomedical",
         description:
-          "Time-frequency and VLSI/FPGA-oriented methods for locating protein-coding regions, hot spots in protein sequences, and related genomic and proteomic signal analysis.",
+          "Multi-channel EEG sleep stage classification using Discrete Wavelet Transform and Fluctuation-based Dispersion Entropy (FDEn), S-Transform ECG denoising, adaptive MRI/CT noise suppression, heart-sound (PCG) analysis, and RRM-guided Low-Level Laser / Photobiomodulation Therapy (PBMT) targeting the leptin/BDNF circuit.",
+        methods: [
+          "EEG Dispersion Entropy",
+          "S-Transform ECG Denoising",
+          "Photobiomodulation (PBMT)",
+          "Adaptive Medical Image Filtering",
+        ],
         featured: true,
         visible: true,
       },
       {
-        title: "Computer vision and image security",
+        title: "Embedded AI, energy harvesting, and cyber-physical systems",
+        image: "cps",
         description:
-          "Image processing for crowd analysis, pest detection, face detection, and chaos-based image encryption and visual cryptography.",
-        featured: false,
+          "Data-driven models for interdisciplinary cyber-physical systems, precision agriculture soil and crop health telemetry, SSHI and MPPT controllers for piezoelectric and human-motion energy harvesting, and Adaptive Block Coordinate Descent Logistic Regression (ABCDLR) for millisecond obstacle avoidance in autonomous mobile robots.",
+        methods: [
+          "Piezoelectric SSHI & MPPT",
+          "Precision AgTech Telemetry",
+          "Autonomous Robot Navigation",
+          "Cyber-Physical Systems",
+        ],
+        featured: true,
         visible: true,
       },
       {
-        title: "Embedded AI, energy harvesting, and intelligent systems",
+        title: "Computer vision and chaos-based image security",
+        image: "security",
         description:
-          "Controller design and circuits for piezoelectric and thermal energy harvesting, embedded and edge-oriented AI, and related intelligent-system implementations.",
-        featured: false,
+          "Symmetric and visual image encryption using high-dimensional chaotic maps, Modified Rubik’s Cube pixel scrambling, and Adaptive Firefly evolutionary key generation, alongside optical-flow correlation analysis for anomalous crowd behavior detection and remote-sensing hydrology.",
+        methods: [
+          "Chaotic Image Encryption",
+          "Modified Rubik’s Cube Scrambling",
+          "Adaptive Firefly Key Generation",
+          "Optical Flow Crowd Analysis",
+        ],
+        featured: true,
         visible: true,
       },
     ] satisfies ResearchTheme[],
@@ -147,6 +257,8 @@ export const site = {
         articleNumber: "102010",
         doi: "10.1016/j.csl.2026.102010",
         month: "May",
+        abstract:
+          "Aligns acoustic feature distributions between source and target language cohorts using Kernel Mean Matching (KMM) instance-based domain adaptation for cross-lingual Parkinson’s disease voice detection.",
         featured: true,
         visible: true,
         source: {
@@ -164,6 +276,39 @@ export const site = {
       },
       {
         title:
+          "Machine learning based intelligent model for obstacle avoidance in dense environments for autonomous mobile robot",
+        authors: [
+          "Abhishek Thakur",
+          "Subhranil Das",
+          "Monica Bhutani",
+          "Sudhansu Kumar Mishra",
+          "Vikash Kumar Gupta",
+          "Sitanshu Sekhar Sahu",
+        ],
+        venue: "International Journal of Intelligent Robotics and Applications",
+        year: 2026,
+        type: "journal",
+        doi: "10.1007/s41315-026-00599-8",
+        month: "February",
+        abstract:
+          "Introduces Adaptive Block Coordinate Descent Logistic Regression (ABCDLR), reframing autonomous robot obstacle avoidance in dense environments into a lightweight three-class decision model with millisecond latency.",
+        featured: true,
+        visible: true,
+        source: {
+          type: "doi",
+          url: "https://doi.org/10.1007/s41315-026-00599-8",
+          verified: true,
+        },
+        sources: [
+          {
+            label: "DOI",
+            url: "https://doi.org/10.1007/s41315-026-00599-8",
+            verified: true,
+          },
+        ],
+      },
+      {
+        title:
           "Parkinson's Disease Detection Using Hybrid Siamese Neural Network and Support Vector Machine in Multilingual Voice Signal",
         authors: ["Pandit Vivek Kumar Pandey", "Sitanshu Sekhar Sahu"],
         venue: "Journal of Voice",
@@ -172,6 +317,9 @@ export const site = {
         pages: "S0892-1997(25)00261-9",
         doi: "10.1016/j.jvoice.2025.06.036",
         month: "August",
+        citations: 5,
+        abstract:
+          "Combines metric learning via a Siamese Neural Network with a Support Vector Machine classifier to capture acoustic similarity structure across multilingual Parkinson’s voice recordings.",
         featured: true,
         visible: true,
         source: {
@@ -199,6 +347,8 @@ export const site = {
         articleNumber: "802",
         doi: "10.1007/s42979-025-04327-0",
         month: "September",
+        abstract:
+          "Extracts compact latent representations from time-frequency spectrograms of multilingual Parkinsonian speech using a cascade CNN-Autoencoder architecture.",
         featured: true,
         visible: true,
         source: {
@@ -230,6 +380,7 @@ export const site = {
         type: "journal",
         doi: "10.1007/s41870-025-02651-5",
         month: "July",
+        citations: 12,
         visible: true,
         source: {
           type: "doi",
@@ -255,6 +406,8 @@ export const site = {
         articleNumber: "288",
         doi: "10.1007/s10103-025-04544-2",
         month: "June",
+        abstract:
+          "Applies the Resonant Recognition Model (RRM) to decode shared resonant frequencies across POMC, leptin, adiponectin, BDNF, insulin, irisin, and GDF-15, guiding Photobiomodulation Therapy (PBMT) on the leptin/BDNF circuit.",
         featured: true,
         visible: true,
         source: {
@@ -287,6 +440,8 @@ export const site = {
         articleNumber: "381",
         doi: "10.1007/s42979-024-02728-1",
         month: "March",
+        abstract:
+          "Combines convolutional feature extractors with LSTM sequence modeling to capture spectral envelopes and temporal articulatory transitions in Parkinsonian voice signals.",
         featured: true,
         visible: true,
         source: {
@@ -314,6 +469,8 @@ export const site = {
         pages: "396-409",
         doi: "10.1504/ijics.2024.139023",
         month: "June",
+        abstract:
+          "Presents a multi-level symmetric image encryption scheme based on Modified Rubik’s Cube permutation and chaotic key diffusion.",
         visible: true,
         source: {
           type: "doi",
@@ -339,6 +496,8 @@ export const site = {
         pages: "697-710",
         doi: "10.1007/s10930-024-10219-8",
         month: "July",
+        abstract:
+          "Integrates the Resonant Recognition Model (RRM) with the Stockwell Transform to identify characteristic electromagnetic frequencies and active binding domains in the VEGFA/VEGFR1 complex.",
         visible: true,
         source: {
           type: "doi",
@@ -405,6 +564,9 @@ export const site = {
         issn: "1664-462X",
         indexing: "SCIE",
         month: "February",
+        abstract:
+          "Develops computational machine-learning models to predict inter-species protein–protein interactions between Oryza sativa (rice) and Magnaporthe grisea (rice blast fungus).",
+        featured: true,
         visible: true,
         source: {
           type: "doi",
@@ -594,6 +756,8 @@ export const site = {
         issn: "1477-4054",
         indexing: "SCIE",
         month: "November",
+        abstract:
+          "Introduces a hybrid architecture combining a functional-link Siamese neural network feature extractor with gradient boosting machines for protein–protein interaction prediction.",
         featured: true,
         visible: true,
         source: {
@@ -623,6 +787,9 @@ export const site = {
         issn: "0208-5216",
         indexing: "SCIE",
         month: "April",
+        citations: 54,
+        abstract:
+          "Decomposes non-stationary Parkinsonian speech into band-limited Intrinsic Mode Functions via Variational Mode Decomposition (VMD) and extracts instantaneous energy-frequency features from the Hilbert Spectrum.",
         visible: true,
         source: {
           type: "doi",
@@ -650,6 +817,9 @@ export const site = {
         issn: "1536-1241",
         indexing: "SCIE",
         month: "July",
+        abstract:
+          "Integrates the Resonant Recognition Model (RRM) with the Stockwell Transform (S-Transform) to localize functionally active binding hotspots in Tubulin protein sequences.",
+        featured: true,
         visible: true,
         source: {
           type: "doi",
@@ -682,6 +852,9 @@ export const site = {
         issn: "0885-2308",
         indexing: "SCIE",
         month: "September",
+        citations: 73,
+        abstract:
+          "Extracts spectral basis and temporal activation matrices from time-frequency representations of sustained vowels and running speech using Non-Negative Matrix Factorization (NMF).",
         visible: true,
         source: {
           type: "doi",
@@ -715,6 +888,9 @@ export const site = {
         issn: "1545-5963",
         indexing: "SCIE",
         month: "February",
+        citations: 42,
+        abstract:
+          "Combines deep neural network feature representations with Extreme Gradient Boosting (XGBoost) decision ensembles for cross-species protein–protein interaction prediction.",
         visible: true,
         source: {
           type: "doi",
@@ -834,6 +1010,9 @@ export const site = {
         issn: "1746-8094",
         indexing: "SCIE",
         month: "August",
+        citations: 69,
+        abstract:
+          "Analyzes instantaneous amplitude and frequency variations in Parkinsonian speech via Empirical Mode Decomposition and Hilbert Spectrum analysis for automated detection and UPDRS severity evaluation.",
         visible: true,
         source: {
           type: "doi",
@@ -883,6 +1062,8 @@ export const site = {
         issn: "1350-2387",
         indexing: "SCIE",
         month: "September",
+        abstract:
+          "Presents a low-power VLSI digital anti-notch lattice filter architecture tuned to the period-3 frequency (2π/3) for hardware-accelerated identification of protein-coding exon regions in eukaryotic DNA.",
         visible: true,
         source: {
           type: "doi",
@@ -910,6 +1091,10 @@ export const site = {
         issn: "0208-5216",
         indexing: "SCI",
         month: "April",
+        citations: 165,
+        abstract:
+          "Introduces Intrinsic Mode Function (IMF) cepstral and spectral features derived via Empirical Mode Decomposition of sustained phonations and running speech for Parkinson’s disease prediction.",
+        featured: true,
         visible: true,
         source: {
           type: "doi",
@@ -938,6 +1123,10 @@ export const site = {
         issn: "2041-2851",
         indexing: "SCIE",
         month: "December",
+        citations: 103,
+        abstract:
+          "Presents Plant-mSubP, an integrated machine-learning framework and web server predicting single-compartment and multi-target subcellular localization of plant proteins.",
+        featured: true,
         visible: true,
         source: {
           type: "doi",
@@ -1231,6 +1420,9 @@ export const site = {
         doi: "10.1109/tcbb.2010.109",
         issn: "1545-5963",
         indexing: "SCIE",
+        citations: 31,
+        abstract:
+          "Proposes a frequency-dependent Stockwell Transform (S-Transform) filtering technique applied to Electron-Ion Interaction Potential (EIIP) numeric sequences to localize active binding hot spots in protein sequences.",
         visible: true,
         source: {
           type: "doi",
@@ -1258,6 +1450,9 @@ export const site = {
         doi: "10.1016/s1672-0229(11)60007-7",
         issn: "1672-0229",
         indexing: "SCI",
+        citations: 53,
+        abstract:
+          "Introduces an S-Transform time-band filtering method to isolate the three-base periodicity (f = 1/3) present in protein-coding exon regions of eukaryotic DNA sequences.",
         visible: true,
         source: {
           type: "doi",
@@ -1285,6 +1480,10 @@ export const site = {
         doi: "10.1016/j.compbiolchem.2010.09.002",
         issn: "1476-9271",
         indexing: "SCI",
+        citations: 207,
+        abstract:
+          "Formulates a physicochemical sequence feature representation extending Chou’s Pseudo Amino Acid Composition (PseAAC) coupled with neural network classifiers for protein structural class prediction.",
+        featured: true,
         visible: true,
         source: {
           type: "doi",
@@ -2348,6 +2547,9 @@ export const site = {
         issue: "S11",
         articleNumber: "S13",
         doi: "10.1186/1471-2105-15-s11-s13",
+        citations: 45,
+        abstract:
+          "Constructs a genome-scale host–pathogen protein–protein interaction network between Arabidopsis thaliana and Pseudomonas syringae at Oklahoma State University (NIMFFAB) using domain-interaction and interolog homology modeling.",
         notes:
           "Listed in the CV under conference proceedings; published in the MCBIOS BMC Bioinformatics supplement.",
         visible: true,
@@ -2380,6 +2582,8 @@ export const site = {
         issue: "S11",
         articleNumber: "S15",
         doi: "10.1186/1471-2105-15-s11-s15",
+        abstract:
+          "Develops a homology-independent unsupervised and supervised classification system for 12 subtypes of multi-copper oxidase Laccases using physicochemical descriptors, achieving 99.03% 5-fold cross-validation accuracy and 97.98% independent test accuracy (PMC4251044).",
         notes:
           "Listed in the CV under conference proceedings; published in the MCBIOS BMC Bioinformatics supplement.",
         visible: true,
@@ -2392,6 +2596,11 @@ export const site = {
           {
             label: "DOI",
             url: "https://doi.org/10.1186/1471-2105-15-s11-s15",
+            verified: true,
+          },
+          {
+            label: "PubMed Central (PMC4251044)",
+            url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4251044/",
             verified: true,
           },
         ],
@@ -2831,13 +3040,15 @@ export const site = {
 
   projects: [
     {
-      title:
-        "Development of end-to-end speech-based AI system for Parkinson's Disease Prediction",
-      fundingBody: "IDEAS, TIH, ISI Kolkata",
+      title: "Development of Data Science Methods for Cyber-Physical System",
+      fundingBody: "NM-ICPS, TIH, ISI Kolkata, DST",
       duration: "2022–2025",
-      amount: "₹5,14,000",
+      amount: "₹1,00,00,000",
       role: "PI",
       status: "completed",
+      image: "cps",
+      description:
+        "National Mission on Interdisciplinary Cyber-Physical Systems (NM-ICPS) initiative developing resilient data-science algorithms, edge inference pipelines, and sensor-actuator control architectures for autonomous and physical platforms.",
       featured: true,
       visible: true,
       source: { type: "cv", url: null, verified: false },
@@ -2850,9 +3061,31 @@ export const site = {
       amount: "₹21,62,600",
       role: "PI",
       status: "completed",
+      image: "protein",
+      description:
+        "Constructed genome-wide host–pathogen protein–protein interaction (PPI) prediction models for rice (Oryza sativa) and rice blast fungus (Magnaporthe grisea) using Functional-Link Siamese neural networks and gradient boosting ensembles.",
       featured: true,
       visible: true,
       source: { type: "cv", url: null, verified: false },
+    },
+    {
+      title:
+        "Data-Driven Integrated System Model for Plant and Soil Health Monitoring in Precision Agriculture",
+      fundingBody: "NM-ICPS, DST (ISI Kolkata TIH)",
+      duration: "2024–2025",
+      amount: "₹15,00,000",
+      role: "PI",
+      status: "completed",
+      image: "cps",
+      description:
+        "Integrated IoT and machine-learning telemetry system for real-time soil moisture prediction, crop health diagnostics, and automated precision irrigation scheduling (with Dr. Raju Poddar, Dr. Sudhansu Kumar Mishra, and Dr. Somnath Sengupta).",
+      featured: true,
+      visible: true,
+      source: {
+        type: "institutional",
+        url: "https://bitmesra.ac.in/Show_profile/2F52324A6C2B483833534677726D3152366D365941673D3D",
+        verified: true,
+      },
     },
     {
       title:
@@ -2862,20 +3095,46 @@ export const site = {
       amount: "₹14,42,000",
       role: "PI",
       status: "completed",
-      featured: false,
+      image: "biomedical",
+      description:
+        "Automated multi-class sleep stage scoring from polysomnography (PSG) EEG recordings using Discrete Wavelet Transform sub-bands and Fluctuation-based Dispersion Entropy (FDEn).",
+      featured: true,
       visible: true,
       source: { type: "cv", url: null, verified: false },
     },
     {
-      title: "Development of Data Science Methods for Cyber-Physical System",
-      fundingBody: "NMICPS, TIH, ISI Kolkata, DST",
+      title:
+        "Development of end-to-end speech-based AI system for Parkinson's Disease Prediction",
+      fundingBody: "IDEAS, TIH, ISI Kolkata",
       duration: "2022–2025",
-      amount: "₹1,00,00,000",
+      amount: "₹5,14,000",
       role: "PI",
       status: "completed",
+      image: "speech",
+      description:
+        "End-to-end non-invasive vocal diagnostic system for Parkinson’s disease detection and dysarthria grading across multilingual speech corpora using VMD-Hilbert features, Siamese neural networks, and Kernel Mean Matching.",
       featured: true,
       visible: true,
       source: { type: "cv", url: null, verified: false },
+    },
+    {
+      title:
+        "Development of Low Cost Cryptography Approach for Cyber Security",
+      fundingBody: "JCST, Government of Jharkhand",
+      duration: "2017–2019",
+      amount: "₹2,00,000",
+      role: "PI",
+      status: "completed",
+      image: "security",
+      description:
+        "Lightweight symmetric and visual image encryption schemes utilizing high-dimensional chaotic maps, Modified Rubik’s Cube permutation, and Adaptive Firefly key optimization.",
+      featured: false,
+      visible: true,
+      source: {
+        type: "institutional",
+        url: "https://bitmesra.ac.in/Show_profile/2F52324A6C2B483833534677726D3152366D365941673D3D",
+        verified: true,
+      },
     },
   ] satisfies Project[],
 
@@ -2887,6 +3146,14 @@ export const site = {
       country: "India",
       kind: "patent",
       patentNumber: "564886",
+      date: "Granted 3 April 2025",
+      description:
+        "Non-invasive Low-Level Laser / Photobiomodulation Therapy (PBMT) apparatus tuned via Resonant Recognition Model (RRM) biophysical frequencies to modulate the POMC, leptin, adiponectin, and BDNF neuro-endocrine signaling circuit for non-pharmacological obesity attenuation.",
+      inventors: [
+        "Tuhin Mukherjee",
+        "Ashok Kumar Pattnaik",
+        "Sitanshu Sekhar Sahu",
+      ],
       featured: true,
       visible: true,
       source: {
@@ -2901,18 +3168,18 @@ export const site = {
       country: "India",
       kind: "patent",
       patentNumber: "599883",
+      applicationNumber: "202331060280",
+      date: "20 August 2026",
+      description:
+        "Closed-loop precision irrigation system integrating soil moisture sensing and machine-learning actuation to optimize agricultural water use.",
+      inventors: [
+        "Prity Soni",
+        "Rohit Kumar",
+        "Sudhansu Kumar Mishra",
+        "Subrat Kumar Swain",
+        "Sitanshu Sekhar Sahu",
+      ],
       featured: true,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
-    },
-    {
-      title:
-        "A piezoelectric based energy harvesting system and method thereof",
-      status: "published",
-      country: "India",
-      kind: "patent",
-      applicationNumber: "202331057064",
-      featured: false,
       visible: true,
       source: { type: "cv", url: null, verified: false },
     },
@@ -2923,6 +3190,16 @@ export const site = {
       kind: "design",
       patentNumber: "6300570",
       date: "11 August 2023",
+      description:
+        "Field-deployable multi-sensor agricultural health monitoring unit for real-time crop canopy and soil micro-climate diagnostics.",
+      inventors: [
+        "Rohit Kumar",
+        "Prity Soni",
+        "Sudhansu Kumar Mishra",
+        "Subrat Kumar Swain",
+        "Sitanshu Sekhar Sahu",
+        "Jagannath Sethi",
+      ],
       featured: true,
       visible: true,
       source: {
@@ -2940,11 +3217,39 @@ export const site = {
     },
     {
       title:
+        "A piezoelectric based energy harvesting system and method thereof",
+      status: "published",
+      country: "India",
+      kind: "patent",
+      applicationNumber: "202331057064",
+      date: "13 October 2023",
+      description:
+        "Piezoelectric transducer array and adaptive rectifier-controller circuit for harvesting ambient mechanical vibrations and human motion into regulated DC power.",
+      inventors: [
+        "Sitanshu Sekhar Sahu",
+        "Sweta Kumari",
+        "Subrat Kumar Swain",
+        "Sudhansu Kumar Mishra",
+        "Mayank Singh",
+      ],
+      featured: true,
+      visible: true,
+      source: { type: "cv", url: null, verified: false },
+    },
+    {
+      title:
         "A System for Real Time Detection of Parkinson’s Disease, Method and Utility",
       status: "application",
       country: "India",
       kind: "patent",
       applicationNumber: "202531093457",
+      date: "2025",
+      description:
+        "Real-time acoustic capture and time-frequency neural inference system for point-of-care screening of Parkinson’s disease from voice samples.",
+      inventors: [
+        "Pandit Vivek Kumar Pandey",
+        "Sitanshu Sekhar Sahu",
+      ],
       featured: false,
       visible: true,
       source: { type: "cv", url: null, verified: false },
@@ -2956,6 +3261,15 @@ export const site = {
       kind: "patent",
       applicationNumber: "202331066870",
       date: "5 October 2023",
+      description:
+        "Sensor-fused obstacle detection and adaptive path-planning architecture for autonomous ground vehicles.",
+      inventors: [
+        "Ankit Kumar",
+        "Abhishek Thakur",
+        "Sudhansu Kumar Mishra",
+        "Subrat Kumar Swain",
+        "Sitanshu Sekhar Sahu",
+      ],
       featured: false,
       visible: true,
       source: { type: "cv", url: null, verified: false },
@@ -2967,9 +3281,37 @@ export const site = {
       kind: "patent",
       applicationNumber: "202431024417",
       date: "27 March 2024",
+      description:
+        "Biomedical sensing and signal-conditioning device for cardiac rhythm monitoring and time-frequency ECG/PCG anomaly detection.",
       featured: false,
       visible: true,
       source: { type: "cv", url: null, verified: false },
+    },
+    {
+      title:
+        "Neural Network Based Adaptive Sliding Mode Control Method for Magnetic Levitation System",
+      status: "application",
+      country: "India",
+      kind: "patent",
+      applicationNumber: "202631102277",
+      date: "2026",
+      description:
+        "Neural-network-compensated adaptive sliding mode controller for trajectory tracking in nonlinear magnetic levitation systems.",
+      inventors: [
+        "Brajesh Kumar",
+        "Sudhansu Kumar Mishra",
+        "Abhishek Thakur",
+        "Priyank Kumar",
+        "Sitanshu Sekhar Sahu",
+        "Gajendra Kant Mishra",
+      ],
+      featured: false,
+      visible: true,
+      source: {
+        type: "institutional",
+        url: "https://bitmesra.ac.in/Show_profile/45766E6E566C7A56536D44716C6B426A58313155584D71614971643376562B2F2F6E51455361726733366B3D",
+        verified: true,
+      },
     },
   ] satisfies Patent[],
 
@@ -2981,6 +3323,8 @@ export const site = {
       duration: "2007–2011",
       dissertation:
         "Analysis of Genomic and Proteomic Signals Using Signal Processing and Soft-computing Techniques",
+      description:
+        "Supervised by Prof. Ganapati Panda. Formulated Stockwell Transform (S-Transform) time-frequency filtering for period-3 exon identification in eukaryotic DNA, protein hotspot localization, Chou’s PseAAC protein structural class prediction, and RBFNN microarray classification.",
       visible: true,
     },
     {
@@ -3025,8 +3369,10 @@ export const site = {
     {
       position: "Postdoctoral Research Fellow",
       institution: "Oklahoma State University",
-      location: "USA",
+      location: "Stillwater, Oklahoma, USA",
       duration: "October 2012 – October 2014",
+      description:
+        "Investigated genome-scale host–pathogen protein–protein interaction networks (Arabidopsis–Pseudomonas syringae) and machine-learning frameworks for multi-target plant protein subcellular localization (Plant-mSubP).",
       visible: true,
     },
     {
@@ -3034,13 +3380,17 @@ export const site = {
       institution: "National Institute of Technology, Rourkela",
       location: "India",
       duration: "2007–2011",
+      description:
+        "Developed S-Transform time-frequency filtering and soft-computing methods for DNA protein-coding region identification, protein hotspot localization, and structural class prediction.",
       visible: true,
     },
     {
       position: "Visiting Graduate Research Scholar",
       institution: "University of Western Ontario",
-      location: "Canada",
+      location: "London, Ontario, Canada",
       duration: "October 2008 – March 2009",
+      description:
+        "Supported by the Government of Canada DFAIT-GSEP Fellowship. Collaborated on S-Transform time-frequency filtering of GPS observations for Glacial Isostatic Adjustment in Eastern Canada.",
       visible: true,
     },
   ] satisfies Experience[],
@@ -3052,6 +3402,8 @@ export const site = {
         "Multilingual Speech Signal Analysis for Parkinson’s Disease Detection",
       year: 2026,
       status: "awarded",
+      description:
+        "Cross-lingual Parkinson’s disease voice diagnosis using Hybrid Siamese Neural Networks, Cascade CNN-Autoencoders, CNN-LSTM models, and Kernel Mean Matching domain adaptation.",
       visible: true,
     },
     {
@@ -3060,6 +3412,8 @@ export const site = {
         "Investigation of RRM based Low Level laser Therapy for Obesity and Obesity-induced cardiac Ischemic Complications",
       year: 2026,
       status: "awarded",
+      description:
+        "Resonant Recognition Model and Stockwell Transform biophysical frequency analysis of POMC, leptin/BDNF, and VEGFA/VEGFR1 pathways for Low-Level Laser Photobiomodulation Therapy (Granted Indian Patent No. 564886).",
       visible: true,
     },
     {
@@ -3068,6 +3422,8 @@ export const site = {
         "Machine Learning and Signal Processing Techniques for Protein-Protein Interaction Prediction",
       year: 2022,
       status: "awarded",
+      description:
+        "Functional-Link Siamese neural networks, DNN-XGBoost hybrids, and RRM-Stockwell Transform methods for genome-wide protein–protein interaction prediction and Tubulin hotspot localization.",
       visible: true,
     },
     {
@@ -3075,6 +3431,8 @@ export const site = {
       thesis: "Analysis of Speech Signal for Parkinson's Disease Prediction",
       year: 2021,
       status: "awarded",
+      description:
+        "Intrinsic Mode Functions, Variational Mode Decomposition (VMD)-Hilbert Spectrum, and Non-Negative Matrix Factorization (NMF) time-frequency voice features for Parkinsonian dysarthria assessment.",
       visible: true,
     },
     {
@@ -3083,6 +3441,8 @@ export const site = {
         "Design and Implementation of Controller for Energy Harvesting Applications",
       year: 2020,
       status: "awarded",
+      description:
+        "SSHI and MPPT power-conditioning controllers for piezoelectric and biomechanical human-activity energy harvesting systems.",
       visible: true,
     },
     {
@@ -3090,6 +3450,8 @@ export const site = {
       thesis: "Chaos based Symmetric Cryptography for Image Security",
       year: 2019,
       status: "awarded",
+      description:
+        "Symmetric image encryption using multi-dimensional chaotic maps, Modified Rubik’s Cube scrambling, and Adaptive Firefly evolutionary key generation.",
       visible: true,
     },
   ] satisfies Supervision[],
@@ -3238,10 +3600,10 @@ export const site = {
 
   profiles: [
     {
-      label: "ORCID",
-      url: "https://orcid.org/0000-0003-1236-2255",
-      type: "academic",
-      identifier: "0000-0003-1236-2255",
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/in/sitanshu-sekhar-sahu-51b19743",
+      type: "social",
+      identifier: "sitanshu-sekhar-sahu-51b19743",
       visible: true,
       verified: true,
     },
@@ -3254,6 +3616,14 @@ export const site = {
       verified: true,
     },
     {
+      label: "ORCID",
+      url: "https://orcid.org/0000-0003-1236-2255",
+      type: "academic",
+      identifier: "0000-0003-1236-2255",
+      visible: true,
+      verified: true,
+    },
+    {
       label: "Scopus",
       url: "https://www.scopus.com/authid/detail.uri?authorId=26639680300",
       type: "academic",
@@ -3262,10 +3632,25 @@ export const site = {
       verified: true,
     },
     {
-      label: "ResearcherID",
+      label: "Web of Science",
       url: "https://www.webofscience.com/wos/author/rid/L-9820-2017",
       type: "academic",
       identifier: "L-9820-2017",
+      visible: true,
+      verified: true,
+    },
+    {
+      label: "Loop (Frontiers)",
+      url: "https://loop.frontiersin.org/people/511363/overview",
+      type: "social",
+      identifier: "511363",
+      visible: true,
+      verified: true,
+    },
+    {
+      label: "OpenAlex / Rankless",
+      url: "https://www.rankless.org/authors/sitanshu-sekhar-sahu",
+      type: "academic",
       visible: true,
       verified: true,
     },
@@ -3278,7 +3663,7 @@ export const site = {
       verified: true,
     },
     {
-      label: "BIT Mesra faculty profile",
+      label: "BIT Mesra Profile",
       url: "https://bitmesra.ac.in/Show_profile/2F52324A6C2B483833534677726D3152366D365941673D3D",
       type: "institutional",
       visible: true,

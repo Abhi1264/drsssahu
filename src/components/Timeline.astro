@@ -21,7 +21,7 @@ const { items } = Astro.props;
     items.map((item) => (
       <li class="panel flex items-center gap-4 p-5 md:gap-6 md:p-6">
         <div class="grid min-w-0 flex-1 gap-2 md:grid-cols-[16rem_1fr] md:gap-8">
-          <p class="text-sm text-muted">{item.meta}</p>
+          <p class="text-sm tabular-nums text-muted">{item.meta}</p>
           <div>
             <p class="font-medium text-ink">{item.title}</p>
             {item.detail && (

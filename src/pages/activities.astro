@@ -34,7 +34,7 @@ const jsonLd = pageJsonLd("/activities", [
           visibleItems(site.awards).map((item) => (
             <li class="panel p-5">
               <p class="text-ink">{item.title}</p>
-              <p class="mt-1 text-sm text-muted">
+              <p class="mt-1 text-sm tabular-nums text-muted">
                 {[item.organization, item.date].filter(Boolean).join(" · ")}
               </p>
             </li>
@@ -52,7 +52,7 @@ const jsonLd = pageJsonLd("/activities", [
           visibleItems(site.fellowships).map((item) => (
             <li class="panel p-5">
               <p class="text-ink">{item.title}</p>
-              <p class="mt-1 text-sm text-muted">
+              <p class="mt-1 text-sm tabular-nums text-muted">
                 {item.organization} · {item.date}
               </p>
               {item.description && (
@@ -71,7 +71,7 @@ const jsonLd = pageJsonLd("/activities", [
           visibleItems(site.professionalActivities).map((item) => (
             <li class="panel p-5">
               <p class="text-ink">{item.activity}</p>
-              <p class="mt-1 text-sm text-muted">
+              <p class="mt-1 text-sm tabular-nums text-muted">
                 {[item.organization, item.date].filter(Boolean).join(" · ")}
               </p>
               {item.description && (
@@ -90,7 +90,7 @@ const jsonLd = pageJsonLd("/activities", [
           visibleItems(site.workshops).map((item) => (
             <li class="panel p-5">
               <p class="text-ink">{item.title}</p>
-              <p class="mt-1 text-sm text-muted">
+              <p class="mt-1 text-sm tabular-nums text-muted">
                 {[item.date, item.location, item.sponsor]
                   .filter(Boolean)
                   .join(" · ")}

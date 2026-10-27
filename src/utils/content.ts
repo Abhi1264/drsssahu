@@ -183,6 +183,7 @@ export function searchText(publication: Publication): string {
     publication.venue,
     publication.year,
     publication.doi,
+    publication.abstract,
   ]
     .filter(Boolean)
     .join(" ")
