@@ -5,14 +5,14 @@ import PageHeader from "../components/PageHeader.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ProfileLinks from "../components/ProfileLinks.astro";
 import { site } from "../config/site";
-import { primaryEmail, visiblePhones } from "../utils/content";
+import { primaryEmail } from "../utils/content";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
 import { externalLinkAttrs } from "../utils/links";
 
 const seo = pageSeo("contact");
 const emails = site.person.emails;
-const phones = visiblePhones();
+const phones = site.person.phones;
 const jsonLd = pageJsonLd("/contact", [{ name: "Contact", path: "/contact" }]);
 ---
 
@@ -70,7 +70,7 @@ const jsonLd = pageJsonLd("/contact", [{ name: "Contact", path: "/contact" }]);
                   <li>
                     <a
                       href={item.href}
-                      class="inline-flex min-h-11 items-center md:min-h-0"
+                      class="inline-flex min-h-11 items-center tabular-nums md:min-h-0"
                     >
                       {item.number}
                     </a>

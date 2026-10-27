@@ -1,10 +1,6 @@
 import { site } from "../config/site";
 import type { Publication, PublicationType } from "../config/types";
 
-function isVisible<T extends { visible?: boolean }>(item: T): boolean {
-  return item.visible !== false;
-}
-
 function slugify(value: string): string {
   return value
     .normalize("NFKD")
@@ -20,16 +16,10 @@ function publicationSlug(title: string, year: number): string {
   return `${year}-${slugify(title)}`;
 }
 
-export function visibleItems<T extends { visible?: boolean }>(
+export function featuredItems<T extends { featured?: boolean }>(
   items: readonly T[],
 ): T[] {
-  return items.filter(isVisible);
-}
-
-export function featuredItems<
-  T extends { visible?: boolean; featured?: boolean },
->(items: readonly T[]): T[] {
-  return visibleItems(items).filter((item) => item.featured);
+  return items.filter((item) => item.featured);
 }
 
 export function primaryEmail(): string {
@@ -37,20 +27,6 @@ export function primaryEmail(): string {
   return (
     emails.find((item) => item.primary)?.address ?? emails[0]?.address ?? ""
   );
-}
-
-export function visiblePhones() {
-  return site.person.showPhone ? site.person.phones : [];
-}
-
-export function verifiedProfiles() {
-  return site.profiles.filter(
-    (item) => item.visible && item.verified && item.url,
-  );
-}
-
-export function orcidProfile(profiles = verifiedProfiles()) {
-  return profiles.find((item) => item.label === "ORCID");
 }
 
 const publicationsByKind: Record<PublicationType, readonly Publication[]> = {
@@ -64,14 +40,14 @@ export function allPublications(): Publication[] {
     ...publicationsByKind.journal,
     ...publicationsByKind.conference,
     ...publicationsByKind["book-chapter"],
-  ].filter(isVisible);
+  ];
 }
 
 export function publicationsByType(type: PublicationType): Publication[] {
-  return visibleItems(publicationsByKind[type]);
+  return [...publicationsByKind[type]];
 }
 
-export function sortPublications(items: Publication[]): Publication[] {
+export function sortPublications(items: readonly Publication[]): Publication[] {
   return [...items].sort((a, b) => {
     if (b.year !== a.year) return b.year - a.year;
     return a.title.localeCompare(b.title);
@@ -79,13 +55,13 @@ export function sortPublications(items: Publication[]): Publication[] {
 }
 
 export function publicationYears(
-  items: Publication[] = allPublications(),
+  items: readonly Publication[] = allPublications(),
 ): number[] {
   return [...new Set(items.map((item) => item.year))].sort((a, b) => b - a);
 }
 
 export function groupByYear(
-  items: Publication[],
+  items: readonly Publication[],
 ): { year: number; items: Publication[] }[] {
   const grouped = new Map<number, Publication[]>();
   for (const item of sortPublications(items)) {
@@ -160,20 +136,13 @@ export function doiUrl(doi: string): string {
 
 export function externalSources(publication: Publication) {
   const links = [...(publication.sources ?? [])].filter((item) => item.url);
-  const { doi } = publication;
-  if (doi && !links.some((item) => item.url.includes(doi))) {
-    links.unshift({
-      label: "DOI",
-      url: doiUrl(doi),
-      verified: publication.source.verified,
-    });
+  if (
+    publication.doi &&
+    !links.some((item) => item.url.includes(publication.doi!))
+  ) {
+    links.unshift({ label: "DOI", url: doiUrl(publication.doi) });
   }
-  const seen = new Set<string>();
-  return links.filter((item) => {
-    if (seen.has(item.url)) return false;
-    seen.add(item.url);
-    return true;
-  });
+  return links;
 }
 
 export function searchText(publication: Publication): string {
@@ -183,6 +152,7 @@ export function searchText(publication: Publication): string {
     publication.venue,
     publication.year,
     publication.doi,
+    publication.abstract,
   ]
     .filter(Boolean)
     .join(" ")

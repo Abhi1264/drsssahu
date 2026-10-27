@@ -1,48 +1,74 @@
 ---
+import { Image } from "astro:assets";
 import type { Project } from "../config/types";
 import { externalLinkAttrs } from "../utils/links";
+import { researchImage } from "../utils/logos";
 
 type Props = { project: Project };
 
 const { project } = Astro.props;
+const img = researchImage(project.image);
 ---
 
-<article class="panel mb-4 p-5 md:p-6">
-  <h2 class="max-w-4xl text-xl leading-snug font-medium text-ink md:text-2xl">
-    {project.title}
-  </h2>
-  <dl class="mt-4 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
-    <div>
-      <dt class="text-muted">Funding body</dt>
-      <dd class="mt-1 text-ink">{project.fundingBody}</dd>
-    </div>
-    <div>
-      <dt class="text-muted">Duration</dt>
-      <dd class="mt-1 text-ink">{project.duration}</dd>
-    </div>
-    <div>
-      <dt class="text-muted">Amount</dt>
-      <dd class="mt-1 text-ink">{project.amount}</dd>
-    </div>
-    <div>
-      <dt class="text-muted">Role / status</dt>
-      <dd class="mt-1 text-ink capitalize">
-        {project.role} · {project.status}
-      </dd>
-    </div>
-  </dl>
+<article
+  class:list={[
+    "panel mb-4 overflow-hidden",
+    img && "grid md:grid-cols-[15rem_1fr]",
+  ]}
+>
   {
-    project.description && (
-      <p class="mt-4 max-w-3xl text-ink-soft">{project.description}</p>
+    img && (
+      <Image
+        src={img}
+        alt={project.title}
+        width={640}
+        height={360}
+        densities={[1.5, 2]}
+        loading="lazy"
+        decoding="async"
+        class="aspect-video h-full w-full object-cover md:aspect-auto"
+      />
     )
   }
-  {
-    project.url && (
-      <p class="mt-3 text-sm">
-        <a href={project.url} {...externalLinkAttrs(project.url)}>
-          {project.url}
-        </a>
-      </p>
-    )
-  }
+  <div class="p-5 md:p-6">
+    <h2 class="max-w-4xl text-xl leading-snug font-medium text-ink md:text-2xl">
+      {project.title}
+    </h2>
+    <dl class="mt-4 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <dt class="text-muted">Funding body</dt>
+        <dd class="mt-1 text-ink">{project.fundingBody}</dd>
+      </div>
+      <div>
+        <dt class="text-muted">Duration</dt>
+        <dd class="mt-1 tabular-nums text-ink">{project.duration}</dd>
+      </div>
+      <div>
+        <dt class="text-muted">Amount</dt>
+        <dd class="mt-1 tabular-nums font-medium text-ink">{project.amount}</dd>
+      </div>
+      <div>
+        <dt class="text-muted">Role / status</dt>
+        <dd class="mt-1 text-ink capitalize">
+          {project.role} · {project.status}
+        </dd>
+      </div>
+    </dl>
+    {
+      project.description && (
+        <p class="mt-4 max-w-3xl text-sm leading-relaxed text-ink-soft">
+          {project.description}
+        </p>
+      )
+    }
+    {
+      project.url && (
+        <p class="mt-3 text-sm">
+          <a href={project.url} {...externalLinkAttrs(project.url)}>
+            {project.url}
+          </a>
+        </p>
+      )
+    }
+  </div>
 </article>

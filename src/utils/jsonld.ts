@@ -2,14 +2,7 @@ import profilePhoto from "../assets/profile.jpg";
 import { site } from "../config/site";
 import type { Publication } from "../config/types";
 import { absoluteUrl, pageRange } from "./seo";
-import {
-  doiUrl,
-  matchesAuthor,
-  orcidProfile,
-  primaryEmail,
-  slugFor,
-  verifiedProfiles,
-} from "./content";
+import { doiUrl, matchesAuthor, primaryEmail, slugFor } from "./content";
 
 const personId = `${absoluteUrl("/")}#person`;
 const siteAddress = {
@@ -21,8 +14,7 @@ const siteAddress = {
 };
 
 export function personJsonLd(pageUrl: string) {
-  const profiles = verifiedProfiles();
-  const orcid = orcidProfile(profiles);
+  const orcid = site.profiles.find((item) => item.label === "ORCID");
   return {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -34,9 +26,7 @@ export function personJsonLd(pageUrl: string) {
     jobTitle: site.person.designation,
     email: `mailto:${primaryEmail()}`,
     url: absoluteUrl("/"),
-    ...(site.person.showProfileImage
-      ? { image: absoluteUrl(profilePhoto.src) }
-      : {}),
+    image: absoluteUrl(profilePhoto.src),
     address: {
       ...siteAddress,
       streetAddress: site.person.department,
@@ -59,7 +49,7 @@ export function personJsonLd(pageUrl: string) {
       name: item.institution,
     })),
     knowsAbout: site.research.interests,
-    sameAs: profiles.map((item) => item.url),
+    sameAs: site.profiles.map((item) => item.url),
     ...(orcid?.identifier
       ? {
           identifier: {

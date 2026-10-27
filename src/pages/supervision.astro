@@ -4,12 +4,11 @@ import Container from "../components/Container.astro";
 import PageHeader from "../components/PageHeader.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { site } from "../config/site";
-import { visibleItems } from "../utils/content";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
 
 const seo = pageSeo("supervision");
-const scholars = visibleItems(site.supervision);
+const scholars = site.supervision;
 const jsonLd = pageJsonLd(
   "/supervision",
   [{ name: "Supervision", path: "/supervision" }],
@@ -30,18 +29,25 @@ const jsonLd = pageJsonLd(
     <Breadcrumbs items={[{ label: "Supervision" }]} />
     <PageHeader
       title="Ph.D. supervision"
-      description={`${scholars.length} awarded doctoral scholars.`}
+      description={`${scholars.length} awarded doctoral scholars supervised at Birla Institute of Technology Mesra.`}
     />
     <ol class="mt-8 space-y-3">
       {
         scholars.map((item) => (
           <li class="panel grid gap-2 p-5 md:grid-cols-[8rem_1fr] md:gap-8 md:p-6">
-            <p class="text-sm text-muted">
+            <p class="text-sm tabular-nums text-muted">
               {item.year} · {item.status}
             </p>
             <div>
               <h2 class="text-xl font-medium text-ink">{item.scholar}</h2>
-              <p class="mt-2 max-w-3xl text-ink-soft">{item.thesis}</p>
+              <p class="mt-1.5 max-w-3xl font-medium text-ink-soft">
+                {item.thesis}
+              </p>
+              {item.description && (
+                <p class="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+                  {item.description}
+                </p>
+              )}
             </div>
           </li>
         ))
