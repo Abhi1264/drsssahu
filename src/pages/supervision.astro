@@ -4,12 +4,11 @@ import Container from "../components/Container.astro";
 import PageHeader from "../components/PageHeader.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { site } from "../config/site";
-import { visibleItems } from "../utils/content";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
 
 const seo = pageSeo("supervision");
-const scholars = visibleItems(site.supervision);
+const scholars = site.supervision;
 const jsonLd = pageJsonLd(
   "/supervision",
   [{ name: "Supervision", path: "/supervision" }],

@@ -5,7 +5,6 @@ import PageHeader from "../components/PageHeader.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import Timeline from "../components/Timeline.astro";
 import { site } from "../config/site";
-import { visibleItems } from "../utils/content";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
 
@@ -26,7 +25,7 @@ const jsonLd = pageJsonLd("/education", [
     <PageHeader title="Education" />
     <div class="mt-8">
       <Timeline
-        items={visibleItems(site.education).map((item) => ({
+        items={site.education.map((item) => ({
           title: `${item.degree}, ${item.institution}`,
           meta: item.duration,
           detail: [

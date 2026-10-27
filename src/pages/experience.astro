@@ -5,7 +5,6 @@ import PageHeader from "../components/PageHeader.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import Timeline from "../components/Timeline.astro";
 import { site } from "../config/site";
-import { visibleItems } from "../utils/content";
 import { institutionLogo } from "../utils/logos";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
@@ -28,7 +27,7 @@ const jsonLd = pageJsonLd("/experience", [
     <section class="mt-10">
       <h2 class="mb-4 text-2xl font-medium text-ink">Academic appointments</h2>
       <Timeline
-        items={visibleItems(site.academicExperience).map((item) => ({
+        items={site.academicExperience.map((item) => ({
           title: `${item.position}, ${item.institution}`,
           meta: item.duration,
           detail: [item.location, item.description].filter(Boolean).join(" · "),
@@ -39,7 +38,7 @@ const jsonLd = pageJsonLd("/experience", [
     <section class="mt-14">
       <h2 class="mb-4 text-2xl font-medium text-ink">Research appointments</h2>
       <Timeline
-        items={visibleItems(site.researchExperience).map((item) => ({
+        items={site.researchExperience.map((item) => ({
           title: `${item.position}, ${item.institution}`,
           meta: item.duration,
           detail: [item.location, item.description].filter(Boolean).join(" — "),

@@ -5,12 +5,11 @@ import PageHeader from "../components/PageHeader.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import PatentEntry from "../components/PatentEntry.astro";
 import { site } from "../config/site";
-import { visibleItems } from "../utils/content";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
 
 const seo = pageSeo("patents");
-const patents = visibleItems(site.patents);
+const patents = site.patents;
 const jsonLd = pageJsonLd("/patents", [{ name: "Patents", path: "/patents" }], {
   name: "Patents and intellectual property",
   numberOfItems: patents.length,

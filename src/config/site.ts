@@ -21,7 +21,7 @@ import type {
 export const site = {
   person: {
     name: "Dr. Sitanshu Sekhar Sahu",
-    shortName: "Sitanshu Sekhar Sahu",
+    shortName: "Dr. S. S. Sahu",
     nameVariants: [
       "Sitanshu Sekhar Sahu",
       "Sitanshu S. Sahu",
@@ -62,23 +62,21 @@ export const site = {
         href: "tel:+919437415338",
       },
     ] satisfies PhoneNumber[],
-    showProfileImage: true,
-    showPhone: true,
     shortBio:
       "His research spans bio-signal processing, time-frequency analysis, artificial intelligence and machine learning, embedded AI, bioinformatics, and computer vision—with a focus on neurological speech diagnostics, protein interactomics, and genomic signal processing.",
     bio: "Dr. Sitanshu Sekhar Sahu is an Associate Professor in the Department of Electronics and Communication Engineering at Birla Institute of Technology Mesra, Ranchi. He received his Ph.D. from the National Institute of Technology, Rourkela under Prof. Ganapati Panda for a dissertation on the analysis of genomic and proteomic signals using time-frequency signal processing and soft-computing techniques, was a DFAIT-GSEP Visiting Research Scholar at the University of Western Ontario (Canada), and completed a Postdoctoral Research Fellowship at Oklahoma State University (USA). He has led ₹1.58+ Crore in sponsored R&D projects from DST-SERB, NM-ICPS, IDEAS-TIH (ISI Kolkata), NPIU-MHRD, and JCST, authored over 100 peer-reviewed publications with 1,600+ citations (h-index 21), and holds 8 patents and design registrations.",
   },
 
   navigation: [
-    { label: "Home", href: "/", visible: true },
-    { label: "About", href: "/about", visible: true },
-    { label: "Research", href: "/research", visible: true },
-    { label: "Publications", href: "/publications", visible: true },
-    { label: "Projects", href: "/projects", visible: true },
-    { label: "Patents", href: "/patents", visible: true },
-    { label: "Supervision", href: "/supervision", visible: true },
-    { label: "Activities", href: "/activities", visible: true },
-    { label: "Contact", href: "/contact", visible: true },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Research", href: "/research" },
+    { label: "Publications", href: "/publications" },
+    { label: "Projects", href: "/projects" },
+    { label: "Patents", href: "/patents" },
+    { label: "Supervision", href: "/supervision" },
+    { label: "Activities", href: "/activities" },
+    { label: "Contact", href: "/contact" },
   ] satisfies NavItem[],
 
   research: {
@@ -169,7 +167,6 @@ export const site = {
           "Kernel Mean Matching",
         ],
         featured: true,
-        visible: true,
       },
       {
         title: "Protein–protein interaction and computational biology",
@@ -184,7 +181,6 @@ export const site = {
           "Host–Pathogen Interactomics",
         ],
         featured: true,
-        visible: true,
       },
       {
         title: "Genomic signal processing and VLSI architectures",
@@ -198,7 +194,6 @@ export const site = {
           "FPGA / VLSI Anti-Notch Lattice",
         ],
         featured: true,
-        visible: true,
       },
       {
         title: "Biomedical signal processing and photobiomodulation",
@@ -212,7 +207,6 @@ export const site = {
           "Adaptive Medical Image Filtering",
         ],
         featured: true,
-        visible: true,
       },
       {
         title: "Embedded AI, energy harvesting, and cyber-physical systems",
@@ -226,7 +220,6 @@ export const site = {
           "Cyber-Physical Systems",
         ],
         featured: true,
-        visible: true,
       },
       {
         title: "Computer vision and chaos-based image security",
@@ -240,7 +233,6 @@ export const site = {
           "Optical Flow Crowd Analysis",
         ],
         featured: true,
-        visible: true,
       },
     ] satisfies ResearchTheme[],
   },
@@ -260,19 +252,6 @@ export const site = {
         abstract:
           "Aligns acoustic feature distributions between source and target language cohorts using Kernel Mean Matching (KMM) instance-based domain adaptation for cross-lingual Parkinson’s disease voice detection.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/j.csl.2026.102010",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/j.csl.2026.102010",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -293,19 +272,6 @@ export const site = {
         abstract:
           "Introduces Adaptive Block Coordinate Descent Logistic Regression (ABCDLR), reframing autonomous robot obstacle avoidance in dense environments into a lightweight three-class decision model with millisecond latency.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s41315-026-00599-8",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s41315-026-00599-8",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -321,19 +287,6 @@ export const site = {
         abstract:
           "Combines metric learning via a Siamese Neural Network with a Support Vector Machine classifier to capture acoustic similarity structure across multilingual Parkinson’s voice recordings.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/j.jvoice.2025.06.036",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/j.jvoice.2025.06.036",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -350,19 +303,6 @@ export const site = {
         abstract:
           "Extracts compact latent representations from time-frequency spectrograms of multilingual Parkinsonian speech using a cascade CNN-Autoencoder architecture.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s42979-025-04327-0",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s42979-025-04327-0",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -381,19 +321,6 @@ export const site = {
         doi: "10.1007/s41870-025-02651-5",
         month: "July",
         citations: 12,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s41870-025-02651-5",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s41870-025-02651-5",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -409,19 +336,6 @@ export const site = {
         abstract:
           "Applies the Resonant Recognition Model (RRM) to decode shared resonant frequencies across POMC, leptin, adiponectin, BDNF, insulin, irisin, and GDF-15, guiding Photobiomodulation Therapy (PBMT) on the leptin/BDNF circuit.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s10103-025-04544-2",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s10103-025-04544-2",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -443,19 +357,6 @@ export const site = {
         abstract:
           "Combines convolutional feature extractors with LSTM sequence modeling to capture spectral envelopes and temporal articulatory transitions in Parkinsonian voice signals.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s42979-024-02728-1",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s42979-024-02728-1",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -471,19 +372,6 @@ export const site = {
         month: "June",
         abstract:
           "Presents a multi-level symmetric image encryption scheme based on Modified Rubik’s Cube permutation and chaotic key diffusion.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1504/ijics.2024.139023",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1504/ijics.2024.139023",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -498,19 +386,6 @@ export const site = {
         month: "July",
         abstract:
           "Integrates the Resonant Recognition Model (RRM) with the Stockwell Transform to identify characteristic electromagnetic frequencies and active binding domains in the VEGFA/VEGFR1 complex.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s10930-024-10219-8",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s10930-024-10219-8",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -531,19 +406,6 @@ export const site = {
         articleNumber: "659",
         doi: "10.1007/s42979-024-02999-8",
         month: "June",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s42979-024-02999-8",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s42979-024-02999-8",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -567,19 +429,6 @@ export const site = {
         abstract:
           "Develops computational machine-learning models to predict inter-species protein–protein interactions between Oryza sativa (rice) and Magnaporthe grisea (rice blast fungus).",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.3389/fpls.2022.1046209",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.3389/fpls.2022.1046209",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -602,19 +451,6 @@ export const site = {
         indexing: "SCIE",
         month: "May",
         notes: "Publisher record marks this article as retracted.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.3233/jifs-222238",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.3233/jifs-222238",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -634,19 +470,6 @@ export const site = {
         issn: "0208-5216",
         indexing: "SCIE",
         month: "June",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/j.bbe.2022.04.003",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/j.bbe.2022.04.003",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -666,19 +489,6 @@ export const site = {
         issn: "1746-8094",
         indexing: "SCIE",
         month: "September",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/j.bspc.2022.103909",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/j.bspc.2022.103909",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -694,19 +504,6 @@ export const site = {
         issn: "1097-0134",
         indexing: "SCIE",
         month: "September",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1002/prot.26236",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1002/prot.26236",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -729,19 +526,6 @@ export const site = {
         month: "September",
         notes:
           "The CV lists volume 19(11); the publisher record is volume 49, issue 11.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1002/cta.3131",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1002/cta.3131",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -759,19 +543,6 @@ export const site = {
         abstract:
           "Introduces a hybrid architecture combining a functional-link Siamese neural network feature extractor with gradient boosting machines for protein–protein interaction prediction.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1093/bib/bbab255",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1093/bib/bbab255",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -790,19 +561,6 @@ export const site = {
         citations: 54,
         abstract:
           "Decomposes non-stationary Parkinsonian speech into band-limited Intrinsic Mode Functions via Variational Mode Decomposition (VMD) and extracts instantaneous energy-frequency features from the Hilbert Spectrum.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/j.bbe.2021.04.014",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/j.bbe.2021.04.014",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -820,19 +578,6 @@ export const site = {
         abstract:
           "Integrates the Resonant Recognition Model (RRM) with the Stockwell Transform (S-Transform) to localize functionally active binding hotspots in Tubulin protein sequences.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/tnb.2021.3077710",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/tnb.2021.3077710",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -855,19 +600,6 @@ export const site = {
         citations: 73,
         abstract:
           "Extracts spectral basis and temporal activation matrices from time-frequency representations of sustained vowels and running speech using Non-Negative Matrix Factorization (NMF).",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/j.csl.2021.101216",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/j.csl.2021.101216",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -891,19 +623,6 @@ export const site = {
         citations: 42,
         abstract:
           "Combines deep neural network feature representations with Extreme Gradient Boosting (XGBoost) decision ensembles for cross-species protein–protein interaction prediction.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/tcbb.2021.3061300",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/tcbb.2021.3061300",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -923,19 +642,6 @@ export const site = {
         issn: "2191-4281",
         indexing: "SCIE",
         month: "February",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s13369-021-05333-z",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s13369-021-05333-z",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -956,8 +662,6 @@ export const site = {
         issn: "0975-1084",
         indexing: "SCIE",
         month: "October",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -978,19 +682,6 @@ export const site = {
         issn: "0098-9886",
         indexing: "SCIE",
         month: "July",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1002/cta.2838",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1002/cta.2838",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1013,19 +704,6 @@ export const site = {
         citations: 69,
         abstract:
           "Analyzes instantaneous amplitude and frequency variations in Parkinsonian speech via Empirical Mode Decomposition and Hilbert Spectrum analysis for automated detection and UPDRS severity evaluation.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/j.bspc.2020.102050",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/j.bspc.2020.102050",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Soil Moisture Prediction Using Shallow Neural Network",
@@ -1040,8 +718,6 @@ export const site = {
         issn: "2350-0328",
         indexing: "SCOPUS",
         month: "June",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -1064,19 +740,6 @@ export const site = {
         month: "September",
         abstract:
           "Presents a low-power VLSI digital anti-notch lattice filter architecture tuned to the period-3 frequency (2π/3) for hardware-accelerated identification of protein-coding exon regions in eukaryotic DNA.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1049/iet-cdt.2019.0086",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1049/iet-cdt.2019.0086",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1095,19 +758,6 @@ export const site = {
         abstract:
           "Introduces Intrinsic Mode Function (IMF) cepstral and spectral features derived via Empirical Mode Decomposition of sustained phonations and running speech for Parkinson’s disease prediction.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/j.bbe.2019.05.005",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/j.bbe.2019.05.005",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1127,19 +777,6 @@ export const site = {
         abstract:
           "Presents Plant-mSubP, an integrated machine-learning framework and web server predicting single-compartment and multi-target subcellular localization of plant proteins.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1093/aobpla/plz068",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1093/aobpla/plz068",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1154,19 +791,6 @@ export const site = {
         doi: "10.1007/s11760-019-01474-9",
         issn: "1863-1711",
         indexing: "SCI",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s11760-019-01474-9",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s11760-019-01474-9",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1181,19 +805,6 @@ export const site = {
         doi: "10.3233/JIFS-169998",
         issn: "1064-1246",
         indexing: "SCI",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.3233/JIFS-169998",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.3233/JIFS-169998",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1207,19 +818,6 @@ export const site = {
         doi: "10.1007/s10470-018-1218-1",
         issn: "0925-1030",
         indexing: "SCI",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s10470-018-1218-1",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s10470-018-1218-1",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1234,19 +832,6 @@ export const site = {
         doi: "10.3233/JIFS-169696",
         issn: "1064-1246",
         indexing: "SCI",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.3233/JIFS-169696",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.3233/JIFS-169696",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1266,19 +851,6 @@ export const site = {
         doi: "10.1504/ijesdf.2018.090949",
         issn: "1751-9128",
         indexing: "SCOPUS",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1504/ijesdf.2018.090949",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1504/ijesdf.2018.090949",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Classification of Atrial Arrhythmias using Neural Networks",
@@ -1298,19 +870,6 @@ export const site = {
         doi: "10.11591/ijai.v7.i2.pp90-94",
         issn: "2089-4872",
         indexing: "SCOPUS",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.11591/ijai.v7.i2.pp90-94",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.11591/ijai.v7.i2.pp90-94",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1331,19 +890,6 @@ export const site = {
         doi: "10.1504/ijdmb.2017.090991",
         issn: "1748-5681",
         indexing: "SCIE",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1504/ijdmb.2017.090991",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1504/ijdmb.2017.090991",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1358,19 +904,6 @@ export const site = {
         doi: "10.1155/2016/6304915",
         issn: "1687-9724",
         indexing: "SCOPUS",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1155/2016/6304915",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1155/2016/6304915",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1392,19 +925,6 @@ export const site = {
         doi: "10.1007/s00024-011-0404-1",
         issn: "0033-4553",
         indexing: "SCI",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/s00024-011-0404-1",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/s00024-011-0404-1",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1423,19 +943,6 @@ export const site = {
         citations: 31,
         abstract:
           "Proposes a frequency-dependent Stockwell Transform (S-Transform) filtering technique applied to Electron-Ion Interaction Potential (EIIP) numeric sequences to localize active binding hot spots in protein sequences.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/tcbb.2010.109",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/tcbb.2010.109",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1453,19 +960,6 @@ export const site = {
         citations: 53,
         abstract:
           "Introduces an S-Transform time-band filtering method to isolate the three-base periodicity (f = 1/3) present in protein-coding exon regions of eukaryotic DNA sequences.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/s1672-0229(11)60007-7",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/s1672-0229(11)60007-7",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1484,19 +978,6 @@ export const site = {
         abstract:
           "Formulates a physicochemical sequence feature representation extending Chou’s Pseudo Amino Acid Composition (PseAAC) coupled with neural network classifiers for protein structural class prediction.",
         featured: true,
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/j.compbiolchem.2010.09.002",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/j.compbiolchem.2010.09.002",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1509,8 +990,6 @@ export const site = {
         issue: "2",
         pages: "75-79",
         month: "March",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
     ] satisfies Publication[],
     conferences: [
@@ -1528,19 +1007,6 @@ export const site = {
         type: "conference",
         doi: "10.1109/cvmi66673.2025.11337370",
         month: "October",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/cvmi66673.2025.11337370",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/cvmi66673.2025.11337370",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1558,19 +1024,6 @@ export const site = {
         type: "conference",
         doi: "10.1109/icee67165.2025.11409911",
         month: "December",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icee67165.2025.11409911",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icee67165.2025.11409911",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1587,19 +1040,6 @@ export const site = {
         type: "conference",
         doi: "10.1109/icasspw65056.2025.11011128",
         month: "June",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icasspw65056.2025.11011128",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icasspw65056.2025.11011128",
-            verified: true,
-          },
-        ],
       },
       {
         title: "CNN-LSTM-Based Lung Sound Analysis for Pneumonia Detection",
@@ -1615,19 +1055,6 @@ export const site = {
         pages: "1072-1077",
         doi: "10.1109/southeastcon56624.2025.10971692",
         month: "March",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/southeastcon56624.2025.10971692",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/southeastcon56624.2025.10971692",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1640,19 +1067,6 @@ export const site = {
         pages: "351-361",
         doi: "10.1007/978-981-96-1185-0_27",
         month: "May",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-96-1185-0_27",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-96-1185-0_27",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1666,19 +1080,6 @@ export const site = {
         month: "February",
         notes:
           "Conference date from the CV (February 2024); Springer LNNS DOI is the published proceedings record.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-96-4741-5_22",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-96-4741-5_22",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1689,19 +1090,6 @@ export const site = {
         type: "conference",
         doi: "10.1007/978-981-99-7862-5_32",
         month: "July",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-99-7862-5_32",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-99-7862-5_32",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1716,8 +1104,6 @@ export const site = {
         year: 2023,
         type: "conference",
         month: "April",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -1734,19 +1120,6 @@ export const site = {
         pages: "2800-2803",
         doi: "10.1109/bigdata55660.2022.10020480",
         month: "December",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/bigdata55660.2022.10020480",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/bigdata55660.2022.10020480",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1765,19 +1138,6 @@ export const site = {
         pages: "310-314",
         doi: "10.1109/iria53009.2021.9588724",
         month: "September",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/iria53009.2021.9588724",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/iria53009.2021.9588724",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1795,19 +1155,6 @@ export const site = {
         doi: "10.1109/isvlsi51109.2021.00082",
         isbn: "978-1-6654-3947-3",
         month: "August",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/isvlsi51109.2021.00082",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/isvlsi51109.2021.00082",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1826,19 +1173,6 @@ export const site = {
         doi: "10.1007/978-981-15-5546-6_48",
         publisher: "Springer, Singapore",
         month: "March",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-15-5546-6_48",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-15-5546-6_48",
-            verified: true,
-          },
-        ],
       },
       {
         title: "A Review on Intelligent PID Controllers in Autonomous Vehicle",
@@ -1857,19 +1191,6 @@ export const site = {
         doi: "10.1007/978-981-15-7675-1_39",
         publisher: "Springer, Singapore",
         month: "April",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-15-7675-1_39",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-15-7675-1_39",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1881,19 +1202,6 @@ export const site = {
         type: "conference",
         pages: "1-4",
         doi: "10.1109/aisp48273.2020.9073595",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/aisp48273.2020.9073595",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/aisp48273.2020.9073595",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1906,19 +1214,6 @@ export const site = {
         pages: "1-4",
         doi: "10.1109/sceecs48394.2020.150",
         month: "February",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/sceecs48394.2020.150",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/sceecs48394.2020.150",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -1935,19 +1230,6 @@ export const site = {
         pages: "3-12",
         doi: "10.1007/978-981-15-1081-6_1",
         publisher: "Springer",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-15-1081-6_1",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-15-1081-6_1",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Improved Face Detection Using YCbCr and Adaboost",
@@ -1963,19 +1245,6 @@ export const site = {
         pages: "689-699",
         doi: "10.1007/978-981-13-8676-3_58",
         publisher: "Springer",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-13-8676-3_58",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-13-8676-3_58",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Image Encryption Using Modified Rubik’s Cube Algorithm",
@@ -1992,19 +1261,6 @@ export const site = {
         pages: "69-78",
         doi: "10.1007/978-981-13-8222-2_6",
         publisher: "Springer",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-13-8222-2_6",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-13-8222-2_6",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2019,19 +1275,6 @@ export const site = {
         type: "conference",
         pages: "33-36",
         doi: "10.1109/icit48102.2019.00012",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icit48102.2019.00012",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icit48102.2019.00012",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2051,8 +1294,6 @@ export const site = {
         pages: "113",
         publisher: "CRC Press",
         month: "March",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title: "Improved fractal-SPIHT hybrid image compression algorithm",
@@ -2064,19 +1305,6 @@ export const site = {
         pages: "1-4",
         doi: "10.1109/icccnt45670.2019.8944769",
         month: "July",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icccnt45670.2019.8944769",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icccnt45670.2019.8944769",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2088,19 +1316,6 @@ export const site = {
         type: "conference",
         doi: "10.1109/iccsp.2018.8524445",
         month: "April",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/iccsp.2018.8524445",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/iccsp.2018.8524445",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2116,19 +1331,6 @@ export const site = {
         type: "conference",
         doi: "10.1109/indicon45594.2018.8986985",
         month: "December",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/indicon45594.2018.8986985",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/indicon45594.2018.8986985",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2146,19 +1348,6 @@ export const site = {
         type: "conference",
         doi: "10.1109/icctct.2018.8551137",
         month: "March",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icctct.2018.8551137",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icctct.2018.8551137",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2173,19 +1362,6 @@ export const site = {
         year: 2018,
         type: "conference",
         doi: "10.1109/icicct.2018.8473279",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icicct.2018.8473279",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icicct.2018.8473279",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Chaotic Image Encryption Scheme Based on S-Box Substitution",
@@ -2201,19 +1377,6 @@ export const site = {
         year: 2018,
         type: "conference",
         doi: "10.1109/icirca.2018.8597409",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icirca.2018.8597409",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icirca.2018.8597409",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Soil moisture prediction using machine learning",
@@ -2223,19 +1386,6 @@ export const site = {
         year: 2018,
         type: "conference",
         doi: "10.1109/icicct.2018.8473260",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icicct.2018.8473260",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icicct.2018.8473260",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Detection of Pests Using Color Based Image Segmentation",
@@ -2252,19 +1402,6 @@ export const site = {
         year: 2018,
         type: "conference",
         doi: "10.1109/icicct.2018.8473166",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icicct.2018.8473166",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icicct.2018.8473166",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2279,19 +1416,6 @@ export const site = {
         doi: "10.1007/978-981-10-5565-2_9",
         isbn: "978-981-10-5564-5",
         publisher: "Springer, Singapore",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-10-5565-2_9",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-10-5565-2_9",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Detection of Atrial Arrhythmias Using Autoregessive Modeling",
@@ -2307,19 +1431,6 @@ export const site = {
         publisher: "Springer, Singapore",
         month: "November",
         notes: "Title spelling follows the CV (Autoregessive).",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-10-3812-9_20",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-10-3812-9_20",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Accidental Event Detection Based on Optical Flow Analysis",
@@ -2334,19 +1445,6 @@ export const site = {
         isbn: "978-981-10-7900-9",
         publisher: "Springer, Singapore",
         month: "May",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-10-7901-6_66",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-10-7901-6_66",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2359,8 +1457,6 @@ export const site = {
         pages: "94-98",
         isbn: "978-1-5386-0373-4",
         month: "June",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -2373,19 +1469,6 @@ export const site = {
         pages: "1999-2002",
         doi: "10.1109/wispnet.2017.8300105",
         month: "March",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/wispnet.2017.8300105",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/wispnet.2017.8300105",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2402,19 +1485,6 @@ export const site = {
         type: "conference",
         doi: "10.1109/icbsii.2017.8082297",
         month: "March",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/icbsii.2017.8082297",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/icbsii.2017.8082297",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2433,19 +1503,6 @@ export const site = {
         isbn: "978-981-10-3873-0",
         publisher: "Springer, Singapore",
         month: "May",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1007/978-981-10-3874-7_42",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1007/978-981-10-3874-7_42",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Quantum Key Distribution: Simulation of BB84 Protocol in C",
@@ -2456,8 +1513,6 @@ export const site = {
         type: "conference",
         issn: "2345-117X",
         month: "January",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -2473,19 +1528,6 @@ export const site = {
         type: "conference",
         doi: "10.1109/iccsp.2016.7754188",
         month: "April",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/iccsp.2016.7754188",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/iccsp.2016.7754188",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2497,19 +1539,6 @@ export const site = {
         type: "conference",
         doi: "10.1109/iceeot.2016.7755419",
         month: "March",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/iceeot.2016.7755419",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/iceeot.2016.7755419",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2521,8 +1550,6 @@ export const site = {
         type: "conference",
         isbn: "978-93-82570-78-3",
         month: "April",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -2533,8 +1560,6 @@ export const site = {
         year: 2015,
         type: "conference",
         month: "December",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -2552,19 +1577,6 @@ export const site = {
           "Constructs a genome-scale host–pathogen protein–protein interaction network between Arabidopsis thaliana and Pseudomonas syringae at Oklahoma State University (NIMFFAB) using domain-interaction and interolog homology modeling.",
         notes:
           "Listed in the CV under conference proceedings; published in the MCBIOS BMC Bioinformatics supplement.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1186/1471-2105-15-s11-s13",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1186/1471-2105-15-s11-s13",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2586,22 +1598,14 @@ export const site = {
           "Develops a homology-independent unsupervised and supervised classification system for 12 subtypes of multi-copper oxidase Laccases using physicochemical descriptors, achieving 99.03% 5-fold cross-validation accuracy and 97.98% independent test accuracy (PMC4251044).",
         notes:
           "Listed in the CV under conference proceedings; published in the MCBIOS BMC Bioinformatics supplement.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1186/1471-2105-15-s11-s15",
-          verified: true,
-        },
         sources: [
           {
             label: "DOI",
             url: "https://doi.org/10.1186/1471-2105-15-s11-s15",
-            verified: true,
           },
           {
             label: "PubMed Central (PMC4251044)",
             url: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4251044/",
-            verified: true,
           },
         ],
       },
@@ -2620,8 +1624,6 @@ export const site = {
         venue: "Plant Biology, Portland, Oregon, USA",
         year: 2014,
         type: "conference",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -2641,19 +1643,6 @@ export const site = {
         doi: "10.1186/1471-2105-14-s14-s7",
         notes:
           "Listed in the CV under conference proceedings; published in a BMC Bioinformatics supplement.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1186/1471-2105-14-s14-s7",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1186/1471-2105-14-s14-s7",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2662,8 +1651,6 @@ export const site = {
         venue: "MCBIOS Conference, Columbia, MO, USA",
         year: 2013,
         type: "conference",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -2673,8 +1660,6 @@ export const site = {
         year: 2011,
         type: "conference",
         month: "January",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title:
@@ -2684,8 +1669,6 @@ export const site = {
         year: 2010,
         type: "conference",
         month: "January",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title: "An Improved S-Transform for Time-Frequency Analysis",
@@ -2696,19 +1679,6 @@ export const site = {
         type: "conference",
         pages: "315-319",
         doi: "10.1109/IADCC.2009.4809028",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/IADCC.2009.4809028",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/IADCC.2009.4809028",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2720,19 +1690,6 @@ export const site = {
         type: "conference",
         pages: "1-4",
         doi: "10.1109/GENSIPS.2009.5174374",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/GENSIPS.2009.5174374",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/GENSIPS.2009.5174374",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Time Localized Band Filtering Using Modified S-Transform",
@@ -2749,19 +1706,6 @@ export const site = {
         type: "conference",
         pages: "42-46",
         doi: "10.1109/ICSPS.2009.63",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/ICSPS.2009.63",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/ICSPS.2009.63",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2778,19 +1722,6 @@ export const site = {
         pages: "731-735",
         doi: "10.1109/NABIC.2009.5393488",
         month: "December",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1109/NABIC.2009.5393488",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1109/NABIC.2009.5393488",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2803,8 +1734,6 @@ export const site = {
         volume: "2",
         pages: "1044",
         month: "December",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
       {
         title: "Gene Prediction by Sliding DFT Algorithm",
@@ -2814,8 +1743,6 @@ export const site = {
         year: 2007,
         type: "conference",
         month: "December",
-        visible: true,
-        source: { type: "cv", url: null, verified: false },
       },
     ] satisfies Publication[],
     bookChapters: [
@@ -2838,19 +1765,6 @@ export const site = {
         publisher: "Academic Press, Elsevier",
         notes:
           "Book-level DOI listed in the CV: 10.1016/C2023-0-51864-6. The chapter DOI is used for the chapter page.",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/B978-0-443-29281-1.00004-6",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/B978-0-443-29281-1.00004-6",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2865,19 +1779,6 @@ export const site = {
         bookTitle: "Machine Learning in Biomedical and Health Informatics",
         publisher: "Apple Academic Press",
         month: "June",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1201/9781774919552-8",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1201/9781774919552-8",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2899,19 +1800,6 @@ export const site = {
           "Deep Learning, Machine Learning and IoT in Biomedical and Health Informatics",
         publisher: "CRC Press, Taylor & Francis",
         month: "February",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1201/9780367548445-12",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1201/9780367548445-12",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2933,19 +1821,6 @@ export const site = {
           "Deep Learning, Machine Learning and IoT in Biomedical and Health Informatics",
         publisher: "CRC Press, Taylor & Francis",
         month: "February",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1201/9780367548445-9",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1201/9780367548445-9",
-            verified: true,
-          },
-        ],
       },
       {
         title:
@@ -2966,19 +1841,6 @@ export const site = {
         bookTitle: "Computer-Aided Design for Biomedical Applications",
         publisher: "CRC Press, Taylor & Francis Group",
         month: "April",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1201/9781003121152-2",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1201/9781003121152-2",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Energy harvesting via human body activities",
@@ -2996,19 +1858,6 @@ export const site = {
         isbn: "978-0-12-820781-9",
         bookTitle: "Smart Biosensors in Medical Care",
         publisher: "Academic Press, Elsevier",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/B978-0-12-820781-9.00005-X",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/B978-0-12-820781-9.00005-X",
-            verified: true,
-          },
-        ],
       },
       {
         title: "Intelligent Speech Processing in the Time-Frequency Domain",
@@ -3021,19 +1870,6 @@ export const site = {
         isbn: "978-0-12-818130-0",
         bookTitle: "Intelligent Speech Signal Processing",
         publisher: "Elsevier",
-        visible: true,
-        source: {
-          type: "doi",
-          url: "https://doi.org/10.1016/B978-0-12-818130-0.00009-X",
-          verified: true,
-        },
-        sources: [
-          {
-            label: "DOI",
-            url: "https://doi.org/10.1016/B978-0-12-818130-0.00009-X",
-            verified: true,
-          },
-        ],
       },
     ] satisfies Publication[],
   },
@@ -3050,8 +1886,6 @@ export const site = {
       description:
         "National Mission on Interdisciplinary Cyber-Physical Systems (NM-ICPS) initiative developing resilient data-science algorithms, edge inference pipelines, and sensor-actuator control architectures for autonomous and physical platforms.",
       featured: true,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
     },
     {
       title:
@@ -3065,8 +1899,6 @@ export const site = {
       description:
         "Constructed genome-wide host–pathogen protein–protein interaction (PPI) prediction models for rice (Oryza sativa) and rice blast fungus (Magnaporthe grisea) using Functional-Link Siamese neural networks and gradient boosting ensembles.",
       featured: true,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
     },
     {
       title:
@@ -3080,12 +1912,6 @@ export const site = {
       description:
         "Integrated IoT and machine-learning telemetry system for real-time soil moisture prediction, crop health diagnostics, and automated precision irrigation scheduling (with Dr. Raju Poddar, Dr. Sudhansu Kumar Mishra, and Dr. Somnath Sengupta).",
       featured: true,
-      visible: true,
-      source: {
-        type: "institutional",
-        url: "https://bitmesra.ac.in/Show_profile/2F52324A6C2B483833534677726D3152366D365941673D3D",
-        verified: true,
-      },
     },
     {
       title:
@@ -3099,8 +1925,6 @@ export const site = {
       description:
         "Automated multi-class sleep stage scoring from polysomnography (PSG) EEG recordings using Discrete Wavelet Transform sub-bands and Fluctuation-based Dispersion Entropy (FDEn).",
       featured: true,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
     },
     {
       title:
@@ -3114,8 +1938,6 @@ export const site = {
       description:
         "End-to-end non-invasive vocal diagnostic system for Parkinson’s disease detection and dysarthria grading across multilingual speech corpora using VMD-Hilbert features, Siamese neural networks, and Kernel Mean Matching.",
       featured: true,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
     },
     {
       title:
@@ -3129,12 +1951,6 @@ export const site = {
       description:
         "Lightweight symmetric and visual image encryption schemes utilizing high-dimensional chaotic maps, Modified Rubik’s Cube permutation, and Adaptive Firefly key optimization.",
       featured: false,
-      visible: true,
-      source: {
-        type: "institutional",
-        url: "https://bitmesra.ac.in/Show_profile/2F52324A6C2B483833534677726D3152366D365941673D3D",
-        verified: true,
-      },
     },
   ] satisfies Project[],
 
@@ -3155,12 +1971,6 @@ export const site = {
         "Sitanshu Sekhar Sahu",
       ],
       featured: true,
-      visible: true,
-      source: {
-        type: "institutional",
-        url: "https://vidwan.inflibnet.ac.in/profile/413438",
-        verified: false,
-      },
     },
     {
       title: "An intelligent irrigation system and method thereof",
@@ -3180,8 +1990,6 @@ export const site = {
         "Sitanshu Sekhar Sahu",
       ],
       featured: true,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
     },
     {
       title: "Agricultural Health Monitoring Device",
@@ -3201,17 +2009,10 @@ export const site = {
         "Jagannath Sethi",
       ],
       featured: true,
-      visible: true,
-      source: {
-        type: "institutional",
-        url: "https://archive.bitmesra.ac.in/Visit_Faculty_Page99856_997?deptid=71&i=BCenbWQQlGPdiyOeumwjRg%3D%3D&menuid=1686",
-        verified: true,
-      },
       sources: [
         {
           label: "BIT Mesra faculty record",
           url: "https://archive.bitmesra.ac.in/Visit_Faculty_Page99856_997?deptid=71&i=BCenbWQQlGPdiyOeumwjRg%3D%3D&menuid=1686",
-          verified: true,
         },
       ],
     },
@@ -3233,8 +2034,6 @@ export const site = {
         "Mayank Singh",
       ],
       featured: true,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
     },
     {
       title:
@@ -3251,8 +2050,6 @@ export const site = {
         "Sitanshu Sekhar Sahu",
       ],
       featured: false,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
     },
     {
       title: "An Autonomous Vehicle Navigation System and Method Thereof",
@@ -3271,8 +2068,6 @@ export const site = {
         "Sitanshu Sekhar Sahu",
       ],
       featured: false,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
     },
     {
       title: "A Device for Heart Condition(s) Management and Method Thereof",
@@ -3284,8 +2079,6 @@ export const site = {
       description:
         "Biomedical sensing and signal-conditioning device for cardiac rhythm monitoring and time-frequency ECG/PCG anomaly detection.",
       featured: false,
-      visible: true,
-      source: { type: "cv", url: null, verified: false },
     },
     {
       title:
@@ -3306,12 +2099,6 @@ export const site = {
         "Gajendra Kant Mishra",
       ],
       featured: false,
-      visible: true,
-      source: {
-        type: "institutional",
-        url: "https://bitmesra.ac.in/Show_profile/45766E6E566C7A56536D44716C6B426A58313155584D71614971643376562B2F2F6E51455361726733366B3D",
-        verified: true,
-      },
     },
   ] satisfies Patent[],
 
@@ -3325,7 +2112,6 @@ export const site = {
         "Analysis of Genomic and Proteomic Signals Using Signal Processing and Soft-computing Techniques",
       description:
         "Supervised by Prof. Ganapati Panda. Formulated Stockwell Transform (S-Transform) time-frequency filtering for period-3 exon identification in eukaryotic DNA, protein hotspot localization, Chou’s PseAAC protein structural class prediction, and RBFNN microarray classification.",
-      visible: true,
     },
     {
       degree: "B.E.",
@@ -3333,7 +2119,6 @@ export const site = {
       location: "India",
       duration: "2001–2005",
       major: "Electronics and Telecommunication Engineering",
-      visible: true,
     },
   ] satisfies Education[],
 
@@ -3345,7 +2130,6 @@ export const site = {
       duration: "August 2021 – present",
       description: "Department of Electronics and Communication Engineering",
       current: true,
-      visible: true,
     },
     {
       position: "Assistant Professor",
@@ -3353,7 +2137,6 @@ export const site = {
       location: "Ranchi, India",
       duration: "September 2011 – July 2021",
       description: "Department of Electronics and Communication Engineering",
-      visible: true,
     },
     {
       position: "Guest Faculty",
@@ -3361,7 +2144,6 @@ export const site = {
       location: "India",
       duration: "December 2010 – September 2011",
       description: "School of Electrical Sciences",
-      visible: true,
     },
   ] satisfies Experience[],
 
@@ -3373,7 +2155,6 @@ export const site = {
       duration: "October 2012 – October 2014",
       description:
         "Investigated genome-scale host–pathogen protein–protein interaction networks (Arabidopsis–Pseudomonas syringae) and machine-learning frameworks for multi-target plant protein subcellular localization (Plant-mSubP).",
-      visible: true,
     },
     {
       position: "Graduate Research Scholar",
@@ -3382,7 +2163,6 @@ export const site = {
       duration: "2007–2011",
       description:
         "Developed S-Transform time-frequency filtering and soft-computing methods for DNA protein-coding region identification, protein hotspot localization, and structural class prediction.",
-      visible: true,
     },
     {
       position: "Visiting Graduate Research Scholar",
@@ -3391,7 +2171,6 @@ export const site = {
       duration: "October 2008 – March 2009",
       description:
         "Supported by the Government of Canada DFAIT-GSEP Fellowship. Collaborated on S-Transform time-frequency filtering of GPS observations for Glacial Isostatic Adjustment in Eastern Canada.",
-      visible: true,
     },
   ] satisfies Experience[],
 
@@ -3404,7 +2183,6 @@ export const site = {
       status: "awarded",
       description:
         "Cross-lingual Parkinson’s disease voice diagnosis using Hybrid Siamese Neural Networks, Cascade CNN-Autoencoders, CNN-LSTM models, and Kernel Mean Matching domain adaptation.",
-      visible: true,
     },
     {
       scholar: "Tuhin Mukherjee",
@@ -3414,7 +2192,6 @@ export const site = {
       status: "awarded",
       description:
         "Resonant Recognition Model and Stockwell Transform biophysical frequency analysis of POMC, leptin/BDNF, and VEGFA/VEGFR1 pathways for Low-Level Laser Photobiomodulation Therapy (Granted Indian Patent No. 564886).",
-      visible: true,
     },
     {
       scholar: "Satyajit Mahapatra",
@@ -3424,7 +2201,6 @@ export const site = {
       status: "awarded",
       description:
         "Functional-Link Siamese neural networks, DNN-XGBoost hybrids, and RRM-Stockwell Transform methods for genome-wide protein–protein interaction prediction and Tubulin hotspot localization.",
-      visible: true,
     },
     {
       scholar: "Biswajit Karan",
@@ -3433,7 +2209,6 @@ export const site = {
       status: "awarded",
       description:
         "Intrinsic Mode Functions, Variational Mode Decomposition (VMD)-Hilbert Spectrum, and Non-Negative Matrix Factorization (NMF) time-frequency voice features for Parkinsonian dysarthria assessment.",
-      visible: true,
     },
     {
       scholar: "Sweta Kumari",
@@ -3443,7 +2218,6 @@ export const site = {
       status: "awarded",
       description:
         "SSHI and MPPT power-conditioning controllers for piezoelectric and biomechanical human-activity energy harvesting systems.",
-      visible: true,
     },
     {
       scholar: "Rupesh Kumar Sinha",
@@ -3452,7 +2226,6 @@ export const site = {
       status: "awarded",
       description:
         "Symmetric image encryption using multi-dimensional chaotic maps, Modified Rubik’s Cube scrambling, and Adaptive Firefly evolutionary key generation.",
-      visible: true,
     },
   ] satisfies Supervision[],
 
@@ -3463,7 +2236,6 @@ export const site = {
         "IEEE International Symposium of Asian Control Association on Intelligent Robotics and Industrial Automation (IRIA), IIT Goa",
       date: "2021",
       featured: true,
-      visible: true,
     },
     {
       title: "Jury Member, National-wide Edge AI Innovation Challenge",
@@ -3471,19 +2243,16 @@ export const site = {
         "In collaboration with DigiToad Technologies Pvt. Ltd. and STMicroelectronics",
       date: "2024",
       featured: true,
-      visible: true,
     },
     {
       title: "National Merit Scholarship",
       organization: "Government of India",
       date: "1995",
-      visible: true,
     },
     {
       title: "State Merit Scholarship",
       organization: "Government of Odisha",
       date: "1993",
-      visible: true,
     },
   ] satisfies Award[],
 
@@ -3492,13 +2261,11 @@ export const site = {
       title: "Postdoctoral Fellowship",
       organization: "Oklahoma State University, USA",
       date: "2012–2014",
-      visible: true,
     },
     {
       title: "DFAIT-GSEP scholarship",
       organization: "Government of Canada",
       date: "October 2008 – March 2009",
-      visible: true,
     },
     {
       title: "USDA travel support",
@@ -3506,7 +2273,6 @@ export const site = {
       date: "28–29 April 2014",
       description:
         "Travel support to attend a workshop on Engineered Crops at Des Moines, IA, USA.",
-      visible: true,
     },
   ] satisfies Fellowship[],
 
@@ -3514,48 +2280,41 @@ export const site = {
     {
       activity:
         "Reviewer for journals of Nature, IEEE, Elsevier, Springer, Taylor & Francis, and BMC",
-      visible: true,
     },
     {
       activity: "Keynote speaker",
       organization:
         "International Conference on Data Science and Applications, MNIT Jaipur",
       date: "July 2024",
-      visible: true,
     },
     {
       activity: "Chaired a technical session",
       organization:
         "International Conference on Data Science and Applications, MNIT Jaipur",
       date: "July 2024",
-      visible: true,
     },
     {
       activity: "Chaired a technical session",
       organization:
         "International Conference on Nano-electronics, Circuits and Communication Systems, Ranchi",
       date: "May 2015",
-      visible: true,
     },
     {
       activity: "Chaired a technical session",
       organization:
         "MidSouth Computational Biology and Bioinformatics Society Conference (MCBIOS), Oklahoma, USA",
       date: "April 2014",
-      visible: true,
     },
     {
       activity:
         "Member, Institute of Electrical and Electronics Engineers (IEEE)",
       organization: "IEEE, USA",
       description: "Membership No. 90793764",
-      visible: true,
     },
     {
       activity: "Member, International Association of Engineers (IAENG)",
       organization: "IAENG, Hong Kong",
       description: "Membership No. 289706",
-      visible: true,
     },
   ] satisfies ProfessionalActivity[],
 
@@ -3564,37 +2323,31 @@ export const site = {
       title: "Recent Trends in Speech and Audio Processing",
       date: "16–20 March 2026",
       location: "BIT Mesra",
-      visible: true,
     },
     {
       title: "Internet of Things (IoT)",
       date: "25–26 April 2023",
-      visible: true,
     },
     {
       title: "Embedded AI Design",
       date: "20–24 February 2023",
-      visible: true,
     },
     {
       title: "Machine Learning in Speech and Audio Processing",
       date: "21–25 February 2022",
       location: "BIT Mesra",
-      visible: true,
     },
     {
       title: "Artificial Intelligence",
       date: "25–29 January 2021",
       location: "BIT Mesra",
       sponsor: "ATAL-AICTE",
-      visible: true,
     },
     {
       title: "Artificial Intelligence and Machine learning in Healthcare",
       date: "27–31 July 2020",
       location: "BIT Mesra",
       sponsor: "TEQIP-III",
-      visible: true,
     },
   ] satisfies Workshop[],
 
@@ -3604,70 +2357,52 @@ export const site = {
       url: "https://www.linkedin.com/in/sitanshu-sekhar-sahu-51b19743",
       type: "social",
       identifier: "sitanshu-sekhar-sahu-51b19743",
-      visible: true,
-      verified: true,
     },
     {
       label: "Google Scholar",
       url: "https://scholar.google.com/citations?user=F1VwnUIAAAAJ",
       type: "academic",
       identifier: "F1VwnUIAAAAJ",
-      visible: true,
-      verified: true,
     },
     {
       label: "ORCID",
       url: "https://orcid.org/0000-0003-1236-2255",
       type: "academic",
       identifier: "0000-0003-1236-2255",
-      visible: true,
-      verified: true,
     },
     {
       label: "Scopus",
       url: "https://www.scopus.com/authid/detail.uri?authorId=26639680300",
       type: "academic",
       identifier: "26639680300",
-      visible: true,
-      verified: true,
     },
     {
       label: "Web of Science",
       url: "https://www.webofscience.com/wos/author/rid/L-9820-2017",
       type: "academic",
       identifier: "L-9820-2017",
-      visible: true,
-      verified: true,
     },
     {
       label: "Loop (Frontiers)",
       url: "https://loop.frontiersin.org/people/511363/overview",
       type: "social",
       identifier: "511363",
-      visible: true,
-      verified: true,
     },
     {
       label: "OpenAlex / Rankless",
       url: "https://www.rankless.org/authors/sitanshu-sekhar-sahu",
       type: "academic",
-      visible: true,
-      verified: true,
     },
     {
       label: "Vidwan / IRINS",
       url: "https://vidwan.inflibnet.ac.in/profile/413438",
       type: "institutional",
       identifier: "413438",
-      visible: true,
-      verified: true,
     },
     {
       label: "BIT Mesra Profile",
       url: "https://bitmesra.ac.in/Show_profile/2F52324A6C2B483833534677726D3152366D365941673D3D",
       type: "institutional",
-      visible: true,
-      verified: true,
     },
   ] satisfies ProfileLink[],
 
@@ -3690,13 +2425,6 @@ export const site = {
     tagline:
       "Associate Professor, Department of Electronics and Communication Engineering, Birla Institute of Technology Mesra",
     copyrightName: "Dr. Sitanshu Sekhar Sahu",
-    links: [
-      { label: "Research", href: "/research", visible: true },
-      { label: "Publications", href: "/publications", visible: true },
-      { label: "Projects", href: "/projects", visible: true },
-      { label: "Patents", href: "/patents", visible: true },
-      { label: "Contact", href: "/contact", visible: true },
-    ] satisfies NavItem[],
   },
 
   seo: {

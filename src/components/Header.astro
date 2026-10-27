@@ -1,9 +1,8 @@
 ---
 import { site } from "../config/site";
-import { visibleItems } from "../utils/content";
 import Container from "./Container.astro";
 
-const items = visibleItems(site.navigation);
+const items = site.navigation;
 const current = Astro.url.pathname;
 ---
 
@@ -12,13 +11,11 @@ const current = Astro.url.pathname;
   transition:name="site-header"
 >
   <Container class="flex items-center justify-between gap-4 py-3.5">
-    <a href="/" class="min-w-0 text-ink no-underline hover:text-navy">
-      <span class="block font-serif text-lg leading-tight tracking-tight md:text-[1.3rem]">
-        {site.person.name}
-      </span>
-      <span class="mt-0.5 block text-[0.68rem] tracking-[0.16em] text-muted uppercase">
-        {site.person.institutionShort} · Dept. of ECE
-      </span>
+    <a
+      href="/"
+      class="min-w-0 text-ink no-underline hover:text-navy block font-serif text-lg leading-tight tracking-tight md:text-[1.3rem]"
+    >
+      {site.person.shortName}
     </a>
 
     <input
@@ -36,11 +33,25 @@ const current = Astro.url.pathname;
       class="inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-rule bg-surface text-ink hover:border-navy hover:text-navy peer-focus-visible:outline peer-focus-visible:outline-offset-2 peer-focus-visible:outline-navy peer-checked:[&_.icon-menu]:hidden peer-checked:[&_.icon-close]:block lg:hidden"
     >
       <span class="sr-only">Open menu</span>
-      <svg class="icon-menu size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+      <svg
+        class="icon-menu size-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"></path>
       </svg>
-      <svg class="icon-close hidden size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-        <path stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />
+      <svg
+        class="icon-close hidden size-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" d="M6 6l12 12M18 6 6 18"></path>
       </svg>
     </label>
 
@@ -49,38 +60,54 @@ const current = Astro.url.pathname;
       aria-label="Primary"
       class="absolute left-0 right-0 top-full z-40 hidden max-h-[min(75vh,34rem)] overflow-y-auto overscroll-contain border-b border-rule bg-paper/98 px-5 py-4 shadow-lg backdrop-blur-md peer-checked:block lg:static lg:z-auto lg:flex lg:max-h-none lg:items-center lg:gap-3 lg:overflow-visible lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none lg:backdrop-blur-none"
     >
-      <ul class="flex flex-col gap-1 lg:flex-row lg:items-center lg:gap-0.5 lg:rounded-full lg:border lg:border-rule lg:bg-surface lg:p-1">
-        {items.map((item) => {
-          const active =
-            item.href === "/"
-              ? current === "/"
-              : current === item.href || current.startsWith(`${item.href}/`);
-          return (
-            <li>
-              <a
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                class:list={[
-                  "inline-flex min-h-10 w-full items-center rounded-full px-3.5 text-[0.92rem] no-underline transition-colors lg:min-h-8 lg:w-auto lg:text-[0.86rem]",
-                  active
-                    ? "bg-navy font-semibold text-white"
-                    : "text-ink-soft hover:bg-paper hover:text-ink",
-                ]}
-              >
-                {item.label}
-              </a>
-            </li>
-          );
-        })}
+      <ul
+        class="flex flex-col gap-1 lg:flex-row lg:items-center lg:gap-0.5 lg:rounded-full lg:border lg:border-rule lg:bg-surface lg:p-1"
+      >
+        {
+          items.map((item) => {
+            const active =
+              item.href === "/"
+                ? current === "/"
+                : current === item.href || current.startsWith(`${item.href}/`);
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  class:list={[
+                    "inline-flex min-h-10 w-full items-center rounded-full px-3.5 text-[0.92rem] no-underline transition-colors lg:min-h-8 lg:w-auto lg:text-[0.86rem]",
+                    active
+                      ? "bg-navy font-semibold text-white"
+                      : "text-ink-soft hover:bg-paper hover:text-ink",
+                  ]}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
+        }
       </ul>
       <a
         href="/resume"
         class="mt-3 inline-flex min-h-10 items-center justify-between gap-2.5 rounded-full bg-navy py-1 pl-4 pr-1.5 text-xs font-semibold tracking-wider text-white uppercase no-underline transition-colors hover:bg-navy-hover lg:mt-0 lg:min-h-9"
       >
         <span>CV</span>
-        <span class="inline-flex size-6.5 items-center justify-center rounded-full bg-surface text-navy">
-          <svg class="size-3.5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 14 14 6m0 0H7.5M14 6v6.5" />
+        <span
+          class="inline-flex size-6.5 items-center justify-center rounded-full bg-surface text-navy"
+        >
+          <svg
+            class="size-3.5"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 14 14 6m0 0H7.5M14 6v6.5"></path>
           </svg>
         </span>
       </a>
@@ -97,7 +124,9 @@ const current = Astro.url.pathname;
     const { signal } = menuAbort;
     const toggle = document.querySelector<HTMLInputElement>("#nav-toggle");
     if (!toggle) return;
-    const label = document.querySelector<HTMLLabelElement>("label[for='nav-toggle']");
+    const label = document.querySelector<HTMLLabelElement>(
+      "label[for='nav-toggle']",
+    );
     const openLabel = label?.querySelector(".sr-only");
     const openText = toggle.dataset.openLabel ?? "Open menu";
     const closeText = toggle.dataset.closeLabel ?? "Close menu";

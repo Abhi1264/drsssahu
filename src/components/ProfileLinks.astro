@@ -1,37 +1,35 @@
 ---
-import { verifiedProfiles } from "../utils/content";
+import { site } from "../config/site";
 import { identityLinkAttrs } from "../utils/links";
 
-const profiles = verifiedProfiles();
+const profiles = site.profiles;
 ---
 
-{
-  profiles.length > 0 && (
-    <ul class="flex flex-wrap gap-2">
-      {profiles.map((item) => (
-        <li>
-          <a href={item.url} {...identityLinkAttrs(item.url)} class="chip">
-            <span>{item.label}</span>
-            {item.identifier && (
-              <span class="text-xs text-muted">({item.identifier})</span>
-            )}
-            <svg
-              class="size-3.5 text-muted"
-              viewBox="0 0 20 20"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.75"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 14 14 6m0 0H7.5M14 6v6.5"
-              />
-            </svg>
-          </a>
-        </li>
-      ))}
-    </ul>
-  )
-}
+<ul class="flex flex-wrap gap-2">
+  {
+    profiles.map((item) => (
+      <li>
+        <a href={item.url} {...identityLinkAttrs(item.url)} class="chip">
+          <span>{item.label}</span>
+          {item.identifier && (
+            <span class="text-xs text-muted">({item.identifier})</span>
+          )}
+          <svg
+            class="size-3.5 text-muted"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 14 14 6m0 0H7.5M14 6v6.5"
+            />
+          </svg>
+        </a>
+      </li>
+    ))
+  }
+</ul>

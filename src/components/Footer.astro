@@ -1,11 +1,11 @@
 ---
 import { site } from "../config/site";
-import { primaryEmail, verifiedProfiles, visibleItems } from "../utils/content";
+import { primaryEmail } from "../utils/content";
 import { identityLinkAttrs } from "../utils/links";
 import Container from "./Container.astro";
 
-const navItems = visibleItems(site.navigation);
-const profiles = verifiedProfiles();
+const navItems = site.navigation;
+const profiles = site.profiles;
 const email = primaryEmail();
 
 function iconFor(label: string) {
@@ -23,9 +23,9 @@ function iconFor(label: string) {
   class="mt-24 bg-navy pb-[env(safe-area-inset-bottom)] text-white"
   transition:name="site-footer"
 >
-  <Container class="py-16 md:py-20">
+  <Container class="py-10">
     <!-- Top Callout & Socials Row -->
-    <div class="grid gap-10 border-b border-white/15 pb-14 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+    <div class="grid gap-10 border-b border-white/15 pb-8 lg:grid-cols-[1.3fr_1fr] lg:items-end">
       <div>
         <p class="text-xs tracking-[0.2em] text-white/70 uppercase">
           Correspondence & Collaboration
@@ -56,7 +56,7 @@ function iconFor(label: string) {
     </div>
 
     <!-- Socials & Academic Profiles Pill Strip -->
-    <div class="border-b border-white/15 py-10">
+    <div class="border-b border-white/15 py-8">
       <p class="text-xs tracking-[0.18em] text-white/65 uppercase">
         Socials, Scholarly Indices &amp; Institutional Profiles
       </p>

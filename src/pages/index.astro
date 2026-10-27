@@ -11,8 +11,6 @@ import {
   allPublications,
   featuredItems,
   featuredPublications,
-  verifiedProfiles,
-  visibleItems,
 } from "../utils/content";
 import { absoluteUrl, pageSeo } from "../utils/seo";
 import {
@@ -26,14 +24,14 @@ import { institutionLogo, researchImage } from "../utils/logos";
 
 const seo = pageSeo("home");
 const featuredPubs = featuredPublications().slice(0, 7);
-const themes = visibleItems(site.research.themes);
+const themes = site.research.themes;
 const highlights = site.research.highlights;
 const featuredProjects = featuredItems(site.projects);
 const featuredPatents = featuredItems(site.patents);
 const featuredAwards = featuredItems(site.awards);
-const workshops = visibleItems(site.workshops).slice(0, 4);
-const profiles = verifiedProfiles();
-const scholars = visibleItems(site.supervision);
+const workshops = site.workshops.slice(0, 4);
+const profiles = site.profiles;
+const scholars = site.supervision;
 const totalPubs = allPublications().length;
 
 const jsonLd = [
@@ -129,54 +127,50 @@ const jsonLd = [
         </div>
 
         <!-- Portrait & Pedigree Card -->
-        {
-          site.person.showProfileImage && (
-            <figure
-              class="panel-inset mx-auto w-full max-w-xs lg:mx-0 lg:max-w-none"
-              transition:name="profile-photo"
-            >
-              <div class="overflow-hidden rounded-xl bg-paper">
-                <Image
-                  src={profilePhoto}
-                  alt={site.person.name}
-                  width={480}
-                  height={480}
-                  densities={[1.5, 2]}
-                  fetchpriority="high"
-                  decoding="async"
-                  draggable="false"
-                  class="profile-photo aspect-square w-full object-cover"
-                />
+        <figure
+          class="panel-inset mx-auto w-full max-w-xs lg:mx-0 lg:max-w-none"
+          transition:name="profile-photo"
+        >
+          <div class="overflow-hidden rounded-xl bg-paper">
+            <Image
+              src={profilePhoto}
+              alt={site.person.name}
+              width={480}
+              height={480}
+              densities={[1.5, 2]}
+              fetchpriority="high"
+              decoding="async"
+              draggable="false"
+              class="profile-photo aspect-square w-full object-cover"
+            />
+          </div>
+          <figcaption class="p-3.5">
+            <p class="font-serif text-lg text-ink">
+              {site.person.designation}
+            </p>
+            <p class="mt-0.5 text-xs text-muted">
+              {site.person.department}, {site.person.institution}
+            </p>
+            <dl class="mt-3.5 grid grid-cols-2 gap-2 border-t border-rule pt-3 text-xs">
+              <div>
+                <dt class="text-muted">Doctorate</dt>
+                <dd class="font-medium text-ink">NIT Rourkela</dd>
               </div>
-              <figcaption class="p-3.5">
-                <p class="font-serif text-lg text-ink">
-                  {site.person.designation}
-                </p>
-                <p class="mt-0.5 text-xs text-muted">
-                  {site.person.department}, {site.person.institution}
-                </p>
-                <dl class="mt-3.5 grid grid-cols-2 gap-2 border-t border-rule pt-3 text-xs">
-                  <div>
-                    <dt class="text-muted">Doctorate</dt>
-                    <dd class="font-medium text-ink">NIT Rourkela</dd>
-                  </div>
-                  <div>
-                    <dt class="text-muted">Postdoc (USA)</dt>
-                    <dd class="font-medium text-ink">Oklahoma State</dd>
-                  </div>
-                  <div>
-                    <dt class="text-muted">Visiting Scholar</dt>
-                    <dd class="font-medium text-ink">Western Ontario</dd>
-                  </div>
-                  <div>
-                    <dt class="text-muted">ORCID</dt>
-                    <dd class="tabular-nums font-medium text-ink">0000-0003-1236-2255</dd>
-                  </div>
-                </dl>
-              </figcaption>
-            </figure>
-          )
-        }
+              <div>
+                <dt class="text-muted">Postdoc (USA)</dt>
+                <dd class="font-medium text-ink">Oklahoma State</dd>
+              </div>
+              <div>
+                <dt class="text-muted">Visiting Scholar</dt>
+                <dd class="font-medium text-ink">Western Ontario</dd>
+              </div>
+              <div>
+                <dt class="text-muted">ORCID</dt>
+                <dd class="tabular-nums font-medium text-ink">0000-0003-1236-2255</dd>
+              </div>
+            </dl>
+          </figcaption>
+        </figure>
       </div>
 
       <!-- TEKURIOUS-STYLE ASYMMETRIC BENTO IMPACT STRIP -->
@@ -254,7 +248,7 @@ const jsonLd = [
             </p>
           </div>
           <p class="border-t border-white/15 pt-3 text-xs tabular-nums text-white/80">
-            {visibleItems(site.patents).length} Patents &amp; Designs · {scholars.length} Ph.D.s Awarded
+            {site.patents.length} Patents &amp; Designs · {scholars.length} Ph.D.s Awarded
           </p>
         </div>
       </div>
@@ -288,7 +282,7 @@ const jsonLd = [
         {
           highlights.map((item, idx) => {
             const img = researchImage(item.image);
-            const isExternal = item.url.startsWith("http");
+            const ext = externalLinkAttrs(item.url);
             return (
               <li class="panel panel-hover flex flex-col justify-between overflow-hidden bg-paper/45">
                 <div>
@@ -316,7 +310,7 @@ const jsonLd = [
                     <h3 class="mt-2 text-xl leading-snug text-ink">
                       <a
                         href={item.url}
-                        {...(isExternal ? externalLinkAttrs(item.url) : {})}
+                        {...ext}
                         class="text-ink no-underline hover:text-navy"
                       >
                         {item.title}
@@ -330,10 +324,10 @@ const jsonLd = [
                 <div class="border-t border-rule px-5 py-3.5 md:px-6">
                   <a
                     href={item.url}
-                    {...(isExternal ? externalLinkAttrs(item.url) : {})}
+                    {...ext}
                     class="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider text-navy uppercase no-underline hover:underline"
                   >
-                    <span>{isExternal ? "View DOI / Public Record" : "Read Paper Details"}</span>
+                    <span>{"target" in ext ? "View DOI / Public Record" : "Read Paper Details"}</span>
                     <span aria-hidden="true">↗</span>
                   </a>
                 </div>
@@ -519,7 +513,7 @@ const jsonLd = [
               <span class="btn-icon-circle" aria-hidden="true">→</span>
             </a>
             <a href="/patents" class="btn-ghost">
-              All Patents ({visibleItems(site.patents).length})
+              All Patents ({site.patents.length})
             </a>
           </div>
         </div>
@@ -641,8 +635,8 @@ const jsonLd = [
               <ul class="mt-4 space-y-4">
                 {
                   [
-                    ...visibleItems(site.academicExperience),
-                    ...visibleItems(site.researchExperience),
+                    ...site.academicExperience,
+                    ...site.researchExperience,
                   ].map((item) => {
                     const logo = institutionLogo(item.institution);
                     return (
@@ -711,7 +705,7 @@ const jsonLd = [
                   ))
                 }
                 {
-                  visibleItems(site.fellowships).map((item) => (
+                  site.fellowships.map((item) => (
                     <li>
                       <span class="font-medium text-ink">{item.title}</span>
                       {` — ${item.organization} (${item.date})`}

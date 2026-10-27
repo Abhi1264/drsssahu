@@ -5,14 +5,13 @@ import Container from "../components/Container.astro";
 import PageHeader from "../components/PageHeader.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import { site } from "../config/site";
-import { visibleItems } from "../utils/content";
 import { externalLinkAttrs } from "../utils/links";
 import { researchImage } from "../utils/logos";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
 
 const seo = pageSeo("research");
-const themes = visibleItems(site.research.themes);
+const themes = site.research.themes;
 const highlights = site.research.highlights;
 const jsonLd = pageJsonLd("/research", [
   { name: "Research", path: "/research" },
@@ -131,7 +130,7 @@ const jsonLd = pageJsonLd("/research", [
         <ul class="grid gap-5 sm:grid-cols-2">
           {
             highlights.map((item) => {
-              const isExternal = item.url.startsWith("http");
+              const ext = externalLinkAttrs(item.url);
               return (
                 <li class="panel panel-hover flex flex-col justify-between p-6">
                   <div>
@@ -154,10 +153,10 @@ const jsonLd = pageJsonLd("/research", [
                   <div class="mt-5 border-t border-rule pt-3.5">
                     <a
                       href={item.url}
-                      {...(isExternal ? externalLinkAttrs(item.url) : {})}
+                      {...ext}
                       class="text-xs font-semibold tracking-wider text-navy uppercase no-underline hover:underline"
                     >
-                      {isExternal ? "Open DOI / Public Record ↗" : "View Publication →"}
+                      {"target" in ext ? "Open DOI / Public Record ↗" : "View Publication →"}
                     </a>
                   </div>
                 </li>

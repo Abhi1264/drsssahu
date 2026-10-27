@@ -1,35 +1,11 @@
-export type SourceType =
-  | "doi"
-  | "publisher"
-  | "ieee"
-  | "crossref"
-  | "openalex"
-  | "orcid"
-  | "scopus"
-  | "google-scholar"
-  | "researcherid"
-  | "vidwan"
-  | "institutional"
-  | "patent-office"
-  | "cv";
-
 export type ExternalSource = {
   label: string;
   url: string;
-  type?: SourceType;
-  verified: boolean;
-};
-
-export type Verification = {
-  type: SourceType;
-  url: string | null;
-  verified: boolean;
 };
 
 export type NavItem = {
   label: string;
   href: string;
-  visible: boolean;
 };
 
 export type ProfileLink = {
@@ -37,8 +13,6 @@ export type ProfileLink = {
   url: string;
   type: "academic" | "institutional" | "social";
   identifier?: string;
-  visible: boolean;
-  verified: boolean;
 };
 
 export type HighlightWork = {
@@ -74,8 +48,6 @@ export type Publication = {
   abstract?: string;
   citations?: number;
   featured?: boolean;
-  visible?: boolean;
-  source: Verification;
   sources?: ExternalSource[];
 };
 
@@ -90,8 +62,6 @@ export type Project = {
   image?: string;
   url?: string;
   featured?: boolean;
-  visible?: boolean;
-  source: Verification;
 };
 
 export type PatentStatus = "granted" | "published" | "application";
@@ -108,8 +78,6 @@ export type Patent = {
   inventors?: string[];
   description?: string;
   featured?: boolean;
-  visible?: boolean;
-  source: Verification;
   sources?: ExternalSource[];
 };
 
@@ -121,7 +89,6 @@ export type Education = {
   major?: string;
   dissertation?: string;
   description?: string;
-  visible?: boolean;
 };
 
 export type Experience = {
@@ -131,7 +98,6 @@ export type Experience = {
   duration: string;
   description?: string;
   current?: boolean;
-  visible?: boolean;
 };
 
 export type Supervision = {
@@ -140,7 +106,6 @@ export type Supervision = {
   year: number;
   status: "awarded" | "ongoing";
   description?: string;
-  visible?: boolean;
 };
 
 export type Award = {
@@ -150,7 +115,6 @@ export type Award = {
   description?: string;
   url?: string;
   featured?: boolean;
-  visible?: boolean;
 };
 
 export type Fellowship = {
@@ -158,7 +122,6 @@ export type Fellowship = {
   organization: string;
   date: string;
   description?: string;
-  visible?: boolean;
 };
 
 export type ProfessionalActivity = {
@@ -166,7 +129,6 @@ export type ProfessionalActivity = {
   organization?: string;
   date?: string;
   description?: string;
-  visible?: boolean;
 };
 
 export type Workshop = {
@@ -176,7 +138,6 @@ export type Workshop = {
   sponsor?: string;
   description?: string;
   url?: string;
-  visible?: boolean;
 };
 
 export type ResearchTheme = {
@@ -185,7 +146,6 @@ export type ResearchTheme = {
   image?: string;
   methods?: string[];
   featured?: boolean;
-  visible?: boolean;
 };
 
 export type EmailAddress = {

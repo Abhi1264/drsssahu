@@ -5,12 +5,11 @@ import PageHeader from "../components/PageHeader.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ProjectEntry from "../components/ProjectEntry.astro";
 import { site } from "../config/site";
-import { visibleItems } from "../utils/content";
 import { pageSeo } from "../utils/seo";
 import { pageJsonLd } from "../utils/jsonld";
 
 const seo = pageSeo("projects");
-const projects = visibleItems(site.projects);
+const projects = site.projects;
 const jsonLd = pageJsonLd(
   "/projects",
   [{ name: "Projects", path: "/projects" }],
